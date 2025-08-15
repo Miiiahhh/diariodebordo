@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -759,9 +758,19 @@
             </div>
         </nav>
 
-        <!-- Indicador de Salvamento -->
+        // Indicador de Salvamento -->
         <div id="save-indicator" class="save-indicator">
             ✓ Salvo automaticamente
+        </div>
+
+        <!-- Status de Carregamento -->
+        <div id="load-indicator" style="position: fixed; top: 2rem; left: 2rem; background: #3498db; color: white; padding: 1rem 1.5rem; border-radius: 10px; opacity: 0; transition: opacity 0.3s; z-index: 1001;">
+            📂 Dados carregados com sucesso!
+        </div>
+
+        <!-- Aviso de dados não salvos -->
+        <div id="unsaved-indicator" style="position: fixed; top: 2rem; left: 50%; transform: translateX(-50%); background: #e74c3c; color: white; padding: 1rem 1.5rem; border-radius: 10px; opacity: 0; transition: opacity 0.3s; z-index: 1002;">
+            ⚠️ Dados não salvos! Use o botão Backup
         </div>
 
         <!-- Controles de Salvamento -->
@@ -1967,6 +1976,17 @@ Dano em Área: 1d4 em alvos adjacentes</textarea>
     </div>
 
     <script>
+        /* 
+         * SISTEMA DE PERSISTÊNCIA MELHORADO
+         * - Salvamento automático com debounce (500ms)
+         * - Salvamento antes de sair da página  
+         * - Salvamento periódico (30s)
+         * - Verificação de integridade dos dados
+         * - Indicadores visuais de status
+         * - Tratamento de erros robusto
+         * - Compatibilidade cross-browser
+         */
+
         // Sistema de navegação
         function showSection(sectionId) {
             // Esconder todas as seções
@@ -2071,86 +2091,104 @@ Dano em Área: 1d4 em alvos adjacentes</textarea>
         // Carregar dados salvos
         function loadData() {
             const savedData = localStorage.getItem('mayaRpgData');
-            if (!savedData) return;
+            if (!savedData) {
+                console.log('ℹ️ Nenhum dado salvo encontrado');
+                return;
+            }
             
             try {
                 const data = JSON.parse(savedData);
+                console.log('📂 Carregando dados salvos de:', data.lastSaved || 'data desconhecida');
+                
+                // Função auxiliar para definir valor com segurança
+                function safeSetValue(id, value) {
+                    const element = document.getElementById(id);
+                    if (element && value !== undefined && value !== null) {
+                        element.value = value;
+                    }
+                }
                 
                 // Carregar dados da ficha
-                if (data.charName) document.getElementById('char-name').value = data.charName;
-                if (data.charClass) document.getElementById('char-class').value = data.charClass;
-                if (data.str) document.getElementById('str').value = data.str;
-                if (data.dex) document.getElementById('dex').value = data.dex;
-                if (data.con) document.getElementById('con').value = data.con;
-                if (data.int) document.getElementById('int').value = data.int;
-                if (data.wis) document.getElementById('wis').value = data.wis;
-                if (data.cha) document.getElementById('cha').value = data.cha;
-                if (data.hp) document.getElementById('hp').value = data.hp;
-                if (data.credits) document.getElementById('credits').value = data.credits;
-                if (data.class) document.getElementById('class').value = data.class;
-                if (data.equipment) document.getElementById('equipment').value = data.equipment;
-                if (data.notes) document.getElementById('notes').value = data.notes;
+                safeSetValue('char-name', data.charName);
+                safeSetValue('char-class', data.charClass);
+                safeSetValue('str', data.str);
+                safeSetValue('dex', data.dex);
+                safeSetValue('con', data.con);
+                safeSetValue('int', data.int);
+                safeSetValue('wis', data.wis);
+                safeSetValue('cha', data.cha);
+                safeSetValue('hp', data.hp);
+                safeSetValue('credits', data.credits);
+                safeSetValue('class', data.class);
+                safeSetValue('equipment', data.equipment);
+                safeSetValue('notes', data.notes);
                 
                 // Carregar habilidades
                 if (data.abilities) {
                     Object.keys(data.abilities).forEach(id => {
                         const ability = data.abilities[id];
-                        const nameEl = document.getElementById(`ability${id}-name`);
-                        const descEl = document.getElementById(`ability${id}-desc`);
-                        const mechEl = document.getElementById(`ability${id}-mech`);
-                        const visualEl = document.getElementById(`ability${id}-visual`);
-                        
-                        if (nameEl && ability.name) nameEl.value = ability.name;
-                        if (descEl && ability.desc) descEl.value = ability.desc;
-                        if (mechEl && ability.mech) mechEl.value = ability.mech;
-                        if (visualEl && ability.visual) visualEl.value = ability.visual;
+                        if (ability) {
+                            safeSetValue(`ability${id}-name`, ability.name);
+                            safeSetValue(`ability${id}-desc`, ability.desc);
+                            safeSetValue(`ability${id}-mech`, ability.mech);
+                            safeSetValue(`ability${id}-visual`, ability.visual);
+                        }
                     });
                 }
                 
-                // Carregar aventuras
+                // Carregar aventuras existentes
                 if (data.adventures) {
                     Object.keys(data.adventures).forEach(id => {
                         const adventure = data.adventures[id];
-                        const titleEl = document.getElementById(`adventure-${id}-title`);
-                        if (titleEl && adventure.title) {
-                            titleEl.value = adventure.title;
-                            if (adventure.summary) document.getElementById(`adventure-${id}-summary`).value = adventure.summary;
-                            if (adventure.opening) document.getElementById(`adventure-${id}-opening`).value = adventure.opening;
-                            if (adventure.events) document.getElementById(`adventure-${id}-events`).value = adventure.events;
-                            if (adventure.npcs) document.getElementById(`adventure-${id}-npcs`).value = adventure.npcs;
-                            if (adventure.abilities) document.getElementById(`adventure-${id}-abilities`).value = adventure.abilities;
-                            if (adventure.rewards) document.getElementById(`adventure-${id}-rewards`).value = adventure.rewards;
-                            if (adventure.date) document.getElementById(`adventure-${id}-date`).value = adventure.date;
-                            if (adventure.notes) document.getElementById(`adventure-${id}-notes`).value = adventure.notes;
+                        if (adventure) {
+                            safeSetValue(`adventure-${id}-title`, adventure.title);
+                            safeSetValue(`adventure-${id}-summary`, adventure.summary);
+                            safeSetValue(`adventure-${id}-opening`, adventure.opening);
+                            safeSetValue(`adventure-${id}-events`, adventure.events);
+                            safeSetValue(`adventure-${id}-npcs`, adventure.npcs);
+                            safeSetValue(`adventure-${id}-abilities`, adventure.abilities);
+                            safeSetValue(`adventure-${id}-rewards`, adventure.rewards);
+                            safeSetValue(`adventure-${id}-date`, adventure.date);
+                            safeSetValue(`adventure-${id}-notes`, adventure.notes);
                         }
                     });
+                    
+                    // Atualizar contador de aventuras para não sobrescrever
+                    const adventureIds = Object.keys(data.adventures).map(id => parseInt(id)).filter(id => !isNaN(id));
+                    if (adventureIds.length > 0) {
+                        adventureCounter = Math.max(...adventureIds);
+                    }
                 }
                 
                 // Carregar dados das cidades
                 if (data.cities) {
                     Object.keys(data.cities).forEach(city => {
                         const cityData = data.cities[city];
-                        Object.keys(cityData).forEach(field => {
-                            const el = document.getElementById(`${city}-${field}`);
-                            if (el) {
-                                el.value = cityData[field];
-                            }
-                        });
+                        if (cityData) {
+                            Object.keys(cityData).forEach(field => {
+                                safeSetValue(`${city}-${field}`, cityData[field]);
+                            });
+                        }
                     });
                 }
                 
+                console.log('✅ Todos os dados carregados com sucesso!');
+                
             } catch (error) {
-                console.error('Erro ao carregar dados:', error);
+                console.error('❌ Erro ao carregar dados salvos:', error);
+                alert('Erro ao carregar dados salvos. Os dados podem estar corrompidos.');
             }
         }
 
         // Indicador visual de salvamento
         function showSaveIndicator() {
             const indicator = document.getElementById('save-indicator');
+            const now = new Date();
+            indicator.innerHTML = `✓ Salvo automaticamente às ${now.toLocaleTimeString()}`;
             indicator.style.opacity = '1';
             setTimeout(() => {
                 indicator.style.opacity = '0';
-            }, 2000);
+            }, 3000);
         }
 
         // Exportar dados
@@ -2362,14 +2400,210 @@ Dano em Área: 1d4 em alvos adjacentes</textarea>
         // Salvar automaticamente quando houver mudanças
         document.addEventListener('input', function(e) {
             if (e.target.matches('input, textarea')) {
-                saveData();
+                // Debounce para evitar salvar muito frequentemente
+                clearTimeout(window.saveTimeout);
+                window.saveTimeout = setTimeout(saveData, 500);
             }
         });
 
+        // Salvar quando sair da página
+        window.addEventListener('beforeunload', function() {
+            saveData();
+        });
+
+        // Salvar periodicamente (a cada 30 segundos)
+        setInterval(saveData, 30000);
+
+        // Verificar se localStorage está disponível
+        function isLocalStorageAvailable() {
+            try {
+                const test = 'test';
+                localStorage.setItem(test, test);
+                localStorage.removeItem(test);
+                return true;
+            } catch(e) {
+                return false;
+            }
+        }
+
         // Inicializar quando a página carregar
         document.addEventListener('DOMContentLoaded', function() {
+            if (!isLocalStorageAvailable()) {
+                alert('⚠️ Aviso: O salvamento automático pode não funcionar neste navegador. Use o botão de Backup para salvar seus dados.');
+                showUnsavedIndicator();
+                return;
+            }
+            
+            // Teste inicial de salvamento
+            try {
+                localStorage.setItem('mayaRpgTest', 'test');
+                localStorage.removeItem('mayaRpgTest');
+                console.log('✅ Sistema de salvamento funcionando');
+            } catch(e) {
+                console.warn('⚠️ Problema detectado no sistema de salvamento');
+                showUnsavedIndicator();
+            }
+            
+            const savedData = localStorage.getItem('mayaRpgData');
+            
             loadData();
+            
+            // Verificar se há dados salvos e mostrar confirmação
+            if (savedData) {
+                try {
+                    const data = JSON.parse(savedData);
+                    const lastSaved = data.lastSaved ? new Date(data.lastSaved).toLocaleString() : 'data desconhecida';
+                    console.log(`✅ Dados carregados de: ${lastSaved}`);
+                    showLoadIndicator();
+                } catch(e) {
+                    console.warn('⚠️ Dados salvos podem estar corrompidos');
+                }
+            } else {
+                console.log('🆕 Primeira vez usando o sistema - dados padrão carregados');
+            }
         });
+
+        // Mostrar indicador de carregamento
+        function showLoadIndicator() {
+            const indicator = document.getElementById('load-indicator');
+            const savedData = localStorage.getItem('mayaRpgData');
+            
+            if (indicator && savedData) {
+                try {
+                    const data = JSON.parse(savedData);
+                    const lastSaved = data.lastSaved ? new Date(data.lastSaved).toLocaleString() : 'data desconhecida';
+                    indicator.innerHTML = `📂 Dados carregados de: ${lastSaved}`;
+                } catch(e) {
+                    indicator.innerHTML = '📂 Dados carregados com sucesso!';
+                }
+                
+                indicator.style.opacity = '1';
+                setTimeout(() => {
+                    indicator.style.opacity = '0';
+                }, 4000);
+            }
+        }
+
+        // Melhorar o sistema de salvamento para garantir persistência
+        function saveData() {
+            if (!isLocalStorageAvailable()) {
+                console.warn('LocalStorage não disponível - dados não salvos');
+                showUnsavedIndicator();
+                return false;
+            }
+
+            try {
+                const data = {
+                    // Timestamp para verificar quando foi salvo
+                    lastSaved: new Date().toISOString(),
+                    
+                    // Dados da ficha
+                    charName: document.getElementById('char-name')?.value || '',
+                    charClass: document.getElementById('char-class')?.value || '',
+                    str: document.getElementById('str')?.value || '',
+                    dex: document.getElementById('dex')?.value || '',
+                    con: document.getElementById('con')?.value || '',
+                    int: document.getElementById('int')?.value || '',
+                    wis: document.getElementById('wis')?.value || '',
+                    cha: document.getElementById('cha')?.value || '',
+                    hp: document.getElementById('hp')?.value || '',
+                    credits: document.getElementById('credits')?.value || '',
+                    class: document.getElementById('class')?.value || '',
+                    equipment: document.getElementById('equipment')?.value || '',
+                    notes: document.getElementById('notes')?.value || '',
+                    
+                    // Habilidades
+                    abilities: {},
+                    
+                    // Aventuras
+                    adventures: {},
+                    
+                    // Cidades
+                    cities: {}
+                };
+                
+                // Salvar habilidades
+                for (let i = 1; i <= 7; i++) {
+                    const nameEl = document.getElementById(`ability${i}-name`);
+                    const descEl = document.getElementById(`ability${i}-desc`);
+                    const mechEl = document.getElementById(`ability${i}-mech`);
+                    const visualEl = document.getElementById(`ability${i}-visual`);
+                    
+                    if (nameEl) {
+                        data.abilities[i] = {
+                            name: nameEl.value || '',
+                            desc: descEl ? descEl.value || '' : '',
+                            mech: mechEl ? mechEl.value || '' : '',
+                            visual: visualEl ? visualEl.value || '' : ''
+                        };
+                    }
+                }
+                
+                // Salvar aventuras
+                document.querySelectorAll('.adventure-edit-box').forEach(adventureBox => {
+                    const id = adventureBox.id.split('-')[1];
+                    const titleEl = document.getElementById(`adventure-${id}-title`);
+                    if (titleEl) {
+                        data.adventures[id] = {
+                            title: titleEl.value || '',
+                            summary: document.getElementById(`adventure-${id}-summary`)?.value || '',
+                            opening: document.getElementById(`adventure-${id}-opening`)?.value || '',
+                            events: document.getElementById(`adventure-${id}-events`)?.value || '',
+                            npcs: document.getElementById(`adventure-${id}-npcs`)?.value || '',
+                            abilities: document.getElementById(`adventure-${id}-abilities`)?.value || '',
+                            rewards: document.getElementById(`adventure-${id}-rewards`)?.value || '',
+                            date: document.getElementById(`adventure-${id}-date`)?.value || '',
+                            notes: document.getElementById(`adventure-${id}-notes`)?.value || ''
+                        };
+                    }
+                });
+                
+                // Salvar dados das cidades
+                const cities = ['uluth', 'winter', 'morred', 'anaz', 'lonisivinuss', 'karas', 'imperial'];
+                cities.forEach(city => {
+                    data.cities[city] = {};
+                    const fields = ['type', 'characteristics', 'population', 'relevance', 'dangers', 'resources', 'status', 'danger', 'interest', 'artifacts', 'mysteries', 'maya', 'surveillance', 'maya-danger'];
+                    fields.forEach(field => {
+                        const el = document.getElementById(`${city}-${field}`);
+                        if (el) {
+                            data.cities[city][field] = el.value || '';
+                        }
+                    });
+                });
+                
+                // Salvar com verificação
+                const dataString = JSON.stringify(data);
+                localStorage.setItem('mayaRpgData', dataString);
+                
+                // Verificar se foi salvo corretamente
+                const verified = localStorage.getItem('mayaRpgData');
+                if (verified === dataString) {
+                    console.log('💾 Dados salvos com sucesso:', new Date().toLocaleTimeString());
+                    showSaveIndicator();
+                    return true;
+                } else {
+                    console.error('❌ Erro na verificação do salvamento');
+                    showUnsavedIndicator();
+                    return false;
+                }
+                
+            } catch (error) {
+                console.error('❌ Erro ao salvar dados:', error);
+                showUnsavedIndicator();
+                return false;
+            }
+        }
+
+        // Mostrar aviso de dados não salvos
+        function showUnsavedIndicator() {
+            const indicator = document.getElementById('unsaved-indicator');
+            if (indicator) {
+                indicator.style.opacity = '1';
+                setTimeout(() => {
+                    indicator.style.opacity = '0';
+                }, 5000);
+            }
+        }
     </script>
 </body>
 </html>
