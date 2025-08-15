@@ -615,6 +615,32 @@
             font-weight: bold;
         }
         
+        /* Estilos para imagens da Maya */
+        .maya-character-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .maya-character-image:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+        
+        .maya-image-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        
+        .maya-image-caption {
+            margin-top: 0.5rem;
+            font-style: italic;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+        
         @media (max-width: 768px) {
             .container {
                 margin: 0;
@@ -739,6 +765,26 @@
                 font-size: 1rem;
                 padding: 0.4rem 0.8rem;
             }
+            
+            /* Imagens responsivas da Maya */
+            .maya-character-image {
+                max-width: 100% !important;
+            }
+            
+            .maya-image-container div[style*="max-width"] {
+                max-width: 100% !important;
+            }
+            
+            /* Layout flexível para seções com imagens */
+            div[style*="display: flex"] {
+                flex-direction: column !important;
+                gap: 1rem !important;
+            }
+            
+            div[style*="flex: 1"], div[style*="flex: 2"] {
+                flex: none !important;
+                min-width: 100% !important;
+            }
         }
     </style>
 </head>
@@ -791,6 +837,16 @@
             <div class="hero">
                 <h2>Bem-vindos ao Universo da Maya</h2>
                 <p>Um guia completo para a ciborgue que questiona os limites entre humanidade e tecnologia</p>
+            </div>
+            
+            <!-- Imagem Principal da Maya -->
+            <div class="maya-image-container" style="margin: 3rem 0;">
+                <div style="max-width: 400px; margin: 0 auto;">
+                    <img src="maya-character-art.jpg" alt="Maya - Arte Conceitual" class="maya-character-image">
+                </div>
+                <div class="maya-image-caption">
+                    Maya em sua forma característica - humanidade e tecnologia em perfeita síntese
+                </div>
             </div>
             
             <div class="guide-section">
@@ -868,6 +924,26 @@
                 </div>
                 
                 <div class="sheet-content">
+                    <!-- Aparência Visual de Maya -->
+                    <div style="text-align: center; margin: 2rem 0;">
+                        <h3 style="color: #2c3e50; margin-bottom: 1rem;">🎭 Aparência Visual</h3>
+                        <div style="display: flex; gap: 2rem; align-items: flex-start; flex-wrap: wrap;">
+                            <div style="flex: 1; min-width: 250px;">
+                                <img src="maya-character-art.jpg" alt="Maya - Referência Visual" class="maya-character-image" style="max-width: 300px;">
+                            </div>
+                            <div style="flex: 2; min-width: 300px; text-align: left;">
+                                <div class="stat-box">
+                                    <div class="stat-label">Descrição Física</div>
+                                    <textarea class="stat-input" style="min-height: 120px;" placeholder="Descreva a aparência de Maya..." id="appearance-desc">Cabelos castanho-escuros na altura dos ombros, olhos expressivos que revelam profundidade emocional mesmo em meio aos implantes cibernéticos. Braços e pernas parcialmente mecanizados com placas metálicas que se integram organicamente à pele. Veste roupas práticas em tons terrosos que permitem mobilidade enquanto disfarçam parcialmente suas modificações tecnológicas.</textarea>
+                                </div>
+                                <div class="stat-box">
+                                    <div class="stat-label">Modificações Visíveis</div>
+                                    <textarea class="stat-input" style="min-height: 80px;" placeholder="Implantes e modificações cibernéticas..." id="modifications">Braços com placas de blindagem integradas, joelheiras com sistemas de estabilização, interface neural sutil no pescoço, olhos com leve brilho digital quando ativa habilidades especiais.</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
                     <div class="stats-grid">
                         <div class="stat-box">
                             <div class="stat-label">Força</div>
@@ -1556,6 +1632,34 @@ Dano em Área: 1d4 em alvos adjacentes</textarea>
                     </div>
                 </div>
 
+                <!-- Perfil Visual de Maya -->
+                <div class="info-box">
+                    <div class="info-header">⚡ MAYA - A Protagonista</div>
+                    <div class="info-content">
+                        <div style="display: flex; gap: 2rem; align-items: flex-start; flex-wrap: wrap;">
+                            <div style="flex: 1; min-width: 200px; text-align: center;">
+                                <img src="maya-character-art.jpg" alt="Maya - Protagonista" class="maya-character-image" style="max-width: 250px;">
+                                <div class="maya-image-caption">
+                                    A ciborgue que questiona sua própria humanidade
+                                </div>
+                            </div>
+                            <div style="flex: 2; min-width: 300px;">
+                                <p><strong>Identidade:</strong> Ciborgue de origem desconhecida com amnésia seletiva sobre seu passado</p>
+                                
+                                <p><strong>Aparência:</strong> Jovem mulher com implantes cibernéticos visíveis nos braços e pernas, cabelos castanhos e olhos que brilham sutilmente quando usa suas habilidades especiais</p>
+                                
+                                <p><strong>Personalidade:</strong> Introspectiva mas determinada, busca equilibrar sua humanidade com suas capacidades tecnológicas. Possui forte senso de proteção aos vulneráveis</p>
+                                
+                                <p><strong>Localização Atual:</strong> Lonisivinuss - onde vive escondida entre as comunidades aquáticas</p>
+                                
+                                <p><strong>Objetivo Principal:</strong> Descobrir a verdade sobre sua criação e encontrar seu lugar entre humanos e máquinas</p>
+                                
+                                <p><strong>Relacionamentos:</strong> Mantém distância por segurança, mas forma vínculos profundos com aqueles em quem confia</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="info-box">
                     <div class="info-header">🌟 SKYE - A Companheira Perdida</div>
                     <div class="info-content">
@@ -1731,6 +1835,26 @@ Dano em Área: 1d4 em alvos adjacentes</textarea>
                 </div>
 
                 <h3>🎨 Inspirações Visuais</h3>
+                
+                <!-- Galeria Visual de Maya -->
+                <div class="adventure-box">
+                    <div class="adventure-header">🎭 Referência Visual Oficial - Maya</div>
+                    <div class="adventure-content">
+                        <div class="maya-image-container" style="margin-bottom: 2rem;">
+                            <img src="maya-character-art.jpg" alt="Maya - Arte Conceitual Oficial" class="maya-character-image" style="max-width: 400px;">
+                        </div>
+                        
+                        <h4>🔍 Análise da Arte Conceitual</h4>
+                        <p><strong>Integração Cibernética:</strong> A arte mostra perfeitamente como os implantes de Maya se integram organicamente ao seu corpo. As placas metálicas nos braços e pernas não parecem "grudadas", mas sim parte natural de sua anatomia.</p>
+                        
+                        <p><strong>Expressão Humana:</strong> Seus olhos e expressão facial mantêm total humanidade, mostrando que, apesar das modificações, Maya preserva sua essência emocional e personalidade.</p>
+                        
+                        <p><strong>Estilo Prático:</strong> Roupas em tons terrosos e funcionais que permitem movimento, mas também ajudam a camuflar suas modificações quando necessário para passar despercebida.</p>
+                        
+                        <p><strong>Postura Confiante:</strong> A posição ereta e olhar direto demonstram a determinação de Maya, mesmo carregando o peso das incertezas sobre seu passado.</p>
+                    </div>
+                </div>
+                
                 <div class="concept-visual">
                     <div class="concept-title">Aesthetic Cyberpunk Aquático</div>
                     <div class="concept-description">
@@ -1914,6 +2038,10 @@ Dano em Área: 1d4 em alvos adjacentes</textarea>
                 safeSetValue('class', data.class);
                 safeSetValue('equipment', data.equipment);
                 safeSetValue('notes', data.notes);
+                
+                // Carregar dados de aparência
+                safeSetValue('appearance-desc', data.appearanceDesc);
+                safeSetValue('modifications', data.modifications);
                 
                 // Carregar habilidades
                 if (data.abilities) {
@@ -2318,6 +2446,10 @@ Dano em Área: 1d4 em alvos adjacentes</textarea>
                     class: document.getElementById('class')?.value || '',
                     equipment: document.getElementById('equipment')?.value || '',
                     notes: document.getElementById('notes')?.value || '',
+                    
+                    // Dados de aparência
+                    appearanceDesc: document.getElementById('appearance-desc')?.value || '',
+                    modifications: document.getElementById('modifications')?.value || '',
                     
                     // Habilidades
                     abilities: {},
