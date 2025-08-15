@@ -808,7 +808,7 @@
                     </div>
                     <div class="stat-display">
                         <div class="stat-display-label">Aventuras</div>
-                        <div class="stat-display-value" style="font-size: 1rem;">Editáveis</div>
+                        <div class="stat-display-value" style="font-size: 1rem;">Suas Sessões</div>
                     </div>
                     <div class="stat-display">
                         <div class="stat-display-label">Regiões</div>
@@ -824,7 +824,7 @@
                 <ul>
                     <li><strong>📋 Ficha Editável:</strong> Complete e personalize Maya com salvamento automático</li>
                     <li><strong>⚡ Sistema de Habilidades:</strong> 7 habilidades únicas com descrições detalhadas</li>
-                    <li><strong>🗺️ Aventuras Editáveis:</strong> Sistema para documentar suas próprias sessões e adicionar novas aventuras</li>
+                    <li><strong>🗺️ Sistema de Aventuras:</strong> Documente suas próprias sessões conforme jogam</li>
                     <li><strong>🌍 Mapa Interativo:</strong> 7 regiões detalhadas com descrições personalizáveis</li>
                     <li><strong>👥 NPCs Importantes:</strong> Personagens-chave como Skye, Dra. Elena e Orion</li>
                     <li><strong>🎨 Conceitos Visuais:</strong> Inspirações e descrições para dar vida ao personagem</li>
@@ -835,9 +835,9 @@
                 <div class="concept-visual">
                     <div class="concept-title">Documente Suas Sessões</div>
                     <div class="concept-description">
-                        O site inclui um sistema completo para documentar suas aventuras de sábado com os amigos. 
-                        Cada sessão pode ser registrada com resumo, eventos principais, NPCs encontrados, 
-                        habilidades usadas e notas do mestre. Adicione novas aventuras conforme jogam!
+                        O site inclui um sistema completo para documentar suas aventuras conforme você e seus amigos jogam. 
+                        Comece do zero e adicione cada sessão com resumo, eventos principais, NPCs encontrados, 
+                        habilidades usadas e notas do mestre. Crie sua própria cronologia de aventuras!
                     </div>
                 </div>
 
@@ -1145,227 +1145,19 @@ Dano em Área: 1d4 em alvos adjacentes</textarea>
 
                 <!-- Aventuras Editáveis -->
                 <div id="adventures-container">
-                    
-                    <!-- Aventura 1 -->
-                    <div class="adventure-edit-box" id="adventure-1">
-                        <div class="adventure-header">
-                            <input type="text" style="background: transparent; border: none; color: white; font-size: 1.3rem; font-weight: bold; width: 80%;" 
-                                   placeholder="Nome da Aventura" id="adventure-1-title" value="🔍 Ecos do Passado">
-                            <button onclick="deleteAdventure(1)" style="background: rgba(255,255,255,0.2); border: none; color: white; padding: 0.5rem; border-radius: 5px; cursor: pointer; margin-left: 1rem;">🗑️</button>
-                        </div>
-                        <div class="adventure-content">
-                            <div style="margin-bottom: 1.5rem;">
-                                <h4>📝 Resumo da Sessão</h4>
-                                <textarea class="stat-input" style="min-height: 100px;" placeholder="O que aconteceu nesta aventura?" id="adventure-1-summary">Maya recebe um sinal estranho em seus implantes - uma transmissão que ativa memórias enterradas. O sinal leva a um laboratório abandonado onde ela pode descobrir mais sobre sua origem.</textarea>
-                            </div>
-                            
-                            <div style="margin-bottom: 1.5rem;">
-                                <h4>🎬 Cena de Abertura</h4>
-                                <textarea class="stat-input" style="min-height: 80px;" placeholder="Como a aventura começou?" id="adventure-1-opening">Maya está em uma taverna quando seus implantes começam a piscar irregularmente. Uma voz robotizada sussurra: "Projeto Prometeu... fase final... retorne ao laboratório 7." Ela reconhece vagamente a voz, mas não consegue identificar de onde.</textarea>
-                            </div>
-
-                            <div style="margin-bottom: 1.5rem;">
-                                <h4>⚔️ Principais Eventos</h4>
-                                <textarea class="stat-input" style="min-height: 120px;" placeholder="O que aconteceu durante a aventura? Combates, descobertas, interações..." id="adventure-1-events">• Investigação: Rastrear o sinal até sua origem
-• Viagem: Atravessar zona contaminada para chegar ao laboratório
-• Infiltração: Entrar no complexo evitando sistemas de segurança
-• Revelação: Descobrir registros de outros como ela
-• Conflito: Enfrentar um dos "irmãos" ciborgues corrompidos</textarea>
-                            </div>
-
-                            <div style="margin-bottom: 1.5rem;">
-                                <h4>👥 NPCs Encontrados</h4>
-                                <textarea class="stat-input" style="min-height: 80px;" placeholder="Quais personagens apareceram?" id="adventure-1-npcs">• Guarda de segurança corrompido
-• ALPHA-03 "Fragment" - ciborgue hostil
-• Dra. Elena (mensagem gravada)</textarea>
-                            </div>
-
-                            <div style="margin-bottom: 1.5rem;">
-                                <h4>⚡ Habilidades Usadas</h4>
-                                <textarea class="stat-input" style="min-height: 80px;" placeholder="Quais habilidades de Maya foram destaque?" id="adventure-1-abilities">• Pulso de Conexão: Detectar sistemas de segurança ocultos
-• Sobreposição de Realidade: Confundir guardas com falsas memórias
-• Eco de Guerra: Duplicar ataques contra o ciborgue inimigo</textarea>
-                            </div>
-
-                            <div style="margin-bottom: 1.5rem;">
-                                <h4>🎁 Recompensas e Descobertas</h4>
-                                <textarea class="stat-input" style="min-height: 80px;" placeholder="O que Maya ganhou ou descobriu?" id="adventure-1-rewards">• Fragmento de memória sobre sua criação
-• Melhoria nos implantes (+1 em testes de habilidades)
-• Localização de outros laboratórios
-• Pista sobre a "figura feminina" de seus sonhos</textarea>
-                            </div>
-
-                            <div style="margin-bottom: 1.5rem;">
-                                <h4>📅 Data da Sessão</h4>
-                                <input type="date" class="stat-input" id="adventure-1-date">
-                            </div>
-
-                            <div style="margin-bottom: 1.5rem;">
-                                <h4>📝 Notas do Mestre</h4>
-                                <textarea class="stat-input" style="min-height: 100px;" placeholder="Observações, ideias para próximas sessões, reações dos jogadores..." id="adventure-1-notes">Os jogadores ficaram muito envolvidos com a descoberta sobre outros protótipos. Planejam investigar mais laboratórios na próxima sessão.</textarea>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Aventura 2 -->
-                    <div class="adventure-edit-box" id="adventure-2">
-                        <div class="adventure-header">
-                            <input type="text" style="background: transparent; border: none; color: white; font-size: 1.3rem; font-weight: bold; width: 80%;" 
-                                   placeholder="Nome da Aventura" id="adventure-2-title" value="⚔️ Proteção Digital">
-                            <button onclick="deleteAdventure(2)" style="background: rgba(255,255,255,0.2); border: none; color: white; padding: 0.5rem; border-radius: 5px; cursor: pointer; margin-left: 1rem;">🗑️</button>
-                        </div>
-                        <div class="adventure-content">
-                            <div style="margin-bottom: 1.5rem;">
-                                <h4>📝 Resumo da Sessão</h4>
-                                <textarea class="stat-input" style="min-height: 100px;" placeholder="O que aconteceu nesta aventura?" id="adventure-2-summary">Uma comunidade pacífica está sendo atacada por drones hackeados. Maya deve descobrir quem está controlando os drones e parar os ataques, enquanto protege os civis.</textarea>
-                            </div>
-                            
-                            <div style="margin-bottom: 1.5rem;">
-                                <h4>🎬 Cena de Abertura</h4>
-                                <textarea class="stat-input" style="min-height: 80px;" placeholder="Como a aventura começou?" id="adventure-2-opening">Maya chega a uma pequena cidade mineira para encontrar famílias se escondendo em bunkers. Drones militares sobrevoam as ruas, atacando qualquer movimento. O líder da comunidade implora por ajuda.</textarea>
-                            </div>
-
-                            <div style="margin-bottom: 1.5rem;">
-                                <h4>⚔️ Principais Eventos</h4>
-                                <textarea class="stat-input" style="min-height: 120px;" placeholder="O que aconteceu durante a aventura?" id="adventure-2-events">• Resgate: Salvar civis presos em edifícios
-• Investigação: Descobrir fonte do controle dos drones
-• Infiltração: Entrar na torre de comunicações
-• Hacking: Reverter a programação dos drones
-• Boss Fight: Enfrentar o hacker que controla tudo</textarea>
-                            </div>
-
-                            <div style="margin-bottom: 1.5rem;">
-                                <h4>👥 NPCs Encontrados</h4>
-                                <textarea class="stat-input" style="min-height: 80px;" placeholder="Quais personagens apareceram?" id="adventure-2-npcs"></textarea>
-                            </div>
-
-                            <div style="margin-bottom: 1.5rem;">
-                                <h4>⚡ Habilidades Usadas</h4>
-                                <textarea class="stat-input" style="min-height: 80px;" placeholder="Quais habilidades de Maya foram destaque?" id="adventure-2-abilities">• Vínculo Luminar: Redirecionar dano de ataques aéreos para proteger civis
-• Lança de Dados: Perfurar múltiplos drones alinhados
-• Fragmento Explosivo: Destruir enxames de mini-drones</textarea>
-                            </div>
-
-                            <div style="margin-bottom: 1.5rem;">
-                                <h4>🎁 Recompensas e Descobertas</h4>
-                                <textarea class="stat-input" style="min-height: 80px;" placeholder="O que Maya ganhou ou descobriu?" id="adventure-2-rewards"></textarea>
-                            </div>
-
-                            <div style="margin-bottom: 1.5rem;">
-                                <h4>📅 Data da Sessão</h4>
-                                <input type="date" class="stat-input" id="adventure-2-date">
-                            </div>
-
-                            <div style="margin-bottom: 1.5rem;">
-                                <h4>📝 Notas do Mestre</h4>
-                                <textarea class="stat-input" style="min-height: 100px;" placeholder="Observações, ideias para próximas sessões, reações dos jogadores..." id="adventure-2-notes"></textarea>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Aventura 3 -->
-                    <div class="adventure-edit-box" id="adventure-3">
-                        <div class="adventure-header">
-                            <input type="text" style="background: transparent; border: none; color: white; font-size: 1.3rem; font-weight: bold; width: 80%;" 
-                                   placeholder="Nome da Aventura" id="adventure-3-title" value="🧠 Labirintos da Mente">
-                            <button onclick="deleteAdventure(3)" style="background: rgba(255,255,255,0.2); border: none; color: white; padding: 0.5rem; border-radius: 5px; cursor: pointer; margin-left: 1rem;">🗑️</button>
-                        </div>
-                        <div class="adventure-content">
-                            <div style="margin-bottom: 1.5rem;">
-                                <h4>📝 Resumo da Sessão</h4>
-                                <textarea class="stat-input" style="min-height: 100px;" placeholder="O que aconteceu nesta aventura?" id="adventure-3-summary">Maya é infectada por um vírus que ataca sistemas cibernéticos. Ela deve navegar em seus próprios sistemas internos - um mundo digital surreal - para encontrar e destruir o vírus antes que ele a mate.</textarea>
-                            </div>
-                            
-                            <div style="margin-bottom: 1.5rem;">
-                                <h4>🎬 Cena de Abertura</h4>
-                                <textarea class="stat-input" style="min-height: 80px;" placeholder="Como a aventura começou?" id="adventure-3-opening">Durante uma missão de rotina, Maya é atingida por um dart infectado. Ela desaba, e sua consciência é puxada para dentro de seus próprios sistemas. O mundo ao redor se torna uma representação digital de suas memórias e medos.</textarea>
-                            </div>
-
-                            <div style="margin-bottom: 1.5rem;">
-                                <h4>⚔️ Principais Eventos</h4>
-                                <textarea class="stat-input" style="min-height: 120px;" placeholder="O que aconteceu durante a aventura?" id="adventure-3-events"></textarea>
-                            </div>
-
-                            <div style="margin-bottom: 1.5rem;">
-                                <h4>👥 NPCs Encontrados</h4>
-                                <textarea class="stat-input" style="min-height: 80px;" placeholder="Quais personagens apareceram?" id="adventure-3-npcs"></textarea>
-                            </div>
-
-                            <div style="margin-bottom: 1.5rem;">
-                                <h4>⚡ Habilidades Usadas</h4>
-                                <textarea class="stat-input" style="min-height: 80px;" placeholder="Quais habilidades de Maya foram destaque?" id="adventure-3-abilities"></textarea>
-                            </div>
-
-                            <div style="margin-bottom: 1.5rem;">
-                                <h4>🎁 Recompensas e Descobertas</h4>
-                                <textarea class="stat-input" style="min-height: 80px;" placeholder="O que Maya ganhou ou descobriu?" id="adventure-3-rewards"></textarea>
-                            </div>
-
-                            <div style="margin-bottom: 1.5rem;">
-                                <h4>📅 Data da Sessão</h4>
-                                <input type="date" class="stat-input" id="adventure-3-date">
-                            </div>
-
-                            <div style="margin-bottom: 1.5rem;">
-                                <h4>📝 Notas do Mestre</h4>
-                                <textarea class="stat-input" style="min-height: 100px;" placeholder="Observações, ideias para próximas sessões, reações dos jogadores..." id="adventure-3-notes"></textarea>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Aventura 4 -->
-                    <div class="adventure-edit-box" id="adventure-4">
-                        <div class="adventure-header">
-                            <input type="text" style="background: transparent; border: none; color: white; font-size: 1.3rem; font-weight: bold; width: 80%;" 
-                                   placeholder="Nome da Aventura" id="adventure-4-title" value="💔 Sinais do Alto">
-                            <button onclick="deleteAdventure(4)" style="background: rgba(255,255,255,0.2); border: none; color: white; padding: 0.5rem; border-radius: 5px; cursor: pointer; margin-left: 1rem;">🗑️</button>
-                        </div>
-                        <div class="adventure-content">
-                            <div style="margin-bottom: 1.5rem;">
-                                <h4>📝 Resumo da Sessão</h4>
-                                <textarea class="stat-input" style="min-height: 100px;" placeholder="O que aconteceu nesta aventura?" id="adventure-4-summary">Maya começa a receber sinais estranhos em seus implantes - não hackers ou vírus, mas algo que parece... familiar. Alguém está tentando fazer contato do mundo de superfície, mas as transmissões são criptografadas e perigosas de rastrear.</textarea>
-                            </div>
-                            
-                            <div style="margin-bottom: 1.5rem;">
-                                <h4>🎬 Cena de Abertura</h4>
-                                <textarea class="stat-input" style="min-height: 80px;" placeholder="Como a aventura começou?" id="adventure-4-opening">Maya está fazendo manutenção em seus sistemas quando um sinal codificado atravessa suas defesas. Por um momento, ela vê um rosto - uma mulher de olhos preocupados sussurrando "Encontre o ponto neutro". O sinal se corta, deixando apenas coordenadas fragmentadas.</textarea>
-                            </div>
-
-                            <div style="margin-bottom: 1.5rem;">
-                                <h4>⚔️ Principais Eventos</h4>
-                                <textarea class="stat-input" style="min-height: 120px;" placeholder="O que aconteceu durante a aventura?" id="adventure-4-events"></textarea>
-                            </div>
-
-                            <div style="margin-bottom: 1.5rem;">
-                                <h4>👥 NPCs Encontrados</h4>
-                                <textarea class="stat-input" style="min-height: 80px;" placeholder="Quais personagens apareceram?" id="adventure-4-npcs"></textarea>
-                            </div>
-
-                            <div style="margin-bottom: 1.5rem;">
-                                <h4>⚡ Habilidades Usadas</h4>
-                                <textarea class="stat-input" style="min-height: 80px;" placeholder="Quais habilidades de Maya foram destaque?" id="adventure-4-abilities"></textarea>
-                            </div>
-
-                            <div style="margin-bottom: 1.5rem;">
-                                <h4>🎁 Recompensas e Descobertas</h4>
-                                <textarea class="stat-input" style="min-height: 80px;" placeholder="O que Maya ganhou ou descobriu?" id="adventure-4-rewards"></textarea>
-                            </div>
-
-                            <div style="margin-bottom: 1.5rem;">
-                                <h4>📅 Data da Sessão</h4>
-                                <input type="date" class="stat-input" id="adventure-4-date">
-                            </div>
-
-                            <div style="margin-bottom: 1.5rem;">
-                                <h4>📝 Notas do Mestre</h4>
-                                <textarea class="stat-input" style="min-height: 100px;" placeholder="Observações, ideias para próximas sessões, reações dos jogadores..." id="adventure-4-notes"></textarea>
-                            </div>
+                    <!-- Aventuras serão adicionadas aqui dinamicamente -->
+                    <div class="concept-visual" style="margin: 3rem 0;">
+                        <div class="concept-title">📝 Suas Aventuras Aparecerão Aqui</div>
+                        <div class="concept-description">
+                            Use o botão "➕ Adicionar Nova Aventura" acima para começar a documentar 
+                            suas sessões de RPG. Cada aventura pode ser completamente personalizada 
+                            com todos os detalhes da sua mesa!
                         </div>
                     </div>
                 </div>
 
                 <div class="quote">
-                    "Cada aventura é uma nova página na história de Maya. Documente as jornadas de sua mesa e veja como a narrativa evolui sessão após sessão."
+                    "Cada aventura é uma nova página na história de Maya. Comece documentando sua primeira sessão e veja como a narrativa da sua mesa evolui ao longo do tempo."
                 </div>
             </div>
         </div>
@@ -2287,11 +2079,17 @@ Dano em Área: 1d4 em alvos adjacentes</textarea>
         }
 
         // Sistema de aventuras
-        let adventureCounter = 4; // Começar em 5 (próxima aventura)
+        let adventureCounter = 0; // Começar do zero - sem aventuras pré-populadas
 
         function addNewAdventure() {
             adventureCounter++;
             const container = document.getElementById('adventures-container');
+            
+            // Remover a mensagem de placeholder se existir
+            const placeholder = container.querySelector('.concept-visual');
+            if (placeholder) {
+                placeholder.remove();
+            }
             
             const adventureHTML = `
                 <div class="adventure-edit-box" id="adventure-${adventureCounter}">
@@ -2370,26 +2168,35 @@ Dano em Área: 1d4 em alvos adjacentes</textarea>
             if (list.style.display === 'none') {
                 // Montar lista de aventuras
                 listContent.innerHTML = '';
-                document.querySelectorAll('.adventure-edit-box').forEach(adventure => {
-                    const id = adventure.id.split('-')[1];
-                    const title = document.getElementById(`adventure-${id}-title`).value || 'Aventura sem nome';
-                    const date = document.getElementById(`adventure-${id}-date`).value || 'Data não definida';
-                    
-                    const item = document.createElement('div');
-                    item.style.cssText = 'padding: 1rem; border-bottom: 1px solid #eee; cursor: pointer; transition: background 0.3s;';
-                    item.innerHTML = `
-                        <div style="font-weight: bold; color: #2c3e50;">${title}</div>
-                        <div style="color: #7f8c8d; font-size: 0.9rem;">Data: ${date}</div>
-                    `;
-                    item.onclick = () => {
-                        adventure.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                        list.style.display = 'none';
-                    };
-                    item.onmouseover = () => item.style.background = '#f8f9fa';
-                    item.onmouseout = () => item.style.background = 'white';
-                    
-                    listContent.appendChild(item);
-                });
+                const adventures = document.querySelectorAll('.adventure-edit-box');
+                
+                if (adventures.length === 0) {
+                    listContent.innerHTML = '<div style="text-align: center; color: #7f8c8d; padding: 2rem;">📝 Nenhuma aventura criada ainda. Use o botão "Adicionar Nova Aventura" para começar!</div>';
+                } else {
+                    adventures.forEach(adventure => {
+                        const id = adventure.id.split('-')[1];
+                        const titleEl = document.getElementById(`adventure-${id}-title`);
+                        const dateEl = document.getElementById(`adventure-${id}-date`);
+                        
+                        const title = titleEl ? titleEl.value || 'Aventura sem nome' : 'Aventura sem nome';
+                        const date = dateEl ? dateEl.value || 'Data não definida' : 'Data não definida';
+                        
+                        const item = document.createElement('div');
+                        item.style.cssText = 'padding: 1rem; border-bottom: 1px solid #eee; cursor: pointer; transition: background 0.3s;';
+                        item.innerHTML = `
+                            <div style="font-weight: bold; color: #2c3e50;">${title}</div>
+                            <div style="color: #7f8c8d; font-size: 0.9rem;">Data: ${date}</div>
+                        `;
+                        item.onclick = () => {
+                            adventure.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            list.style.display = 'none';
+                        };
+                        item.onmouseover = () => item.style.background = '#f8f9fa';
+                        item.onmouseout = () => item.style.background = 'white';
+                        
+                        listContent.appendChild(item);
+                    });
+                }
                 
                 list.style.display = 'block';
             } else {
