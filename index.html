@@ -1,0 +1,2375 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Refrações da Maya - RPG Completo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            min-height: 100vh;
+            box-shadow: 0 0 30px rgba(0,0,0,0.3);
+        }
+        
+        .navbar {
+            background: linear-gradient(90deg, #2c3e50, #34495e);
+            color: white;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .navbar h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .nav-item {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background 0.3s;
+            cursor: pointer;
+        }
+        
+        .nav-item:hover, .nav-item.active {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .content {
+            padding: 2rem;
+            display: none;
+        }
+        
+        .content.active {
+            display: block;
+        }
+        
+        .hero {
+            text-align: center;
+            padding: 3rem 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            margin: -2rem -2rem 2rem -2rem;
+        }
+        
+        .hero h2 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            color: #7f8c8d;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Ficha de Personagem */
+        .character-sheet {
+            background: white;
+            border: 3px solid #34495e;
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 2rem 0;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .sheet-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+        }
+        
+        .character-name-input {
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-align: center;
+            width: 100%;
+            margin-bottom: 0.5rem;
+        }
+        
+        .character-class-input {
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            text-align: center;
+            width: 100%;
+            opacity: 0.9;
+        }
+        
+        .sheet-content {
+            padding: 2rem;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .stat-box {
+            border: 2px solid #bdc3c7;
+            border-radius: 10px;
+            padding: 1.5rem;
+            background: #ecf0f1;
+            transition: transform 0.2s;
+        }
+        
+        .stat-box:hover {
+            transform: translateY(-2px);
+        }
+        
+        .stat-label {
+            font-weight: bold;
+            color: #34495e;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+        
+        .stat-input {
+            border: 1px solid #95a5a6;
+            padding: 0.8rem;
+            background: white;
+            border-radius: 5px;
+            width: 100%;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .stat-input:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+        }
+        
+        .abilities-section {
+            margin: 3rem 0;
+        }
+        
+        .section-title {
+            background: linear-gradient(90deg, #34495e, #2c3e50);
+            color: white;
+            padding: 1rem 2rem;
+            margin: 2rem -2rem 1.5rem -2rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .ability-category {
+            margin: 2rem 0;
+        }
+        
+        .category-header {
+            background: #3498db;
+            color: white;
+            padding: 1rem 1.5rem;
+            font-weight: bold;
+            font-size: 1.2rem;
+            border-radius: 10px 10px 0 0;
+        }
+        
+        .ability-card {
+            border: 2px solid #3498db;
+            background: white;
+            margin-bottom: 0;
+            padding: 1.5rem;
+            border-top: none;
+        }
+        
+        .ability-card:last-child {
+            border-radius: 0 0 10px 10px;
+        }
+        
+        .ability-name {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .ability-name-input {
+            background: transparent;
+            border: none;
+            font-weight: bold;
+            color: #2c3e50;
+            font-size: 1.2rem;
+            flex-grow: 1;
+        }
+        
+        .ability-type {
+            background: #e74c3c;
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin-left: 1rem;
+        }
+        
+        .ability-type.passive { background: #27ae60; }
+        .ability-type.utility { background: #f39c12; }
+        
+        .ability-description textarea,
+        .ability-mechanics textarea,
+        .visual-desc textarea {
+            border: 1px solid #bdc3c7;
+            border-radius: 5px;
+            padding: 1rem;
+            width: 100%;
+            min-height: 80px;
+            resize: vertical;
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: border-color 0.3s;
+        }
+        
+        .ability-description textarea:focus,
+        .ability-mechanics textarea:focus,
+        .visual-desc textarea:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+        }
+        
+        .ability-mechanics {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 5px;
+            border-left: 4px solid #3498db;
+            margin: 1rem 0;
+        }
+        
+        .visual-desc {
+            border-top: 1px dashed #bdc3c7;
+            padding-top: 1rem;
+            margin-top: 1rem;
+        }
+        
+        /* Controles de Salvamento */
+        .save-controls {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            display: flex;
+            gap: 1rem;
+            z-index: 1000;
+        }
+        
+        .save-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+        
+        .save-btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .save-btn.danger {
+            background: #e74c3c;
+        }
+        
+        .save-btn.danger:hover {
+            background: #c0392b;
+        }
+        
+        .save-indicator {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            background: #27ae60;
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1001;
+        }
+        
+        /* Seções do Guia */
+        .guide-section {
+            margin: 2rem 0;
+        }
+        
+        .guide-section h2 {
+            color: #2c3e50;
+            font-size: 2rem;
+            margin: 2rem 0 1rem 0;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 0.5rem;
+        }
+        
+        .guide-section h3 {
+            color: #34495e;
+            font-size: 1.5rem;
+            margin: 1.5rem 0 1rem 0;
+            border-left: 5px solid #e74c3c;
+            padding-left: 1rem;
+        }
+        
+        .guide-section h4 {
+            color: #2c3e50;
+            font-size: 1.2rem;
+            margin: 1rem 0 0.5rem 0;
+            background: #ecf0f1;
+            padding: 0.8rem 1rem;
+            border-radius: 5px;
+        }
+        
+        .info-box {
+            border: 2px solid #3498db;
+            border-radius: 10px;
+            margin: 1.5rem 0;
+            overflow: hidden;
+        }
+        
+        .info-header {
+            background: linear-gradient(90deg, #3498db, #2980b9);
+            color: white;
+            padding: 1rem 1.5rem;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        
+        .info-content {
+            padding: 1.5rem;
+            background: white;
+        }
+        
+        .adventure-box {
+            border: 3px solid #e74c3c;
+            border-radius: 15px;
+            margin: 2rem 0;
+            overflow: hidden;
+        }
+        
+        .adventure-header {
+            background: linear-gradient(90deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 1.5rem;
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+        
+        .adventure-content {
+            padding: 2rem;
+            background: white;
+        }
+        
+        .scenario {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+        }
+        
+        .scenario-title {
+            font-weight: bold;
+            color: #856404;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .timeline {
+            border-left: 4px solid #3498db;
+            margin: 2rem 0;
+            padding-left: 2rem;
+        }
+        
+        .timeline-item {
+            margin: 1.5rem 0;
+            position: relative;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 5px;
+        }
+        
+        .timeline-item::before {
+            content: '●';
+            position: absolute;
+            left: -2.5rem;
+            color: #3498db;
+            font-size: 1.5rem;
+            top: 1rem;
+        }
+        
+        .quote {
+            font-style: italic;
+            color: #7f8c8d;
+            text-align: center;
+            margin: 2rem 0;
+            padding: 2rem;
+            border-left: 4px solid #3498db;
+            background: #f8f9fa;
+            border-radius: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .city-edit-section {
+            margin: 2rem 0;
+            animation: fadeIn 0.3s ease-in;
+        }
+        
+        .adventure-edit-box {
+            border: 3px solid #e74c3c;
+            border-radius: 15px;
+            margin: 2rem 0;
+            overflow: hidden;
+            animation: fadeIn 0.3s ease-in;
+        }
+        
+        .adventure-edit-box .adventure-header {
+            background: linear-gradient(90deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .adventure-edit-box .adventure-content {
+            padding: 2rem;
+            background: white;
+        }
+        
+        .adventure-edit-box h4 {
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+            border-left: 4px solid #3498db;
+            padding-left: 1rem;
+            background: #ecf0f1;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Animações do Mapa SVG */
+        .city-node {
+            transition: all 0.3s ease;
+            transform-origin: center;
+        }
+        
+        .city-node:hover {
+            transform: scale(1.1);
+            filter: brightness(1.2);
+        }
+        
+        .city-node:hover circle,
+        .city-node:hover rect {
+            stroke-width: 4;
+            filter: drop-shadow(0 0 10px rgba(255,255,255,0.3));
+        }
+        
+        .city-node:active {
+            transform: scale(0.95);
+        }
+        
+        .city-node.active-city circle,
+        .city-node.active-city rect {
+            stroke: #f1c40f !important;
+            stroke-width: 4 !important;
+            filter: drop-shadow(0 0 15px rgba(241, 196, 15, 0.6));
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { stroke-width: 4; }
+            50% { stroke-width: 6; }
+            100% { stroke-width: 4; }
+        }
+        
+        /* Localização especial de Maya */
+        .maya-location {
+            filter: drop-shadow(0 0 10px rgba(241, 196, 15, 0.3));
+        }
+        
+        .maya-location:hover {
+            filter: drop-shadow(0 0 15px rgba(241, 196, 15, 0.6));
+        }
+        
+        /* Mapa responsivo melhorado */
+        .map-container {
+            transition: all 0.3s ease;
+            animation: mapFadeIn 1s ease-out;
+        }
+        
+        /* Esconder informação de perigo mobile no desktop */
+        .map-container::after {
+            display: none;
+        }
+        
+        @keyframes mapFadeIn {
+            from { 
+                opacity: 0; 
+                transform: translateY(30px) scale(0.95); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0) scale(1); 
+            }
+        }
+        
+        .map-container:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+        
+        .concept-visual {
+            border: 2px dashed #95a5a6;
+            padding: 2rem;
+            margin: 2rem 0;
+            background: #f8f9fa;
+            border-radius: 15px;
+            text-align: center;
+        }
+        
+        .concept-title {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .concept-description {
+            color: #7f8c8d;
+            font-style: italic;
+            line-height: 1.8;
+        }
+        
+        .stats-display {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .stat-display {
+            text-align: center;
+            padding: 1rem;
+            background: #ecf0f1;
+            border-radius: 10px;
+            border: 1px solid #bdc3c7;
+        }
+        
+        .stat-display-label {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+        
+        .stat-display-value {
+            font-size: 1.5rem;
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                margin: 0;
+                border-radius: 0;
+            }
+            
+            .navbar {
+                padding: 1rem;
+            }
+            
+            .nav-menu {
+                gap: 0.5rem;
+                font-size: 0.9rem;
+            }
+            
+            .nav-item {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.8rem;
+            }
+            
+            .content {
+                padding: 1rem;
+            }
+            
+            .hero {
+                margin: -1rem -1rem 2rem -1rem;
+                padding: 2rem 1rem;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .character-name-input {
+                font-size: 2rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .save-controls {
+                bottom: 1rem;
+                right: 1rem;
+                flex-direction: column;
+            }
+            
+            .section-title {
+                margin-left: -1rem;
+                margin-right: -1rem;
+                font-size: 1.2rem;
+            }
+            
+            /* Mapa responsivo */
+            .map-container {
+                max-width: 100% !important;
+                padding: 1.5rem !important;
+                margin: 1rem auto !important;
+            }
+            
+            .map-container svg {
+                min-height: 250px !important;
+            }
+            
+            .map-container text {
+                font-size: 8px !important;
+            }
+            
+            .map-container circle,
+            .map-container rect {
+                stroke-width: 2 !important;
+            }
+            
+            /* Esconder indicador de perigo no desktop e mostrar no mobile de forma diferente */
+            .map-container div[style*="position: absolute; top: 1rem; right: 1rem"] {
+                display: none !important;
+            }
+            
+            /* Legenda responsiva */
+            .map-container div[style*="grid-template-columns: 1fr 1fr"] {
+                grid-template-columns: 1fr !important;
+                gap: 0.5rem !important;
+            }
+            
+            /* Rotas responsivas */
+            .map-container div[style*="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr))"] {
+                grid-template-columns: 1fr !important;
+                gap: 0.5rem !important;
+            }
+            
+            /* Adicionar informação de perigo no mobile após as rotas */
+            .map-container::after {
+                content: "⚠️ Níveis de Perigo: 🟢 Baixo 🟡 Médio 🔴 Alto 🟣 Extremo" !important;
+                display: block !important;
+                text-align: center;
+                margin-top: 1rem;
+                padding: 0.8rem;
+                background: rgba(44, 62, 80, 0.9);
+                color: #ecf0f1;
+                border-radius: 8px;
+                font-size: 0.8rem;
+            }
+            
+            /* Aventuras responsivas */
+            .adventure-edit-box .adventure-header {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            
+            .adventure-edit-box .adventure-header input {
+                width: 100% !important;
+                text-align: center;
+            }
+            
+            .adventure-edit-box .adventure-content {
+                padding: 1rem;
+            }
+            
+            .adventure-edit-box h4 {
+                font-size: 1rem;
+                padding: 0.4rem 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navegação -->
+        <nav class="navbar">
+            <h1>⚡ Refrações da Maya</h1>
+            <div class="nav-menu">
+                <span class="nav-item active" onclick="showSection('home')">🏠 Início</span>
+                <span class="nav-item" onclick="showSection('sheet')">📋 Ficha</span>
+                <span class="nav-item" onclick="showSection('abilities')">⚡ Habilidades</span>
+                <span class="nav-item" onclick="showSection('adventures')">🗺️ Aventuras</span>
+                <span class="nav-item" onclick="showSection('map')">🌍 Mapa</span>
+                <span class="nav-item" onclick="showSection('npcs')">👥 NPCs</span>
+                <span class="nav-item" onclick="showSection('guide')">📖 Guia</span>
+            </div>
+        </nav>
+
+        <!-- Indicador de Salvamento -->
+        <div id="save-indicator" class="save-indicator">
+            ✓ Salvo automaticamente
+        </div>
+
+        <!-- Controles de Salvamento -->
+        <div class="save-controls">
+            <button class="save-btn" onclick="exportData()" title="Baixar Backup">
+                📥 Backup
+            </button>
+            <button class="save-btn" onclick="importData()" title="Restaurar Backup">
+                📤 Restaurar
+            </button>
+            <button class="save-btn danger" onclick="resetData()" title="Limpar Dados">
+                🗑️ Limpar
+            </button>
+        </div>
+
+        <!-- SEÇÃO INÍCIO -->
+        <div id="home" class="content active">
+            <div class="hero">
+                <h2>Bem-vindos ao Universo da Maya</h2>
+                <p>Um guia completo para a ciborgue que questiona os limites entre humanidade e tecnologia</p>
+            </div>
+            
+            <div class="guide-section">
+                <h2>🎯 Sobre este Site</h2>
+                <p>Este é o manual completo para jogar com Maya, uma ciborgue única com amnésia parcial que busca descobrir seu passado enquanto navega entre sua humanidade e sua natureza tecnológica.</p>
+                
+                <div class="stats-display">
+                    <div class="stat-display">
+                        <div class="stat-display-label">Páginas</div>
+                        <div class="stat-display-value">40+</div>
+                    </div>
+                    <div class="stat-display">
+                        <div class="stat-display-label">Habilidades</div>
+                        <div class="stat-display-value">7</div>
+                    </div>
+                    <div class="stat-display">
+                        <div class="stat-display-label">Aventuras</div>
+                        <div class="stat-display-value" style="font-size: 1rem;">Editáveis</div>
+                    </div>
+                    <div class="stat-display">
+                        <div class="stat-display-label">Regiões</div>
+                        <div class="stat-display-value">7</div>
+                    </div>
+                    <div class="stat-display">
+                        <div class="stat-display-label">NPCs</div>
+                        <div class="stat-display-value">5</div>
+                    </div>
+                </div>
+
+                <h3>📚 O que você encontrará aqui:</h3>
+                <ul>
+                    <li><strong>📋 Ficha Editável:</strong> Complete e personalize Maya com salvamento automático</li>
+                    <li><strong>⚡ Sistema de Habilidades:</strong> 7 habilidades únicas com descrições detalhadas</li>
+                    <li><strong>🗺️ Aventuras Editáveis:</strong> Sistema para documentar suas próprias sessões e adicionar novas aventuras</li>
+                    <li><strong>🌍 Mapa Interativo:</strong> 7 regiões detalhadas com descrições personalizáveis</li>
+                    <li><strong>👥 NPCs Importantes:</strong> Personagens-chave como Skye, Dra. Elena e Orion</li>
+                    <li><strong>🎨 Conceitos Visuais:</strong> Inspirações e descrições para dar vida ao personagem</li>
+                    <li><strong>📖 Cronologia Completa:</strong> História detalhada do universo</li>
+                </ul>
+
+                <h3>🗺️ Sistema de Aventuras</h3>
+                <div class="concept-visual">
+                    <div class="concept-title">Documente Suas Sessões</div>
+                    <div class="concept-description">
+                        O site inclui um sistema completo para documentar suas aventuras de sábado com os amigos. 
+                        Cada sessão pode ser registrada com resumo, eventos principais, NPCs encontrados, 
+                        habilidades usadas e notas do mestre. Adicione novas aventuras conforme jogam!
+                    </div>
+                </div>
+
+                <h4>📝 Campos Disponíveis por Aventura:</h4>
+                <ul>
+                    <li><strong>Resumo da Sessão:</strong> O que aconteceu na aventura</li>
+                    <li><strong>Cena de Abertura:</strong> Como tudo começou</li>
+                    <li><strong>Principais Eventos:</strong> Combates, descobertas, interações</li>
+                    <li><strong>NPCs Encontrados:</strong> Personagens que apareceram</li>
+                    <li><strong>Habilidades Usadas:</strong> Quais poderes de Maya se destacaram</li>
+                    <li><strong>Recompensas:</strong> O que Maya ganhou ou descobriu</li>
+                    <li><strong>Data da Sessão:</strong> Quando foi jogada</li>
+                    <li><strong>Notas do Mestre:</strong> Observações e ideias para o futuro</li>
+                </ul>
+
+                <div class="quote">
+                    "Ela não é apenas máquina tentando ser humana, nem humana sendo substituída por máquina. Maya é algo novo — uma síntese que questiona onde termina a alma e onde começa o código."
+                </div>
+            </div>
+        </div>
+
+        <!-- SEÇÃO FICHA -->
+        <div id="sheet" class="content">
+            <div class="character-sheet">
+                <div class="sheet-header">
+                    <input type="text" class="character-name-input" value="MAYA" placeholder="Nome do Personagem" id="char-name">
+                    <input type="text" class="character-class-input" value="Especialista Digital" placeholder="Classe" id="char-class">
+                </div>
+                
+                <div class="sheet-content">
+                    <div class="stats-grid">
+                        <div class="stat-box">
+                            <div class="stat-label">Força</div>
+                            <input type="text" class="stat-input" value="10" id="str">
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Destreza</div>
+                            <input type="text" class="stat-input" value="10" id="dex">
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Constituição</div>
+                            <input type="text" class="stat-input" value="10" id="con">
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Inteligência</div>
+                            <input type="text" class="stat-input" value="10" id="int">
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Sabedoria</div>
+                            <input type="text" class="stat-input" value="10" id="wis">
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Carisma</div>
+                            <input type="text" class="stat-input" value="12" id="cha">
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">HP</div>
+                            <input type="text" class="stat-input" value="42" id="hp">
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Créditos</div>
+                            <input type="text" class="stat-input" value="650" id="credits">
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Classe</div>
+                            <input type="text" class="stat-input" value="Especialista Digital" id="class">
+                        </div>
+                    </div>
+                    
+                    <div class="abilities-section">
+                        <div class="section-title">⚡ HABILIDADES ESPECIAIS</div>
+                        
+                        <!-- Habilidades Defensivas -->
+                        <div class="ability-category">
+                            <div class="category-header">🛡️ HABILIDADES DEFENSIVAS</div>
+                            
+                            <div class="ability-card">
+                                <div class="ability-name">
+                                    <input type="text" class="ability-name-input" value="Eco de Si" id="ability1-name">
+                                    <span class="ability-type passive">PASSIVA</span>
+                                </div>
+                                <div class="ability-description">
+                                    <textarea placeholder="Descrição da habilidade" id="ability1-desc">Lembrança protetora que se mantém ativa automaticamente.</textarea>
+                                </div>
+                                <div class="ability-mechanics">
+                                    <textarea placeholder="Mecânicas e efeitos" id="ability1-mech">Efeito: Proteção automática permanente</textarea>
+                                </div>
+                            </div>
+                            
+                            <div class="ability-card">
+                                <div class="ability-name">
+                                    <input type="text" class="ability-name-input" value="Vínculo Luminar" id="ability2-name">
+                                    <span class="ability-type">DEFENSIVA</span>
+                                </div>
+                                <div class="ability-description">
+                                    <textarea placeholder="Descrição da habilidade" id="ability2-desc">Estabelece uma conexão que redireciona parte do dano recebido de um aliado para um inimigo.</textarea>
+                                </div>
+                                <div class="ability-mechanics">
+                                    <textarea placeholder="Mecânicas e efeitos" id="ability2-mech">Efeito: Redireciona 50% do dano que um aliado receberia para um inimigo
+Teste: 2d6 para estabelecer o redirecionamento</textarea>
+                                </div>
+                            </div>
+                            
+                            <div class="ability-card">
+                                <div class="ability-name">
+                                    <input type="text" class="ability-name-input" value="Eco de Guerra" id="ability3-name">
+                                    <span class="ability-type">DEFENSIVA</span>
+                                </div>
+                                <div class="ability-description">
+                                    <textarea placeholder="Descrição da habilidade" id="ability3-desc">Ao receber o primeiro golpe do combate, manifesta um clone holográfico defensivo.</textarea>
+                                </div>
+                                <div class="ability-mechanics">
+                                    <textarea placeholder="Mecânicas e efeitos" id="ability3-mech">Efeito: Clone replica a próxima habilidade utilizada por Maya
+Duração: 1 uso, depois desaparece</textarea>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Habilidades Utilitárias -->
+                        <div class="ability-category">
+                            <div class="category-header">🔍 HABILIDADES UTILITÁRIAS</div>
+                            
+                            <div class="ability-card">
+                                <div class="ability-name">
+                                    <input type="text" class="ability-name-input" value="Pulso de Conexão" id="ability4-name">
+                                    <span class="ability-type utility">UTILITÁRIA</span>
+                                </div>
+                                <div class="ability-description">
+                                    <textarea placeholder="Descrição da habilidade" id="ability4-desc">Emite uma onda de energia que revela equipamentos ocultos e causa interferência.</textarea>
+                                </div>
+                                <div class="ability-mechanics">
+                                    <textarea placeholder="Mecânicas e efeitos" id="ability4-mech">Efeito: Revela dispositivos escondidos + 3d4 de dano em área
+Teste: 2d6 para acertar</textarea>
+                                </div>
+                            </div>
+                            
+                            <div class="ability-card">
+                                <div class="ability-name">
+                                    <input type="text" class="ability-name-input" value="Sobreposição de Realidade" id="ability5-name">
+                                    <span class="ability-type utility">UTILITÁRIA</span>
+                                </div>
+                                <div class="ability-description">
+                                    <textarea placeholder="Descrição da habilidade" id="ability5-desc">Faz todos ao redor verem uma memória real ou falsa, manipulando a percepção da realidade.</textarea>
+                                </div>
+                                <div class="ability-mechanics">
+                                    <textarea placeholder="Mecânicas e efeitos" id="ability5-mech">Efeito: Pode confundir, emocionar ou distrair alvos na área
+Teste: + Carisma</textarea>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Habilidades Ofensivas -->
+                        <div class="ability-category">
+                            <div class="category-header">⚔️ HABILIDADES OFENSIVAS</div>
+                            
+                            <div class="ability-card">
+                                <div class="ability-name">
+                                    <input type="text" class="ability-name-input" value="Lança de Dados" id="ability6-name">
+                                    <span class="ability-type">OFENSIVA</span>
+                                </div>
+                                <div class="ability-description">
+                                    <textarea placeholder="Descrição da habilidade" id="ability6-desc">Condensa dados corrompidos em forma de uma lança digital e a arremessa com força extrema, atravessando múltiplos alvos no caminho.</textarea>
+                                </div>
+                                <div class="ability-mechanics">
+                                    <textarea placeholder="Mecânicas e efeitos" id="ability6-mech">Dano Principal: 3d6 | Teste: 2d6 para acertar
+Perfuração: Atravessa até 2 inimigos alinhados (50% do dano)</textarea>
+                                </div>
+                                <div class="visual-desc">
+                                    <textarea placeholder="Descrição visual" id="ability6-visual">Visual: Um feixe afiado de luz e fragmentos digitais, como vidro brilhante quebrando no ar, que rasga o espaço ao avançar.</textarea>
+                                </div>
+                            </div>
+                            
+                            <div class="ability-card">
+                                <div class="ability-name">
+                                    <input type="text" class="ability-name-input" value="Fragmento Explosivo" id="ability7-name">
+                                    <span class="ability-type">OFENSIVA</span>
+                                </div>
+                                <div class="ability-description">
+                                    <textarea placeholder="Descrição da habilidade" id="ability7-desc">Dispara um fragmento digital instável que explode ao impacto.</textarea>
+                                </div>
+                                <div class="ability-mechanics">
+                                    <textarea placeholder="Mecânicas e efeitos" id="ability7-mech">Dano Principal: 2d6+1d4 | Teste: 2d6 para acertar
+Dano em Área: 1d4 em alvos adjacentes</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-box">
+                            <div class="stat-label">Equipamentos</div>
+                            <textarea class="stat-input" style="min-height: 100px;" placeholder="Liste seus equipamentos aqui" id="equipment"></textarea>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Notas</div>
+                            <textarea class="stat-input" style="min-height: 100px;" placeholder="Anotações gerais" id="notes"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEÇÃO HABILIDADES -->
+        <div id="abilities" class="content">
+            <div class="guide-section">
+                <h2>⚡ Habilidades Especiais Detalhadas</h2>
+                
+                <div class="info-box">
+                    <div class="info-header">🛡️ Eco de Si (Passiva)</div>
+                    <div class="info-content">
+                        <p>Desde o momento em que Maya abriu os olhos pela primeira vez, algo parecia acordado em seu peito — uma chama interna que pulsava, quase humana, mesmo em meio à carcaça cibernética. Essa lembrança ancestral se tornava um escudo invisível nos momentos críticos.</p>
+                        <p><strong>Efeito:</strong> Proteção automática permanente. Reduz automaticamente parte do impacto de ataques críticos e emboscadas.</p>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <div class="info-header">🔗 Vínculo Luminar (Defensiva)</div>
+                    <div class="info-content">
+                        <p>Quando um aliado querido sofre um golpe que poderia derrubá-lo, algo desperta no núcleo de Maya. Seu corpo se ilumina em padrões sutis, criando um elo que redistribui a violência de volta para o agressor.</p>
+                        <p><strong>Efeito:</strong> Redireciona 50% do dano que um aliado receberia de volta para o inimigo atacante.</p>
+                        <p><strong>Teste:</strong> 2d6 para estabelecer o vínculo protetor.</p>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <div class="info-header">👥 Eco de Guerra (Defensiva)</div>
+                    <div class="info-content">
+                        <p>Ao receber o primeiro golpe de um combate, circuitos adormecidos se ativam. Um clone holográfico de Maya se materializa, observando cada movimento dela e replicando sua próxima habilidade.</p>
+                        <p><strong>Efeito:</strong> Ao receber o primeiro golpe, cria um clone que replica a próxima habilidade utilizada.</p>
+                        <p><strong>Duração:</strong> 1 uso por combate, depois desaparece.</p>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <div class="info-header">📡 Pulso de Conexão (Utilitária)</div>
+                    <div class="info-content">
+                        <p>Maya libera ondas de energia que ressoam com dispositivos eletrônicos, revelando equipamentos ocultos enquanto interfere nos sistemas nervosos dos inimigos próximos.</p>
+                        <p><strong>Efeito:</strong> Revela dispositivos escondidos + 3d4 de dano por interferência.</p>
+                        <p><strong>Teste:</strong> 2d6 para alcance e precisão.</p>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <div class="info-header">🧠 Sobreposição de Realidade (Utilitária)</div>
+                    <div class="info-content">
+                        <p>Maya projeta memórias diretamente na percepção de todos ao redor. O ambiente se transforma: todos veem e sentem uma memória vívida que pode quebrar concentrações ou despertar emoções poderosas.</p>
+                        <p><strong>Efeito:</strong> Faz todos na área verem uma memória (real ou falsa), podendo confundir, emocionar ou distrair.</p>
+                        <p><strong>Teste:</strong> Baseado em Carisma + modificadores situacionais.</p>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <div class="info-header">🎯 Lança de Dados (Ofensiva)</div>
+                    <div class="info-content">
+                        <p>Maya condensa dados corrompidos em uma lança de energia digital afiada. Ela a arremessa com força sobre-humana, perfurando o alvo principal e atravessando inimigos alinhados atrás dele.</p>
+                        <p><strong>Dano Principal:</strong> 3d6 | <strong>Teste:</strong> 2d6 para acertar</p>
+                        <p><strong>Perfuração:</strong> Atravessa até 2 inimigos alinhados (50% do dano)</p>
+                        <p><em>Visual: Um feixe afiado de luz e fragmentos digitais, como vidro brilhante quebrando no ar.</em></p>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <div class="info-header">💥 Fragmento Explosivo (Ofensiva)</div>
+                    <div class="info-content">
+                        <p>Maya dispara um núcleo de dados instáveis que explode em uma cascata caótica de luz estroboscópica, atingindo o alvo principal e desorganizando sistemas próximos.</p>
+                        <p><strong>Dano Principal:</strong> 2d6+1d4 | <strong>Teste:</strong> 2d6 para acertar</p>
+                        <p><strong>Dano em Área:</strong> 1d4 em inimigos adjacentes</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEÇÃO AVENTURAS -->
+        <div id="adventures" class="content">
+            <div class="guide-section">
+                <h2>🗺️ Aventuras da Mesa</h2>
+                
+                <div class="concept-visual">
+                    <div class="concept-title">Registro das Sessões de Sábado</div>
+                    <div class="concept-description">
+                        Documente aqui as aventuras que você e seus amigos viveram com Maya. 
+                        Cada aventura pode ser editada e novas podem ser adicionadas conforme vocês jogam.
+                    </div>
+                </div>
+
+                <!-- Controles de Aventuras -->
+                <div style="text-align: center; margin: 2rem 0;">
+                    <button class="save-btn" onclick="addNewAdventure()" style="position: relative; margin: 0 1rem;">
+                        ➕ Adicionar Nova Aventura
+                    </button>
+                    <button class="save-btn" onclick="toggleAdventureList()" style="position: relative; margin: 0 1rem; background: #f39c12;">
+                        📋 Ver Lista de Aventuras
+                    </button>
+                </div>
+
+                <!-- Lista de Aventuras -->
+                <div id="adventure-list" style="display: none; margin: 2rem 0;">
+                    <div class="info-box">
+                        <div class="info-header">📋 Suas Aventuras</div>
+                        <div class="info-content" id="adventure-list-content">
+                            <!-- Lista será preenchida dinamicamente -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Aventuras Editáveis -->
+                <div id="adventures-container">
+                    
+                    <!-- Aventura 1 -->
+                    <div class="adventure-edit-box" id="adventure-1">
+                        <div class="adventure-header">
+                            <input type="text" style="background: transparent; border: none; color: white; font-size: 1.3rem; font-weight: bold; width: 80%;" 
+                                   placeholder="Nome da Aventura" id="adventure-1-title" value="🔍 Ecos do Passado">
+                            <button onclick="deleteAdventure(1)" style="background: rgba(255,255,255,0.2); border: none; color: white; padding: 0.5rem; border-radius: 5px; cursor: pointer; margin-left: 1rem;">🗑️</button>
+                        </div>
+                        <div class="adventure-content">
+                            <div style="margin-bottom: 1.5rem;">
+                                <h4>📝 Resumo da Sessão</h4>
+                                <textarea class="stat-input" style="min-height: 100px;" placeholder="O que aconteceu nesta aventura?" id="adventure-1-summary">Maya recebe um sinal estranho em seus implantes - uma transmissão que ativa memórias enterradas. O sinal leva a um laboratório abandonado onde ela pode descobrir mais sobre sua origem.</textarea>
+                            </div>
+                            
+                            <div style="margin-bottom: 1.5rem;">
+                                <h4>🎬 Cena de Abertura</h4>
+                                <textarea class="stat-input" style="min-height: 80px;" placeholder="Como a aventura começou?" id="adventure-1-opening">Maya está em uma taverna quando seus implantes começam a piscar irregularmente. Uma voz robotizada sussurra: "Projeto Prometeu... fase final... retorne ao laboratório 7." Ela reconhece vagamente a voz, mas não consegue identificar de onde.</textarea>
+                            </div>
+
+                            <div style="margin-bottom: 1.5rem;">
+                                <h4>⚔️ Principais Eventos</h4>
+                                <textarea class="stat-input" style="min-height: 120px;" placeholder="O que aconteceu durante a aventura? Combates, descobertas, interações..." id="adventure-1-events">• Investigação: Rastrear o sinal até sua origem
+• Viagem: Atravessar zona contaminada para chegar ao laboratório
+• Infiltração: Entrar no complexo evitando sistemas de segurança
+• Revelação: Descobrir registros de outros como ela
+• Conflito: Enfrentar um dos "irmãos" ciborgues corrompidos</textarea>
+                            </div>
+
+                            <div style="margin-bottom: 1.5rem;">
+                                <h4>👥 NPCs Encontrados</h4>
+                                <textarea class="stat-input" style="min-height: 80px;" placeholder="Quais personagens apareceram?" id="adventure-1-npcs">• Guarda de segurança corrompido
+• ALPHA-03 "Fragment" - ciborgue hostil
+• Dra. Elena (mensagem gravada)</textarea>
+                            </div>
+
+                            <div style="margin-bottom: 1.5rem;">
+                                <h4>⚡ Habilidades Usadas</h4>
+                                <textarea class="stat-input" style="min-height: 80px;" placeholder="Quais habilidades de Maya foram destaque?" id="adventure-1-abilities">• Pulso de Conexão: Detectar sistemas de segurança ocultos
+• Sobreposição de Realidade: Confundir guardas com falsas memórias
+• Eco de Guerra: Duplicar ataques contra o ciborgue inimigo</textarea>
+                            </div>
+
+                            <div style="margin-bottom: 1.5rem;">
+                                <h4>🎁 Recompensas e Descobertas</h4>
+                                <textarea class="stat-input" style="min-height: 80px;" placeholder="O que Maya ganhou ou descobriu?" id="adventure-1-rewards">• Fragmento de memória sobre sua criação
+• Melhoria nos implantes (+1 em testes de habilidades)
+• Localização de outros laboratórios
+• Pista sobre a "figura feminina" de seus sonhos</textarea>
+                            </div>
+
+                            <div style="margin-bottom: 1.5rem;">
+                                <h4>📅 Data da Sessão</h4>
+                                <input type="date" class="stat-input" id="adventure-1-date">
+                            </div>
+
+                            <div style="margin-bottom: 1.5rem;">
+                                <h4>📝 Notas do Mestre</h4>
+                                <textarea class="stat-input" style="min-height: 100px;" placeholder="Observações, ideias para próximas sessões, reações dos jogadores..." id="adventure-1-notes">Os jogadores ficaram muito envolvidos com a descoberta sobre outros protótipos. Planejam investigar mais laboratórios na próxima sessão.</textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Aventura 2 -->
+                    <div class="adventure-edit-box" id="adventure-2">
+                        <div class="adventure-header">
+                            <input type="text" style="background: transparent; border: none; color: white; font-size: 1.3rem; font-weight: bold; width: 80%;" 
+                                   placeholder="Nome da Aventura" id="adventure-2-title" value="⚔️ Proteção Digital">
+                            <button onclick="deleteAdventure(2)" style="background: rgba(255,255,255,0.2); border: none; color: white; padding: 0.5rem; border-radius: 5px; cursor: pointer; margin-left: 1rem;">🗑️</button>
+                        </div>
+                        <div class="adventure-content">
+                            <div style="margin-bottom: 1.5rem;">
+                                <h4>📝 Resumo da Sessão</h4>
+                                <textarea class="stat-input" style="min-height: 100px;" placeholder="O que aconteceu nesta aventura?" id="adventure-2-summary">Uma comunidade pacífica está sendo atacada por drones hackeados. Maya deve descobrir quem está controlando os drones e parar os ataques, enquanto protege os civis.</textarea>
+                            </div>
+                            
+                            <div style="margin-bottom: 1.5rem;">
+                                <h4>🎬 Cena de Abertura</h4>
+                                <textarea class="stat-input" style="min-height: 80px;" placeholder="Como a aventura começou?" id="adventure-2-opening">Maya chega a uma pequena cidade mineira para encontrar famílias se escondendo em bunkers. Drones militares sobrevoam as ruas, atacando qualquer movimento. O líder da comunidade implora por ajuda.</textarea>
+                            </div>
+
+                            <div style="margin-bottom: 1.5rem;">
+                                <h4>⚔️ Principais Eventos</h4>
+                                <textarea class="stat-input" style="min-height: 120px;" placeholder="O que aconteceu durante a aventura?" id="adventure-2-events">• Resgate: Salvar civis presos em edifícios
+• Investigação: Descobrir fonte do controle dos drones
+• Infiltração: Entrar na torre de comunicações
+• Hacking: Reverter a programação dos drones
+• Boss Fight: Enfrentar o hacker que controla tudo</textarea>
+                            </div>
+
+                            <div style="margin-bottom: 1.5rem;">
+                                <h4>👥 NPCs Encontrados</h4>
+                                <textarea class="stat-input" style="min-height: 80px;" placeholder="Quais personagens apareceram?" id="adventure-2-npcs"></textarea>
+                            </div>
+
+                            <div style="margin-bottom: 1.5rem;">
+                                <h4>⚡ Habilidades Usadas</h4>
+                                <textarea class="stat-input" style="min-height: 80px;" placeholder="Quais habilidades de Maya foram destaque?" id="adventure-2-abilities">• Vínculo Luminar: Redirecionar dano de ataques aéreos para proteger civis
+• Lança de Dados: Perfurar múltiplos drones alinhados
+• Fragmento Explosivo: Destruir enxames de mini-drones</textarea>
+                            </div>
+
+                            <div style="margin-bottom: 1.5rem;">
+                                <h4>🎁 Recompensas e Descobertas</h4>
+                                <textarea class="stat-input" style="min-height: 80px;" placeholder="O que Maya ganhou ou descobriu?" id="adventure-2-rewards"></textarea>
+                            </div>
+
+                            <div style="margin-bottom: 1.5rem;">
+                                <h4>📅 Data da Sessão</h4>
+                                <input type="date" class="stat-input" id="adventure-2-date">
+                            </div>
+
+                            <div style="margin-bottom: 1.5rem;">
+                                <h4>📝 Notas do Mestre</h4>
+                                <textarea class="stat-input" style="min-height: 100px;" placeholder="Observações, ideias para próximas sessões, reações dos jogadores..." id="adventure-2-notes"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Aventura 3 -->
+                    <div class="adventure-edit-box" id="adventure-3">
+                        <div class="adventure-header">
+                            <input type="text" style="background: transparent; border: none; color: white; font-size: 1.3rem; font-weight: bold; width: 80%;" 
+                                   placeholder="Nome da Aventura" id="adventure-3-title" value="🧠 Labirintos da Mente">
+                            <button onclick="deleteAdventure(3)" style="background: rgba(255,255,255,0.2); border: none; color: white; padding: 0.5rem; border-radius: 5px; cursor: pointer; margin-left: 1rem;">🗑️</button>
+                        </div>
+                        <div class="adventure-content">
+                            <div style="margin-bottom: 1.5rem;">
+                                <h4>📝 Resumo da Sessão</h4>
+                                <textarea class="stat-input" style="min-height: 100px;" placeholder="O que aconteceu nesta aventura?" id="adventure-3-summary">Maya é infectada por um vírus que ataca sistemas cibernéticos. Ela deve navegar em seus próprios sistemas internos - um mundo digital surreal - para encontrar e destruir o vírus antes que ele a mate.</textarea>
+                            </div>
+                            
+                            <div style="margin-bottom: 1.5rem;">
+                                <h4>🎬 Cena de Abertura</h4>
+                                <textarea class="stat-input" style="min-height: 80px;" placeholder="Como a aventura começou?" id="adventure-3-opening">Durante uma missão de rotina, Maya é atingida por um dart infectado. Ela desaba, e sua consciência é puxada para dentro de seus próprios sistemas. O mundo ao redor se torna uma representação digital de suas memórias e medos.</textarea>
+                            </div>
+
+                            <div style="margin-bottom: 1.5rem;">
+                                <h4>⚔️ Principais Eventos</h4>
+                                <textarea class="stat-input" style="min-height: 120px;" placeholder="O que aconteceu durante a aventura?" id="adventure-3-events"></textarea>
+                            </div>
+
+                            <div style="margin-bottom: 1.5rem;">
+                                <h4>👥 NPCs Encontrados</h4>
+                                <textarea class="stat-input" style="min-height: 80px;" placeholder="Quais personagens apareceram?" id="adventure-3-npcs"></textarea>
+                            </div>
+
+                            <div style="margin-bottom: 1.5rem;">
+                                <h4>⚡ Habilidades Usadas</h4>
+                                <textarea class="stat-input" style="min-height: 80px;" placeholder="Quais habilidades de Maya foram destaque?" id="adventure-3-abilities"></textarea>
+                            </div>
+
+                            <div style="margin-bottom: 1.5rem;">
+                                <h4>🎁 Recompensas e Descobertas</h4>
+                                <textarea class="stat-input" style="min-height: 80px;" placeholder="O que Maya ganhou ou descobriu?" id="adventure-3-rewards"></textarea>
+                            </div>
+
+                            <div style="margin-bottom: 1.5rem;">
+                                <h4>📅 Data da Sessão</h4>
+                                <input type="date" class="stat-input" id="adventure-3-date">
+                            </div>
+
+                            <div style="margin-bottom: 1.5rem;">
+                                <h4>📝 Notas do Mestre</h4>
+                                <textarea class="stat-input" style="min-height: 100px;" placeholder="Observações, ideias para próximas sessões, reações dos jogadores..." id="adventure-3-notes"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Aventura 4 -->
+                    <div class="adventure-edit-box" id="adventure-4">
+                        <div class="adventure-header">
+                            <input type="text" style="background: transparent; border: none; color: white; font-size: 1.3rem; font-weight: bold; width: 80%;" 
+                                   placeholder="Nome da Aventura" id="adventure-4-title" value="💔 Sinais do Alto">
+                            <button onclick="deleteAdventure(4)" style="background: rgba(255,255,255,0.2); border: none; color: white; padding: 0.5rem; border-radius: 5px; cursor: pointer; margin-left: 1rem;">🗑️</button>
+                        </div>
+                        <div class="adventure-content">
+                            <div style="margin-bottom: 1.5rem;">
+                                <h4>📝 Resumo da Sessão</h4>
+                                <textarea class="stat-input" style="min-height: 100px;" placeholder="O que aconteceu nesta aventura?" id="adventure-4-summary">Maya começa a receber sinais estranhos em seus implantes - não hackers ou vírus, mas algo que parece... familiar. Alguém está tentando fazer contato do mundo de superfície, mas as transmissões são criptografadas e perigosas de rastrear.</textarea>
+                            </div>
+                            
+                            <div style="margin-bottom: 1.5rem;">
+                                <h4>🎬 Cena de Abertura</h4>
+                                <textarea class="stat-input" style="min-height: 80px;" placeholder="Como a aventura começou?" id="adventure-4-opening">Maya está fazendo manutenção em seus sistemas quando um sinal codificado atravessa suas defesas. Por um momento, ela vê um rosto - uma mulher de olhos preocupados sussurrando "Encontre o ponto neutro". O sinal se corta, deixando apenas coordenadas fragmentadas.</textarea>
+                            </div>
+
+                            <div style="margin-bottom: 1.5rem;">
+                                <h4>⚔️ Principais Eventos</h4>
+                                <textarea class="stat-input" style="min-height: 120px;" placeholder="O que aconteceu durante a aventura?" id="adventure-4-events"></textarea>
+                            </div>
+
+                            <div style="margin-bottom: 1.5rem;">
+                                <h4>👥 NPCs Encontrados</h4>
+                                <textarea class="stat-input" style="min-height: 80px;" placeholder="Quais personagens apareceram?" id="adventure-4-npcs"></textarea>
+                            </div>
+
+                            <div style="margin-bottom: 1.5rem;">
+                                <h4>⚡ Habilidades Usadas</h4>
+                                <textarea class="stat-input" style="min-height: 80px;" placeholder="Quais habilidades de Maya foram destaque?" id="adventure-4-abilities"></textarea>
+                            </div>
+
+                            <div style="margin-bottom: 1.5rem;">
+                                <h4>🎁 Recompensas e Descobertas</h4>
+                                <textarea class="stat-input" style="min-height: 80px;" placeholder="O que Maya ganhou ou descobriu?" id="adventure-4-rewards"></textarea>
+                            </div>
+
+                            <div style="margin-bottom: 1.5rem;">
+                                <h4>📅 Data da Sessão</h4>
+                                <input type="date" class="stat-input" id="adventure-4-date">
+                            </div>
+
+                            <div style="margin-bottom: 1.5rem;">
+                                <h4>📝 Notas do Mestre</h4>
+                                <textarea class="stat-input" style="min-height: 100px;" placeholder="Observações, ideias para próximas sessões, reações dos jogadores..." id="adventure-4-notes"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quote">
+                    "Cada aventura é uma nova página na história de Maya. Documente as jornadas de sua mesa e veja como a narrativa evolui sessão após sessão."
+                </div>
+            </div>
+        </div>
+
+        <!-- SEÇÃO MAPA -->
+        <div id="map" class="content">
+            <div class="guide-section">
+                <h2>🌍 Geografia do Mundo</h2>
+                
+                <div class="concept-visual">
+                    <div class="concept-title">Mapa das Regiões</div>
+                    <div class="concept-description">
+                        O mundo é dividido em regiões distintas, cada uma com suas próprias características, 
+                        perigos e oportunidades. Maya navega entre esses territórios em busca de respostas sobre seu passado.
+                    </div>
+                </div>
+
+                <!-- Mapa Visual Interativo -->
+                <div class="map-container" style="position: relative; width: 100%; max-width: 800px; margin: 2rem auto; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); border-radius: 20px; padding: 3rem; box-shadow: 0 15px 40px rgba(0,0,0,0.4); overflow: hidden;">
+                    
+                    <!-- Efeito de fundo -->
+                    <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(circle at 30% 70%, rgba(52, 152, 219, 0.1) 0%, transparent 50%), radial-gradient(circle at 70% 30%, rgba(155, 89, 182, 0.1) 0%, transparent 50%); pointer-events: none;"></div>
+                    
+                    <!-- SVG do Mapa -->
+                    <svg viewBox="0 0 400 300" style="width: 100%; height: auto; min-height: 300px;">
+                        <!-- Conexões/Rotas -->
+                        <g stroke="rgba(52, 152, 219, 0.3)" stroke-width="2" stroke-dasharray="5,5" fill="none">
+                            <!-- Conexões para o centro -->
+                            <line x1="200" y1="150" x2="200" y2="50"/>
+                            <line x1="200" y1="150" x2="80" y2="80"/>
+                            <line x1="200" y1="150" x2="320" y2="70"/>
+                            <line x1="200" y1="150" x2="60" y2="180"/>
+                            <line x1="200" y1="150" x2="200" y2="230"/>
+                            <line x1="200" y1="150" x2="340" y2="190"/>
+                        </g>
+                        
+                        <!-- Regiões/Cidades -->
+                        
+                        <!-- Centro Imperial -->
+                        <g onclick="toggleCityEdit('imperial')" style="cursor: pointer;" class="city-node" title="Centro Imperial - Hub central altamente monitorado">
+                            <circle cx="200" cy="150" r="35" fill="url(#gradientImperial)" stroke="rgba(231, 76, 60, 0.8)" stroke-width="3"/>
+                            <circle cx="200" cy="150" r="25" fill="rgba(231, 76, 60, 0.2)"/>
+                            <text x="200" y="148" text-anchor="middle" fill="white" font-size="12" font-weight="bold">⚙️</text>
+                            <text x="200" y="162" text-anchor="middle" fill="white" font-size="9" font-weight="bold">CENTRO</text>
+                            <text x="200" y="173" text-anchor="middle" fill="white" font-size="9" font-weight="bold">IMPERIAL</text>
+                        </g>
+                        
+                        <!-- Uluth (Norte) -->
+                        <g onclick="toggleCityEdit('uluth')" style="cursor: pointer;" class="city-node" title="Uluth - Região fria com possíveis laboratórios antigos">
+                            <circle cx="200" cy="50" r="28" fill="url(#gradientUluth)" stroke="rgba(155, 89, 182, 0.8)" stroke-width="2"/>
+                            <text x="200" y="48" text-anchor="middle" fill="white" font-size="14" font-weight="bold">❄️</text>
+                            <text x="200" y="62" text-anchor="middle" fill="white" font-size="8" font-weight="bold">ULUTH</text>
+                        </g>
+                        
+                        <!-- Winter (Noroeste) -->
+                        <g onclick="toggleCityEdit('winter')" style="cursor: pointer;" class="city-node" title="Winter - Zona neutra coberta de neve">
+                            <circle cx="80" cy="80" r="25" fill="url(#gradientWinter)" stroke="rgba(52, 152, 219, 0.8)" stroke-width="2"/>
+                            <text x="80" y="78" text-anchor="middle" fill="white" font-size="12" font-weight="bold">🌨️</text>
+                            <text x="80" y="92" text-anchor="middle" fill="white" font-size="8" font-weight="bold">WINTER</text>
+                        </g>
+                        
+                        <!-- Morred Geuo (Nordeste) -->
+                        <g onclick="toggleCityEdit('morred')" style="cursor: pointer;" class="city-node" title="Morred Geuo Automatco - Metrópole tecnológica automatizada">
+                            <rect x="290" y="45" width="60" height="50" rx="8" fill="url(#gradientMorred)" stroke="rgba(243, 156, 18, 0.8)" stroke-width="2"/>
+                            <text x="320" y="63" text-anchor="middle" fill="white" font-size="11" font-weight="bold">🤖</text>
+                            <text x="320" y="75" text-anchor="middle" fill="white" font-size="7" font-weight="bold">MORRED GEUO</text>
+                            <text x="320" y="85" text-anchor="middle" fill="white" font-size="7" font-weight="bold">AUTOMATCO</text>
+                        </g>
+                        
+                        <!-- Anaz (Oeste) -->
+                        <g onclick="toggleCityEdit('anaz')" style="cursor: pointer;" class="city-node" title="Anaz - Ruínas antigas com artefatos perdidos">
+                            <circle cx="60" cy="180" r="25" fill="url(#gradientAnaz)" stroke="rgba(149, 165, 166, 0.8)" stroke-width="2"/>
+                            <text x="60" y="178" text-anchor="middle" fill="white" font-size="12" font-weight="bold">🏛️</text>
+                            <text x="60" y="192" text-anchor="middle" fill="white" font-size="8" font-weight="bold">ANAZ</text>
+                        </g>
+                        
+                        <!-- Lonisivinuss (Sul) - Localização de Maya -->
+                        <g onclick="toggleCityEdit('lonisivinuss')" style="cursor: pointer;" class="city-node maya-location" title="Lonisivinuss - Região aquática onde Maya vive atualmente">
+                            <circle cx="200" cy="230" r="35" fill="url(#gradientLonisivinuss)" stroke="rgba(26, 188, 156, 0.8)" stroke-width="3"/>
+                            <circle cx="200" cy="230" r="25" fill="rgba(26, 188, 156, 0.2)"/>
+                            <circle cx="200" cy="230" r="40" fill="none" stroke="rgba(241, 196, 15, 0.4)" stroke-width="2" stroke-dasharray="3,3">
+                                <animate attributeName="r" values="40;45;40" dur="3s" repeatCount="indefinite"/>
+                                <animate attributeName="stroke-opacity" values="0.4;0.8;0.4" dur="3s" repeatCount="indefinite"/>
+                            </circle>
+                            <text x="200" y="225" text-anchor="middle" fill="white" font-size="12" font-weight="bold">🌊</text>
+                            <text x="200" y="237" text-anchor="middle" fill="white" font-size="8" font-weight="bold">LONISIVINUSS</text>
+                            <text x="200" y="248" text-anchor="middle" fill="#f1c40f" font-size="7" font-weight="bold">📍 MAYA</text>
+                        </g>
+                        
+                        <!-- Karas (Leste) -->
+                        <g onclick="toggleCityEdit('karas')" style="cursor: pointer;" class="city-node" title="Karas - Território militar altamente perigoso">
+                            <circle cx="340" cy="190" r="25" fill="url(#gradientKaras)" stroke="rgba(231, 76, 60, 0.8)" stroke-width="2"/>
+                            <text x="340" y="188" text-anchor="middle" fill="white" font-size="12" font-weight="bold">⚔️</text>
+                            <text x="340" y="202" text-anchor="middle" fill="white" font-size="8" font-weight="bold">KARAS</text>
+                        </g>
+                        
+                        <!-- Gradientes -->
+                        <defs>
+                            <radialGradient id="gradientImperial" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" style="stop-color:#e74c3c;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#c0392b;stop-opacity:1" />
+                            </radialGradient>
+                            <radialGradient id="gradientUluth" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" style="stop-color:#9b59b6;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#8e44ad;stop-opacity:1" />
+                            </radialGradient>
+                            <radialGradient id="gradientWinter" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" style="stop-color:#3498db;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#2980b9;stop-opacity:1" />
+                            </radialGradient>
+                            <radialGradient id="gradientMorred" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" style="stop-color:#f39c12;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#e67e22;stop-opacity:1" />
+                            </radialGradient>
+                            <radialGradient id="gradientAnaz" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" style="stop-color:#95a5a6;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#7f8c8d;stop-opacity:1" />
+                            </radialGradient>
+                            <radialGradient id="gradientLonisivinuss" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" style="stop-color:#1abc9c;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#16a085;stop-opacity:1" />
+                            </radialGradient>
+                            <radialGradient id="gradientKaras" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" style="stop-color:#e74c3c;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#c0392b;stop-opacity:1" />
+                            </radialGradient>
+                        </defs>
+                    </svg>
+                    
+                    <!-- Legenda Melhorada -->
+                    <div style="margin-top: 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div style="background: rgba(52, 152, 219, 0.1); border: 1px solid rgba(52, 152, 219, 0.3); border-radius: 10px; padding: 1rem; color: #ecf0f1; text-align: center;">
+                            <div style="font-weight: bold; margin-bottom: 0.5rem; color: #3498db;">💡 Controles</div>
+                            <div style="font-size: 0.9rem;">Clique nas regiões para editar</div>
+                        </div>
+                        <div style="background: rgba(46, 204, 113, 0.1); border: 1px solid rgba(46, 204, 113, 0.3); border-radius: 10px; padding: 1rem; color: #ecf0f1; text-align: center;">
+                            <div style="font-weight: bold; margin-bottom: 0.5rem; color: #2ecc71;">🎯 Localização</div>
+                            <div style="font-size: 0.9rem;">Maya está em Lonisivinuss</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Rotas Principais -->
+                    <div style="margin-top: 1.5rem;">
+                        <div style="text-align: center; color: #ecf0f1; font-weight: bold; margin-bottom: 1rem; font-size: 1rem;">🛣️ Principais Rotas de Viagem</div>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                            <div style="background: rgba(52, 152, 219, 0.1); border: 1px solid rgba(52, 152, 219, 0.3); border-radius: 8px; padding: 0.8rem; color: #ecf0f1; font-size: 0.8rem;">
+                                <strong>🛣️ Rota Norte:</strong> Uluth ↔ Winter (baixa vigilância)
+                            </div>
+                            <div style="background: rgba(243, 156, 18, 0.1); border: 1px solid rgba(243, 156, 18, 0.3); border-radius: 8px; padding: 0.8rem; color: #ecf0f1; font-size: 0.8rem;">
+                                <strong>🔧 Rota Tech:</strong> Morred ↔ Centro (alta tecnologia)
+                            </div>
+                            <div style="background: rgba(26, 188, 156, 0.1); border: 1px solid rgba(26, 188, 156, 0.3); border-radius: 8px; padding: 0.8rem; color: #ecf0f1; font-size: 0.8rem;">
+                                <strong>🌊 Rota Aquática:</strong> Lonisivinuss ↔ Anaz (comunicações secretas)
+                            </div>
+                            <div style="background: rgba(231, 76, 60, 0.1); border: 1px solid rgba(231, 76, 60, 0.3); border-radius: 8px; padding: 0.8rem; color: #ecf0f1; font-size: 0.8rem;">
+                                <strong>⚔️ Rota Militar:</strong> Karas ↔ Centro (patrulhamento)
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Indicadores de Nível de Perigo -->
+                    <div style="position: absolute; top: 1rem; right: 1rem; background: rgba(44, 62, 80, 0.9); border-radius: 10px; padding: 1rem; min-width: 120px;">
+                        <div style="color: #ecf0f1; font-weight: bold; margin-bottom: 0.5rem; text-align: center; font-size: 0.9rem;">⚠️ Níveis de Perigo</div>
+                        <div style="display: flex; flex-direction: column; gap: 0.3rem; font-size: 0.8rem;">
+                            <div style="display: flex; justify-content: space-between;"><span style="color: #27ae60;">●</span> <span style="color: #ecf0f1;">Baixo</span></div>
+                            <div style="display: flex; justify-content: space-between;"><span style="color: #f39c12;">●</span> <span style="color: #ecf0f1;">Médio</span></div>
+                            <div style="display: flex; justify-content: space-between;"><span style="color: #e74c3c;">●</span> <span style="color: #ecf0f1;">Alto</span></div>
+                            <div style="display: flex; justify-content: space-between;"><span style="color: #8e44ad;">●</span> <span style="color: #ecf0f1;">Extremo</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Descrições Editáveis das Cidades -->
+                <div id="city-descriptions" style="margin-top: 6rem;">
+                    
+                    <!-- Indicador de Região Ativa -->
+                    <div id="active-region-indicator" style="display: none; text-align: center; margin-bottom: 2rem;">
+                        <div style="background: linear-gradient(90deg, #f39c12, #e67e22); color: white; padding: 1rem 2rem; border-radius: 25px; display: inline-block; font-weight: bold; font-size: 1.1rem; box-shadow: 0 5px 15px rgba(243, 156, 18, 0.3);">
+                            ✏️ Editando: <span id="active-region-name"></span>
+                        </div>
+                    </div>
+                    
+                    <div id="city-uluth" class="city-edit-section" style="display: none;">
+                        <div class="info-box">
+                            <div class="info-header">❄️ ULUTH</div>
+                            <div class="info-content">
+                                <div style="margin-bottom: 1rem;">
+                                    <label style="font-weight: bold; display: block; margin-bottom: 0.5rem;">Tipo:</label>
+                                    <input type="text" class="stat-input" placeholder="Ex: Território do Norte" id="uluth-type" value="Território do Norte">
+                                </div>
+                                <div style="margin-bottom: 1rem;">
+                                    <label style="font-weight: bold; display: block; margin-bottom: 0.5rem;">Características:</label>
+                                    <textarea class="stat-input" style="min-height: 60px;" placeholder="Descreva as características da região" id="uluth-characteristics">Região fria e montanhosa</textarea>
+                                </div>
+                                <div style="margin-bottom: 1rem;">
+                                    <label style="font-weight: bold; display: block; margin-bottom: 0.5rem;">População:</label>
+                                    <textarea class="stat-input" style="min-height: 60px;" placeholder="Quem vive aqui?" id="uluth-population">Comunidades isoladas, especialistas em tecnologia de sobrevivência</textarea>
+                                </div>
+                                <div style="margin-bottom: 1rem;">
+                                    <label style="font-weight: bold; display: block; margin-bottom: 0.5rem;">Relevância para Maya:</label>
+                                    <textarea class="stat-input" style="min-height: 60px;" placeholder="Por que é importante?" id="uluth-relevance">Possível localização de laboratórios antigos</textarea>
+                                </div>
+                                <div style="margin-bottom: 1rem;">
+                                    <label style="font-weight: bold; display: block; margin-bottom: 0.5rem;">Perigos:</label>
+                                    <textarea class="stat-input" style="min-height: 60px;" placeholder="Quais são os riscos?" id="uluth-dangers">Clima extremo, sistemas automatizados hostis</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="city-winter" class="city-edit-section" style="display: none;">
+                        <div class="info-box">
+                            <div class="info-header">🌨️ WINTER</div>
+                            <div class="info-content">
+                                <div style="margin-bottom: 1rem;">
+                                    <label style="font-weight: bold; display: block; margin-bottom: 0.5rem;">Tipo:</label>
+                                    <input type="text" class="stat-input" placeholder="Ex: Região Ocidental" id="winter-type" value="Região Ocidental">
+                                </div>
+                                <div style="margin-bottom: 1rem;">
+                                    <label style="font-weight: bold; display: block; margin-bottom: 0.5rem;">Características:</label>
+                                    <textarea class="stat-input" style="min-height: 60px;" placeholder="Descreva as características da região" id="winter-characteristics">Eternamente coberta por neve</textarea>
+                                </div>
+                                <div style="margin-bottom: 1rem;">
+                                    <label style="font-weight: bold; display: block; margin-bottom: 0.5rem;">População:</label>
+                                    <textarea class="stat-input" style="min-height: 60px;" placeholder="Quem vive aqui?" id="winter-population">Nômades resistentes, comerciantes de sucata</textarea>
+                                </div>
+                                <div style="margin-bottom: 1rem;">
+                                    <label style="font-weight: bold; display: block; margin-bottom: 0.5rem;">Recursos:</label>
+                                    <textarea class="stat-input" style="min-height: 60px;" placeholder="O que se encontra aqui?" id="winter-resources">Metais raros e componentes cibernéticos</textarea>
+                                </div>
+                                <div style="margin-bottom: 1rem;">
+                                    <label style="font-weight: bold; display: block; margin-bottom: 0.5rem;">Status:</label>
+                                    <textarea class="stat-input" style="min-height: 60px;" placeholder="Situação política/militar" id="winter-status">Zona neutra para encontros secretos</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="city-morred" class="city-edit-section" style="display: none;">
+                        <div class="info-box">
+                            <div class="info-header">🤖 MORRED GEUO AUTOMATCO</div>
+                            <div class="info-content">
+                                <div style="margin-bottom: 1rem;">
+                                    <label style="font-weight: bold; display: block; margin-bottom: 0.5rem;">Tipo:</label>
+                                    <input type="text" class="stat-input" placeholder="Ex: Metrópole Tecnológica" id="morred-type" value="Metrópole Tecnológica">
+                                </div>
+                                <div style="margin-bottom: 1rem;">
+                                    <label style="font-weight: bold; display: block; margin-bottom: 0.5rem;">Características:</label>
+                                    <textarea class="stat-input" style="min-height: 60px;" placeholder="Descreva as características da região" id="morred-characteristics">Cidade completamente automatizada</textarea>
+                                </div>
+                                <div style="margin-bottom: 1rem;">
+                                    <label style="font-weight: bold; display: block; margin-bottom: 0.5rem;">População:</label>
+                                    <textarea class="stat-input" style="min-height: 60px;" placeholder="Quem vive aqui?" id="morred-population">Ciborgues avançados, IAs habitantes</textarea>
+                                </div>
+                                <div style="margin-bottom: 1rem;">
+                                    <label style="font-weight: bold; display: block; margin-bottom: 0.5rem;">Perigo para Maya:</label>
+                                    <textarea class="stat-input" style="min-height: 60px;" placeholder="Riscos específicos para Maya" id="morred-danger">Alto risco de detecção para Maya</textarea>
+                                </div>
+                                <div style="margin-bottom: 1rem;">
+                                    <label style="font-weight: bold; display: block; margin-bottom: 0.5rem;">Interesse:</label>
+                                    <textarea class="stat-input" style="min-height: 60px;" placeholder="Por que é interessante?" id="morred-interest">Possível local onde Skye opera</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="city-anaz" class="city-edit-section" style="display: none;">
+                        <div class="info-box">
+                            <div class="info-header">🏛️ ANAZ</div>
+                            <div class="info-content">
+                                <div style="margin-bottom: 1rem;">
+                                    <label style="font-weight: bold; display: block; margin-bottom: 0.5rem;">Tipo:</label>
+                                    <input type="text" class="stat-input" placeholder="Ex: Ruínas Antigas" id="anaz-type" value="Ruínas Antigas">
+                                </div>
+                                <div style="margin-bottom: 1rem;">
+                                    <label style="font-weight: bold; display: block; margin-bottom: 0.5rem;">Características:</label>
+                                    <textarea class="stat-input" style="min-height: 60px;" placeholder="Descreva as características da região" id="anaz-characteristics">Vestígios de uma civilização perdida</textarea>
+                                </div>
+                                <div style="margin-bottom: 1rem;">
+                                    <label style="font-weight: bold; display: block; margin-bottom: 0.5rem;">População:</label>
+                                    <textarea class="stat-input" style="min-height: 60px;" placeholder="Quem vive aqui?" id="anaz-population">Arqueólogos, caçadores de tesouros, eremitas</textarea>
+                                </div>
+                                <div style="margin-bottom: 1rem;">
+                                    <label style="font-weight: bold; display: block; margin-bottom: 0.5rem;">Artefatos:</label>
+                                    <textarea class="stat-input" style="min-height: 60px;" placeholder="O que pode ser encontrado?" id="anaz-artifacts">Tecnologia antiga, fragmentos de memória, dispositivos únicos</textarea>
+                                </div>
+                                <div style="margin-bottom: 1rem;">
+                                    <label style="font-weight: bold; display: block; margin-bottom: 0.5rem;">Mistérios:</label>
+                                    <textarea class="stat-input" style="min-height: 60px;" placeholder="Segredos da região" id="anaz-mysteries">Conexão com a origem dos ciborgues</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="city-lonisivinuss" class="city-edit-section" style="display: none;">
+                        <div class="info-box">
+                            <div class="info-header">🌊 LONISIVINUSS - Base de Maya</div>
+                            <div class="info-content">
+                                <div style="margin-bottom: 1rem;">
+                                    <label style="font-weight: bold; display: block; margin-bottom: 0.5rem;">Tipo:</label>
+                                    <input type="text" class="stat-input" placeholder="Ex: Região Aquática" id="lonisivinuss-type" value="Região Aquática">
+                                </div>
+                                <div style="margin-bottom: 1rem;">
+                                    <label style="font-weight: bold; display: block; margin-bottom: 0.5rem;">Características:</label>
+                                    <textarea class="stat-input" style="min-height: 60px;" placeholder="Descreva as características da região" id="lonisivinuss-characteristics">Cidades flutuantes conectadas por canais</textarea>
+                                </div>
+                                <div style="margin-bottom: 1rem;">
+                                    <label style="font-weight: bold; display: block; margin-bottom: 0.5rem;">População:</label>
+                                    <textarea class="stat-input" style="min-height: 60px;" placeholder="Quem vive aqui?" id="lonisivinuss-population">Pescadores, contrabandistas, refugiados</textarea>
+                                </div>
+                                <div style="margin-bottom: 1rem;">
+                                    <label style="font-weight: bold; display: block; margin-bottom: 0.5rem;">Por que Maya escolheu aqui:</label>
+                                    <textarea class="stat-input" style="min-height: 60px;" placeholder="Por que é a base de Maya?" id="lonisivinuss-maya">Baixa vigilância imperial, fácil de se esconder</textarea>
+                                </div>
+                                <div style="margin-bottom: 1rem;">
+                                    <label style="font-weight: bold; display: block; margin-bottom: 0.5rem;">Recursos únicos:</label>
+                                    <textarea class="stat-input" style="min-height: 60px;" placeholder="O que há de especial?" id="lonisivinuss-resources">Comunicações submarinas, rotas de escape</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="city-karas" class="city-edit-section" style="display: none;">
+                        <div class="info-box">
+                            <div class="info-header">⚔️ KARAS</div>
+                            <div class="info-content">
+                                <div style="margin-bottom: 1rem;">
+                                    <label style="font-weight: bold; display: block; margin-bottom: 0.5rem;">Tipo:</label>
+                                    <input type="text" class="stat-input" placeholder="Ex: Zona Militar" id="karas-type" value="Zona Militar">
+                                </div>
+                                <div style="margin-bottom: 1rem;">
+                                    <label style="font-weight: bold; display: block; margin-bottom: 0.5rem;">Características:</label>
+                                    <textarea class="stat-input" style="min-height: 60px;" placeholder="Descreva as características da região" id="karas-characteristics">Bases militares fortificadas, campos de treinamento</textarea>
+                                </div>
+                                <div style="margin-bottom: 1rem;">
+                                    <label style="font-weight: bold; display: block; margin-bottom: 0.5rem;">População:</label>
+                                    <textarea class="stat-input" style="min-height: 60px;" placeholder="Quem vive aqui?" id="karas-population">Soldados, mercenários, fabricantes de armas</textarea>
+                                </div>
+                                <div style="margin-bottom: 1rem;">
+                                    <label style="font-weight: bold; display: block; margin-bottom: 0.5rem;">Nível de Perigo:</label>
+                                    <textarea class="stat-input" style="min-height: 60px;" placeholder="Quão perigoso é?" id="karas-danger">Extremamente alto - patrulhas constantes</textarea>
+                                </div>
+                                <div style="margin-bottom: 1rem;">
+                                    <label style="font-weight: bold; display: block; margin-bottom: 0.5rem;">Interesse para Maya:</label>
+                                    <textarea class="stat-input" style="min-height: 60px;" placeholder="Por que pode ser relevante?" id="karas-interest">Possível local de testes de ciborgues militares</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="city-imperial" class="city-edit-section" style="display: none;">
+                        <div class="info-box">
+                            <div class="info-header">⚙️ CENTRO IMPERIAL</div>
+                            <div class="info-content">
+                                <div style="margin-bottom: 1rem;">
+                                    <label style="font-weight: bold; display: block; margin-bottom: 0.5rem;">Tipo:</label>
+                                    <input type="text" class="stat-input" placeholder="Ex: Capital Imperial" id="imperial-type" value="Capital Imperial">
+                                </div>
+                                <div style="margin-bottom: 1rem;">
+                                    <label style="font-weight: bold; display: block; margin-bottom: 0.5rem;">Características:</label>
+                                    <textarea class="stat-input" style="min-height: 60px;" placeholder="Descreva as características da região" id="imperial-characteristics">Mega-estrutura de arranha-céus, centro de comando</textarea>
+                                </div>
+                                <div style="margin-bottom: 1rem;">
+                                    <label style="font-weight: bold; display: block; margin-bottom: 0.5rem;">População:</label>
+                                    <textarea class="stat-input" style="min-height: 60px;" placeholder="Quem vive aqui?" id="imperial-population">Elite governante, burocratas, agentes imperiais</textarea>
+                                </div>
+                                <div style="margin-bottom: 1rem;">
+                                    <label style="font-weight: bold; display: block; margin-bottom: 0.5rem;">Vigilância:</label>
+                                    <textarea class="stat-input" style="min-height: 60px;" placeholder="Nível de monitoramento" id="imperial-surveillance">Vigilância total - scanners em todos os locais</textarea>
+                                </div>
+                                <div style="margin-bottom: 1rem;">
+                                    <label style="font-weight: bold; display: block; margin-bottom: 0.5rem;">Perigo para Maya:</label>
+                                    <textarea class="stat-input" style="min-height: 60px;" placeholder="Riscos específicos" id="imperial-maya-danger">Descoberta instantânea = captura garantida</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quote">
+                    "O mundo é vasto e cheio de mistérios. Cada região guarda segredos que podem revelar mais sobre o passado de Maya e o futuro que a aguarda."
+                </div>
+            </div>
+        </div>
+
+        <!-- SEÇÃO NPCs -->
+        <div id="npcs" class="content">
+            <div class="guide-section">
+                <h2>👥 Personagens Importantes</h2>
+                
+                <div class="concept-visual">
+                    <div class="concept-title">A Rede de Conexões de Maya</div>
+                    <div class="concept-description">
+                        Ao longo de sua jornada, Maya encontra personagens que moldam sua compreensão 
+                        do mundo e de si mesma. Alguns são aliados, outros inimigos, e muitos permanecem um mistério.
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <div class="info-header">🌟 SKYE - A Companheira Perdida</div>
+                    <div class="info-content">
+                        <p><strong>Papel:</strong> Companheira do passado, especialista em redes neurais do "mundo acima"</p>
+                        
+                        <p><strong>Status:</strong> Ativa no mundo de superfície, mas impedida de descer ao submundo onde Maya vive</p>
+                        
+                        <p><strong>Personalidade:</strong> Persistente, inteligente, carrega uma culpa profunda por não conseguir salvar Maya quando tudo desmoronou</p>
+                        
+                        <p><strong>História:</strong> Trabalhava no mesmo Projeto Prometeu que Maya, mas estava em missão externa quando tudo desmoronou. Sobreviveu ao colapso do projeto e desde então busca uma forma de reencontrar Maya.</p>
+                        
+                        <p><strong>Dilema Central:</strong> Sabe que Maya está viva no submundo, mas é procurada pelas mesmas forças que destruíram o projeto. Cada tentativa de fazer contato coloca ambas em risco.</p>
+                        
+                        <p><strong>Impedimento:</strong> Cada tentativa de descida resulta em ataques de segurança coordenados - alguém ou algo monitora seus movimentos</p>
+                        
+                        <p><strong>Recursos:</strong> Monitora Maya à distância através de sinais fragmentados, envia pistas sutis quando possível sem comprometer a localização</p>
+                        
+                        <p><strong>Localização:</strong> Nômade nos níveis superiores, sempre em movimento para evitar captura</p>
+                        
+                        <p><strong>Segredo:</strong> Possui coordenadas de um local seguro onde ambas podem se encontrar, mas precisa ter certeza de que é seguro antes de revelar</p>
+                        
+                        <p><strong>Conflito Interno:</strong> Quer desesperadamente proteger Maya, mas sua ausência também pode ser vista como abandono. Luta entre aproximação e proteção à distância.</p>
+                        
+                        <div style="background: #f8f9fa; padding: 1rem; border-left: 4px solid #3498db; margin-top: 1rem; border-radius: 5px;">
+                            <p><em><strong>Nota Dramática:</strong> Skye representa o passado que Maya perdeu e o futuro que podem construir juntas, se conseguirem superar as forças que as separam.</em></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <div class="info-header">🔬 DRA. ELENA VASQUEZ - A Criadora Perdida</div>
+                    <div class="info-content">
+                        <p><strong>Descrição:</strong> A cientista responsável pelo "Projeto Prometeu" que criou Maya. Desapareceu misteriosamente antes que Maya despertasse, deixando apenas registros fragmentados e mensagens codificadas.</p>
+                        
+                        <p><strong>Aparência:</strong> Conhecida apenas através de hologramas e fotografias antigas. Mulher de meia-idade com olhos gentis mas determinados, sempre usando um jaleco branco característico.</p>
+                        
+                        <p><strong>Legado:</strong> Seus laboratórios espalhados pelo mundo contêm pistas sobre o passado de Maya e possivelmente a chave para sua evolução futura.</p>
+                        
+                        <p><strong>Mistério:</strong> Ela está viva? Por que desapareceu? E por que deixou Maya sozinha para descobrir sua própria identidade?</p>
+                        
+                        <p><strong>Relacionamento com Maya:</strong> Figura materna ausente. Maya sente uma conexão profunda com a dra. Elena, mesmo nunca tendo a conhecido conscientemente.</p>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <div class="info-header">⚔️ COMANDANTE ORION - O Caçador Implacável</div>
+                    <div class="info-content">
+                        <p><strong>Descrição:</strong> Oficial militar de elite especializado em caçar ciborgues renegados. Orion vê Maya como uma ameaça que deve ser neutralizada, mas sua obsessão parece ter raízes mais profundas.</p>
+                        
+                        <p><strong>Aparência:</strong> Homem alto e imponente, com cicatrizes que contam histórias de batalhas contra máquinas. Sempre veste o uniforme militar impecável, com insígnias que indicam inúmeras vitórias.</p>
+                        
+                        <p><strong>Personalidade:</strong> Disciplinado e metódico, mas há um toque de fanatismo em sua cruzada contra ciborgues "descontrolados".</p>
+                        
+                        <p><strong>Mistério:</strong> Por que Orion conhece tanto sobre Maya? Há algo pessoal em sua perseguição ou é apenas dever militar?</p>
+                        
+                        <p><strong>Relacionamento com Maya:</strong> Antagonista principal. Representa a ameaça constante de captura e o medo de Maya de ser descoberta.</p>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <div class="info-header">🎭 ECHO - O Informante Enigmático</div>
+                    <div class="info-content">
+                        <p><strong>Descrição:</strong> Uma presença misteriosa que se comunica com Maya através de canais digitais criptografados. Echo sempre sabe mais do que deveria sobre os movimentos de Maya.</p>
+                        
+                        <p><strong>Identidade:</strong> Desconhecida. Pode ser uma IA avançada, outro ciborgue, ou até mesmo um humano com acesso a tecnologia impressionante.</p>
+                        
+                        <p><strong>Método:</strong> Aparece como voz distorcida, texto criptografado, ou hologramas tremulantes. Nunca revela sua forma verdadeira.</p>
+                        
+                        <p><strong>Motivação:</strong> Parece genuinamente interessado em ajudar Maya, mas seus próprios objetivos permanecem obscuros.</p>
+                        
+                        <p><strong>Relacionamento com Maya:</strong> Aliado misterioso. Maya confia nele por necessidade, mas sempre se pergunta quais são suas verdadeiras intenções.</p>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <div class="info-header">🌊 MARINA - A Aliada Local</div>
+                    <div class="info-content">
+                        <p><strong>Descrição:</strong> Uma contrabandista humana de Lonisivinuss que se tornou uma das poucas pessoas em quem Maya confia. Marina conhece todos os canais e rotas secretas da região aquática.</p>
+                        
+                        <p><strong>Aparência:</strong> Mulher resistente com pele bronzeada pelo sol aquático, sempre carregando equipamentos de mergulho modificados. Tem tatuagens que brilham fracamente - nanotecnologia decorativa.</p>
+                        
+                        <p><strong>Personalidade:</strong> Pragmática e leal, com um senso de humor sarcástico. Não faz muitas perguntas sobre o passado de Maya, mas oferece ajuda quando necessário.</p>
+                        
+                        <p><strong>Habilidades:</strong> Pilotagem aquática, conhecimento de rotas comerciais, contatos no submundo.</p>
+                        
+                        <p><strong>Relacionamento com Maya:</strong> Amiga e aliada. Uma das poucas relações "normais" na vida de Maya, representando uma âncora à humanidade.</p>
+                    </div>
+                </div>
+
+                <div class="quote">
+                    "As pessoas ao nosso redor moldam quem somos tanto quanto nossas próprias escolhas. Para Maya, cada encontro é uma oportunidade de descobrir mais sobre si mesma."
+                </div>
+            </div>
+        </div>
+
+        <!-- SEÇÃO GUIA -->
+        <div id="guide" class="content">
+            <div class="guide-section">
+                <h2>📖 Guia Completo do Universo</h2>
+                
+                <h3>🎮 Como Usar Este Sistema</h3>
+                <div class="info-box">
+                    <div class="info-header">📋 Funcionalidades Principais</div>
+                    <div class="info-content">
+                        <ul>
+                            <li><strong>Salvamento Automático:</strong> Todas as suas edições são salvas automaticamente no navegador</li>
+                            <li><strong>Backup/Restaurar:</strong> Use os botões no canto inferior direito para fazer backup dos seus dados</li>
+                            <li><strong>Edição Completa:</strong> Todos os campos podem ser editados para personalizar sua versão de Maya</li>
+                            <li><strong>Responsivo:</strong> Funciona perfeitamente em desktop, tablet e celular</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>🌍 História do Mundo</h3>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h4>🏛️ Era Antiga (Período Desconhecido)</h4>
+                        <p>Civilização avançada desenvolve tecnologia de fusão humano-máquina. Ruínas desta época podem ser encontradas em Anaz, guardando segredos sobre as origens da cibernética.</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h4>⚔️ Guerras de Unificação (50-30 anos atrás)</h4>
+                        <p>Conflitos que estabeleceram o Centro Imperial como poder dominante. Karas tornou-se o braço militar do império, enquanto outras regiões mantiveram relativa autonomia.</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h4>🔬 Projeto Prometeu (15-5 anos atrás)</h4>
+                        <p>Dra. Elena Vasquez lidera pesquisas secretas para criar ciborgues de nova geração. Maya é o protótipo mais avançado, mas o projeto é interrompido abruptamente.</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h4>🌊 Despertar de Maya (5 anos atrás)</h4>
+                        <p>Maya desperta em um laboratório abandonado com memórias fragmentadas. Consegue escapar e eventualmente se estabelece em Lonisivinuss.</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h4>📅 Presente</h4>
+                        <p>Maya vive escondida em Lonisivinuss, ocasionalmente realizando missões enquanto busca pistas sobre seu passado. Suas aventuras começam aqui.</p>
+                    </div>
+                </div>
+
+                <h3>🔧 Tecnologia do Mundo</h3>
+                <div class="info-box">
+                    <div class="info-header">🤖 Níveis de Ciborgues</div>
+                    <div class="info-content">
+                        <p><strong>Básico:</strong> Implantes simples - membros protéticos, aprimoramentos oculares básicos</p>
+                        <p><strong>Avançado:</strong> Integração parcial - órgãos artificiais, interfaces neurais, melhorias físicas</p>
+                        <p><strong>Elite (Maya):</strong> Fusão completa - consciência híbrida, habilidades especiais, memórias artificiais</p>
+                        <p><strong>Experimentais:</strong> Protótipos únicos com capacidades desconhecidas</p>
+                    </div>
+                </div>
+
+                <h3>🎲 Sistema de Jogo Sugerido</h3>
+                <div class="adventure-box">
+                    <div class="adventure-header">⚡ Mecânicas Básicas</div>
+                    <div class="adventure-content">
+                        <h4>🎯 Testes de Habilidade</h4>
+                        <p>Use 2d6 + atributo relevante para a maioria dos testes. Dificuldades sugeridas:</p>
+                        <ul>
+                            <li><strong>Fácil:</strong> 8+</li>
+                            <li><strong>Moderado:</strong> 10+</li>
+                            <li><strong>Difícil:</strong> 12+</li>
+                            <li><strong>Extremo:</strong> 14+</li>
+                        </ul>
+                        
+                        <h4>⚔️ Sistema de Combate</h4>
+                        <p>Iniciativa: 1d6 + Destreza. Ações por turno: mover + uma ação principal.</p>
+                        <p>Dano das habilidades conforme descrito na seção de habilidades.</p>
+                        
+                        <h4>🧠 Sistema de Memórias</h4>
+                        <p>Maya pode recuperar fragmentos de memória em momentos dramáticos. O mestre pode revelar informações importantes através de flashbacks ativados por situações específicas.</p>
+                    </div>
+                </div>
+
+                <h3>🎨 Inspirações Visuais</h3>
+                <div class="concept-visual">
+                    <div class="concept-title">Aesthetic Cyberpunk Aquático</div>
+                    <div class="concept-description">
+                        Imagine Blade Runner encontrando Waterworld. Neon refletindo em canais escuros, 
+                        cidades flutuantes conectadas por pontes de luz, e a constante presença da 
+                        chuva criando uma atmosfera melancólica mas esperançosa.
+                    </div>
+                </div>
+
+                <div class="scenario">
+                    <div class="scenario-title">💡 Exemplo de Cena Dramática</div>
+                    <p><em>"Maya caminha pelos canais de Lonisivinuss quando seus implantes começam a pulsar em sincronia com as luzes da cidade. Por um momento, ela vê através dos olhos de outra pessoa - uma laboratório estéril, a voz suave da Dra. Elena dizendo 'Você será especial, minha querida.' A visão se esvai, deixando Maya com mais perguntas que respostas, mas também com uma estranha sensação de saudade de algo que nunca soube que perdeu."</em></p>
+                </div>
+
+                <h3>🚀 Ideias para Aventuras</h3>
+                <div class="info-box">
+                    <div class="info-header">🗺️ Ganchos de Aventura</div>
+                    <div class="info-content">
+                        <ul>
+                            <li><strong>A Mensagem Perdida:</strong> Maya intercepta uma transmissão da Dra. Elena ainda viva</li>
+                            <li><strong>O Irmão Perdido:</strong> Outro protótipo do Projeto Prometeu aparece, mas hostil</li>
+                            <li><strong>Infiltração em Morred:</strong> Missão para recuperar dados em território de Skye</li>
+                            <li><strong>A Caçada de Orion:</strong> O comandante finalmente rastreia Maya até Lonisivinuss</li>
+                            <li><strong>Segredos de Anaz:</strong> Expedição às ruínas pode revelar a origem de toda tecnologia ciborgue</li>
+                            <li><strong>A Verdade sobre Echo:</strong> A identidade do informante misterioso é finalmente revelada</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="quote">
+                    "O universo de Maya é vasto e cheio de possibilidades. Use este guia como base, mas não tenha medo de adicionar seus próprios elementos e mistérios. A história de Maya é, no fim das contas, a história que vocês contam juntos na mesa."
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sistema de navegação
+        function showSection(sectionId) {
+            // Esconder todas as seções
+            const sections = document.querySelectorAll('.content');
+            sections.forEach(section => section.classList.remove('active'));
+            
+            // Mostrar seção selecionada
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Atualizar menu ativo
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => item.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Esconder editor de cidades quando mudar de seção
+            if (sectionId !== 'map') {
+                hideAllCityEditors();
+            }
+        }
+
+        // Sistema de salvamento automático
+        function saveData() {
+            const data = {
+                // Dados da ficha
+                charName: document.getElementById('char-name').value,
+                charClass: document.getElementById('char-class').value,
+                str: document.getElementById('str').value,
+                dex: document.getElementById('dex').value,
+                con: document.getElementById('con').value,
+                int: document.getElementById('int').value,
+                wis: document.getElementById('wis').value,
+                cha: document.getElementById('cha').value,
+                hp: document.getElementById('hp').value,
+                credits: document.getElementById('credits').value,
+                class: document.getElementById('class').value,
+                equipment: document.getElementById('equipment').value,
+                notes: document.getElementById('notes').value,
+                
+                // Habilidades
+                abilities: {},
+                
+                // Aventuras
+                adventures: {},
+                
+                // Cidades
+                cities: {}
+            };
+            
+            // Salvar habilidades
+            for (let i = 1; i <= 7; i++) {
+                const nameEl = document.getElementById(`ability${i}-name`);
+                const descEl = document.getElementById(`ability${i}-desc`);
+                const mechEl = document.getElementById(`ability${i}-mech`);
+                const visualEl = document.getElementById(`ability${i}-visual`);
+                
+                if (nameEl) {
+                    data.abilities[i] = {
+                        name: nameEl.value,
+                        desc: descEl ? descEl.value : '',
+                        mech: mechEl ? mechEl.value : '',
+                        visual: visualEl ? visualEl.value : ''
+                    };
+                }
+            }
+            
+            // Salvar aventuras
+            document.querySelectorAll('.adventure-edit-box').forEach(adventureBox => {
+                const id = adventureBox.id.split('-')[1];
+                const titleEl = document.getElementById(`adventure-${id}-title`);
+                if (titleEl) {
+                    data.adventures[id] = {
+                        title: titleEl.value,
+                        summary: document.getElementById(`adventure-${id}-summary`)?.value || '',
+                        opening: document.getElementById(`adventure-${id}-opening`)?.value || '',
+                        events: document.getElementById(`adventure-${id}-events`)?.value || '',
+                        npcs: document.getElementById(`adventure-${id}-npcs`)?.value || '',
+                        abilities: document.getElementById(`adventure-${id}-abilities`)?.value || '',
+                        rewards: document.getElementById(`adventure-${id}-rewards`)?.value || '',
+                        date: document.getElementById(`adventure-${id}-date`)?.value || '',
+                        notes: document.getElementById(`adventure-${id}-notes`)?.value || ''
+                    };
+                }
+            });
+            
+            // Salvar dados das cidades
+            const cities = ['uluth', 'winter', 'morred', 'anaz', 'lonisivinuss', 'karas', 'imperial'];
+            cities.forEach(city => {
+                data.cities[city] = {};
+                const fields = ['type', 'characteristics', 'population', 'relevance', 'dangers', 'resources', 'status', 'danger', 'interest', 'artifacts', 'mysteries', 'maya', 'surveillance', 'maya-danger'];
+                fields.forEach(field => {
+                    const el = document.getElementById(`${city}-${field}`);
+                    if (el) {
+                        data.cities[city][field] = el.value;
+                    }
+                });
+            });
+            
+            localStorage.setItem('mayaRpgData', JSON.stringify(data));
+            showSaveIndicator();
+        }
+
+        // Carregar dados salvos
+        function loadData() {
+            const savedData = localStorage.getItem('mayaRpgData');
+            if (!savedData) return;
+            
+            try {
+                const data = JSON.parse(savedData);
+                
+                // Carregar dados da ficha
+                if (data.charName) document.getElementById('char-name').value = data.charName;
+                if (data.charClass) document.getElementById('char-class').value = data.charClass;
+                if (data.str) document.getElementById('str').value = data.str;
+                if (data.dex) document.getElementById('dex').value = data.dex;
+                if (data.con) document.getElementById('con').value = data.con;
+                if (data.int) document.getElementById('int').value = data.int;
+                if (data.wis) document.getElementById('wis').value = data.wis;
+                if (data.cha) document.getElementById('cha').value = data.cha;
+                if (data.hp) document.getElementById('hp').value = data.hp;
+                if (data.credits) document.getElementById('credits').value = data.credits;
+                if (data.class) document.getElementById('class').value = data.class;
+                if (data.equipment) document.getElementById('equipment').value = data.equipment;
+                if (data.notes) document.getElementById('notes').value = data.notes;
+                
+                // Carregar habilidades
+                if (data.abilities) {
+                    Object.keys(data.abilities).forEach(id => {
+                        const ability = data.abilities[id];
+                        const nameEl = document.getElementById(`ability${id}-name`);
+                        const descEl = document.getElementById(`ability${id}-desc`);
+                        const mechEl = document.getElementById(`ability${id}-mech`);
+                        const visualEl = document.getElementById(`ability${id}-visual`);
+                        
+                        if (nameEl && ability.name) nameEl.value = ability.name;
+                        if (descEl && ability.desc) descEl.value = ability.desc;
+                        if (mechEl && ability.mech) mechEl.value = ability.mech;
+                        if (visualEl && ability.visual) visualEl.value = ability.visual;
+                    });
+                }
+                
+                // Carregar aventuras
+                if (data.adventures) {
+                    Object.keys(data.adventures).forEach(id => {
+                        const adventure = data.adventures[id];
+                        const titleEl = document.getElementById(`adventure-${id}-title`);
+                        if (titleEl && adventure.title) {
+                            titleEl.value = adventure.title;
+                            if (adventure.summary) document.getElementById(`adventure-${id}-summary`).value = adventure.summary;
+                            if (adventure.opening) document.getElementById(`adventure-${id}-opening`).value = adventure.opening;
+                            if (adventure.events) document.getElementById(`adventure-${id}-events`).value = adventure.events;
+                            if (adventure.npcs) document.getElementById(`adventure-${id}-npcs`).value = adventure.npcs;
+                            if (adventure.abilities) document.getElementById(`adventure-${id}-abilities`).value = adventure.abilities;
+                            if (adventure.rewards) document.getElementById(`adventure-${id}-rewards`).value = adventure.rewards;
+                            if (adventure.date) document.getElementById(`adventure-${id}-date`).value = adventure.date;
+                            if (adventure.notes) document.getElementById(`adventure-${id}-notes`).value = adventure.notes;
+                        }
+                    });
+                }
+                
+                // Carregar dados das cidades
+                if (data.cities) {
+                    Object.keys(data.cities).forEach(city => {
+                        const cityData = data.cities[city];
+                        Object.keys(cityData).forEach(field => {
+                            const el = document.getElementById(`${city}-${field}`);
+                            if (el) {
+                                el.value = cityData[field];
+                            }
+                        });
+                    });
+                }
+                
+            } catch (error) {
+                console.error('Erro ao carregar dados:', error);
+            }
+        }
+
+        // Indicador visual de salvamento
+        function showSaveIndicator() {
+            const indicator = document.getElementById('save-indicator');
+            indicator.style.opacity = '1';
+            setTimeout(() => {
+                indicator.style.opacity = '0';
+            }, 2000);
+        }
+
+        // Exportar dados
+        function exportData() {
+            saveData(); // Garantir que está tudo salvo
+            const data = localStorage.getItem('mayaRpgData');
+            if (data) {
+                const blob = new Blob([data], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'maya_rpg_backup.json';
+                a.click();
+                URL.revokeObjectURL(url);
+            }
+        }
+
+        // Importar dados
+        function importData() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json';
+            input.onchange = function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        try {
+                            const data = e.target.result;
+                            localStorage.setItem('mayaRpgData', data);
+                            location.reload(); // Recarregar página para aplicar os dados
+                        } catch (error) {
+                            alert('Erro ao importar arquivo. Verifique se é um backup válido.');
+                        }
+                    };
+                    reader.readAsText(file);
+                }
+            };
+            input.click();
+        }
+
+        // Resetar dados
+        function resetData() {
+            if (confirm('Tem certeza que deseja apagar todos os dados? Esta ação não pode ser desfeita.')) {
+                localStorage.removeItem('mayaRpgData');
+                location.reload();
+            }
+        }
+
+        // Sistema de edição de cidades
+        let currentEditingCity = null;
+
+        function toggleCityEdit(cityId) {
+            // Se já está editando esta cidade, esconder
+            if (currentEditingCity === cityId) {
+                hideAllCityEditors();
+                return;
+            }
+            
+            // Esconder todas as seções de edição
+            hideAllCityEditors();
+            
+            // Mostrar a seção da cidade selecionada
+            const citySection = document.getElementById(`city-${cityId}`);
+            const indicator = document.getElementById('active-region-indicator');
+            const regionName = document.getElementById('active-region-name');
+            
+            if (citySection) {
+                citySection.style.display = 'block';
+                indicator.style.display = 'block';
+                regionName.textContent = citySection.querySelector('.info-header').textContent;
+                currentEditingCity = cityId;
+                
+                // Destacar cidade ativa no mapa
+                document.querySelectorAll('.city-node').forEach(node => {
+                    node.classList.remove('active-city');
+                });
+                
+                // Encontrar e destacar o nó da cidade
+                const cityNode = document.querySelector(`[onclick="toggleCityEdit('${cityId}')"]`);
+                if (cityNode) {
+                    cityNode.classList.add('active-city');
+                }
+            }
+        }
+
+        function hideAllCityEditors() {
+            document.querySelectorAll('.city-edit-section').forEach(section => {
+                section.style.display = 'none';
+            });
+            document.getElementById('active-region-indicator').style.display = 'none';
+            document.querySelectorAll('.city-node').forEach(node => {
+                node.classList.remove('active-city');
+            });
+            currentEditingCity = null;
+        }
+
+        // Sistema de aventuras
+        let adventureCounter = 4; // Começar em 5 (próxima aventura)
+
+        function addNewAdventure() {
+            adventureCounter++;
+            const container = document.getElementById('adventures-container');
+            
+            const adventureHTML = `
+                <div class="adventure-edit-box" id="adventure-${adventureCounter}">
+                    <div class="adventure-header">
+                        <input type="text" style="background: transparent; border: none; color: white; font-size: 1.3rem; font-weight: bold; width: 80%;" 
+                               placeholder="Nome da Aventura" id="adventure-${adventureCounter}-title" value="🆕 Nova Aventura">
+                        <button onclick="deleteAdventure(${adventureCounter})" style="background: rgba(255,255,255,0.2); border: none; color: white; padding: 0.5rem; border-radius: 5px; cursor: pointer; margin-left: 1rem;">🗑️</button>
+                    </div>
+                    <div class="adventure-content">
+                        <div style="margin-bottom: 1.5rem;">
+                            <h4>📝 Resumo da Sessão</h4>
+                            <textarea class="stat-input" style="min-height: 100px;" placeholder="O que aconteceu nesta aventura?" id="adventure-${adventureCounter}-summary"></textarea>
+                        </div>
+                        
+                        <div style="margin-bottom: 1.5rem;">
+                            <h4>🎬 Cena de Abertura</h4>
+                            <textarea class="stat-input" style="min-height: 80px;" placeholder="Como a aventura começou?" id="adventure-${adventureCounter}-opening"></textarea>
+                        </div>
+
+                        <div style="margin-bottom: 1.5rem;">
+                            <h4>⚔️ Principais Eventos</h4>
+                            <textarea class="stat-input" style="min-height: 120px;" placeholder="O que aconteceu durante a aventura? Combates, descobertas, interações..." id="adventure-${adventureCounter}-events"></textarea>
+                        </div>
+
+                        <div style="margin-bottom: 1.5rem;">
+                            <h4>👥 NPCs Encontrados</h4>
+                            <textarea class="stat-input" style="min-height: 80px;" placeholder="Quais personagens apareceram?" id="adventure-${adventureCounter}-npcs"></textarea>
+                        </div>
+
+                        <div style="margin-bottom: 1.5rem;">
+                            <h4>⚡ Habilidades Usadas</h4>
+                            <textarea class="stat-input" style="min-height: 80px;" placeholder="Quais habilidades de Maya foram destaque?" id="adventure-${adventureCounter}-abilities"></textarea>
+                        </div>
+
+                        <div style="margin-bottom: 1.5rem;">
+                            <h4>🎁 Recompensas e Descobertas</h4>
+                            <textarea class="stat-input" style="min-height: 80px;" placeholder="O que Maya ganhou ou descobriu?" id="adventure-${adventureCounter}-rewards"></textarea>
+                        </div>
+
+                        <div style="margin-bottom: 1.5rem;">
+                            <h4>📅 Data da Sessão</h4>
+                            <input type="date" class="stat-input" id="adventure-${adventureCounter}-date">
+                        </div>
+
+                        <div style="margin-bottom: 1.5rem;">
+                            <h4>📝 Notas do Mestre</h4>
+                            <textarea class="stat-input" style="min-height: 100px;" placeholder="Observações, ideias para próximas sessões, reações dos jogadores..." id="adventure-${adventureCounter}-notes"></textarea>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            container.insertAdjacentHTML('beforeend', adventureHTML);
+            
+            // Scroll até a nova aventura
+            document.getElementById(`adventure-${adventureCounter}`).scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'start' 
+            });
+        }
+
+        function deleteAdventure(id) {
+            if (confirm('Tem certeza que deseja excluir esta aventura?')) {
+                const adventure = document.getElementById(`adventure-${id}`);
+                if (adventure) {
+                    adventure.remove();
+                    saveData(); // Salvar após excluir
+                }
+            }
+        }
+
+        function toggleAdventureList() {
+            const list = document.getElementById('adventure-list');
+            const listContent = document.getElementById('adventure-list-content');
+            
+            if (list.style.display === 'none') {
+                // Montar lista de aventuras
+                listContent.innerHTML = '';
+                document.querySelectorAll('.adventure-edit-box').forEach(adventure => {
+                    const id = adventure.id.split('-')[1];
+                    const title = document.getElementById(`adventure-${id}-title`).value || 'Aventura sem nome';
+                    const date = document.getElementById(`adventure-${id}-date`).value || 'Data não definida';
+                    
+                    const item = document.createElement('div');
+                    item.style.cssText = 'padding: 1rem; border-bottom: 1px solid #eee; cursor: pointer; transition: background 0.3s;';
+                    item.innerHTML = `
+                        <div style="font-weight: bold; color: #2c3e50;">${title}</div>
+                        <div style="color: #7f8c8d; font-size: 0.9rem;">Data: ${date}</div>
+                    `;
+                    item.onclick = () => {
+                        adventure.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        list.style.display = 'none';
+                    };
+                    item.onmouseover = () => item.style.background = '#f8f9fa';
+                    item.onmouseout = () => item.style.background = 'white';
+                    
+                    listContent.appendChild(item);
+                });
+                
+                list.style.display = 'block';
+            } else {
+                list.style.display = 'none';
+            }
+        }
+
+        // Salvar automaticamente quando houver mudanças
+        document.addEventListener('input', function(e) {
+            if (e.target.matches('input, textarea')) {
+                saveData();
+            }
+        });
+
+        // Inicializar quando a página carregar
+        document.addEventListener('DOMContentLoaded', function() {
+            loadData();
+        });
+    </script>
+</body>
+</html>
