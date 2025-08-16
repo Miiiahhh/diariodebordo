@@ -1230,28 +1230,28 @@
     <div class="container">
         <!-- Navegação -->
         <nav class="navbar">
-            <h1>⚡ Refrações da Maya</h1>
+            <h1>Refrações da Maya</h1>
             <div class="nav-menu">
-                <span class="nav-item active" onclick="showSection('home')">🏠 Início</span>
-                <span class="nav-item" onclick="showSection('sheet')">📋 Ficha</span>
-                <span class="nav-item" onclick="showSection('abilities')">⚡ Habilidades</span>
-                <span class="nav-item" onclick="showSection('adventures')">🗺️ Aventuras</span>
-                <span class="nav-item" onclick="showSection('map')">🌍 Mapa</span>
-                <span class="nav-item" onclick="showSection('npcs')">👥 NPCs</span>
-                <span class="nav-item" onclick="showSection('dice')">🎲 Dados</span>
-                <span class="nav-item" onclick="showSection('combat')">⚔️ Combate</span>
-                <span class="nav-item" onclick="showSection('dashboard')">📊 Dashboard</span>
-                <span class="nav-item" onclick="showSection('calendar')">📅 Calendário</span>
-                <span class="nav-item" onclick="showSection('memories')">💭 Memórias</span>
-                <span class="nav-item" onclick="showSection('inventory')">🎒 Inventário</span>
-                <span class="nav-item" onclick="showSection('guide')">📖 Guia</span>
+                <span class="nav-item active" onclick="showSection('home')">Início</span>
+                <span class="nav-item" onclick="showSection('sheet')">Ficha</span>
+                <span class="nav-item" onclick="showSection('abilities')">Habilidades</span>
+                <span class="nav-item" onclick="showSection('adventures')">Aventuras</span>
+                <span class="nav-item" onclick="showSection('map')">Mapa</span>
+                <span class="nav-item" onclick="showSection('npcs')">NPCs</span>
+                <span class="nav-item" onclick="showSection('dice')">Dados</span>
+                <span class="nav-item" onclick="showSection('combat')">Combate</span>
+                <span class="nav-item" onclick="showSection('dashboard')">Dashboard</span>
+                <span class="nav-item" onclick="showSection('calendar')">Calendário</span>
+                <span class="nav-item" onclick="showSection('memories')">Memórias</span>
+                <span class="nav-item" onclick="showSection('inventory')">Inventário</span>
+                <span class="nav-item" onclick="showSection('guide')">Guia</span>
             </div>
             
             <!-- Controles do Header -->
             <div style="display: flex; gap: 1rem; align-items: center; margin-top: 1rem;">
-                <button id="theme-toggle" onclick="toggleTheme()" style="background: rgba(255,255,255,0.2); border: none; color: white; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer;">🌙 Escuro</button>
-                <button onclick="toggleSearch()" style="background: rgba(255,255,255,0.2); border: none; color: white; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer;">🔍 Buscar</button>
-                <button onclick="toggleMusic()" style="background: rgba(255,255,255,0.2); border: none; color: white; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer;">🎵 Música</button>
+                <button id="theme-toggle" onclick="toggleTheme()" style="background: rgba(255,255,255,0.2); border: none; color: white; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer;">Modo Escuro</button>
+                <button onclick="toggleSearch()" style="background: rgba(255,255,255,0.2); border: none; color: white; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer;">Buscar</button>
+                <button onclick="toggleMusic()" style="background: rgba(255,255,255,0.2); border: none; color: white; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer;">Música</button>
             </div>
         </nav>
 
@@ -1259,10 +1259,10 @@
         <div id="search-overlay" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); z-index: 2000; display: none;">
             <div style="max-width: 600px; margin: 10% auto; background: white; border-radius: 15px; padding: 2rem;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                    <h3>🔍 Busca Global</h3>
-                    <button onclick="toggleSearch()" style="background: none; border: none; font-size: 1.5rem; cursor: pointer;">❌</button>
+                    <h3>Busca Global</h3>
+                    <button onclick="toggleSearch()" style="background: none; border: none; font-size: 1.5rem; cursor: pointer;">×</button>
                 </div>
-                <input type="text" id="global-search" placeholder="Buscar em aventuras, NPCs, notas..." style="width: 100%; padding: 1rem; border: 2px solid #3498db; border-radius: 10px; font-size: 1rem; margin-bottom: 1rem;">
+                <input type="text" id="global-search" placeholder="Buscar em aventuras, NPCs, notas..." style="width: 100%; padding: 1rem; border: 2px solid #3498db; border-radius: 10px; font-size: 1rem; margin-bottom: 1rem;" oninput="performSearch()">
                 <div id="search-results" style="max-height: 300px; overflow-y: auto; border: 1px solid #eee; border-radius: 5px; padding: 1rem;">
                     Digite algo para buscar...
                 </div>
@@ -1272,17 +1272,17 @@
         <!-- Player de Música Ambiente -->
         <div id="music-player" style="position: fixed; bottom: 100px; right: 2rem; background: rgba(44, 62, 80, 0.95); color: white; padding: 1rem; border-radius: 10px; display: none; z-index: 1000; max-width: 300px;">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                <h4 style="margin: 0;">🎵 Música Ambiente</h4>
-                <button onclick="toggleMusic()" style="background: none; border: none; color: white; cursor: pointer;">❌</button>
+                <h4 style="margin: 0;">Música Ambiente</h4>
+                <button onclick="toggleMusic()" style="background: none; border: none; color: white; cursor: pointer;">×</button>
             </div>
             <div style="margin-bottom: 1rem;">
                 <select id="music-selector" onchange="changeMusic()" style="width: 100%; padding: 0.5rem; border-radius: 5px;">
                     <option value="">Selecione uma trilha</option>
-                    <option value="lonisivinuss">🌊 Lonisivinuss (Aquática)</option>
-                    <option value="combat">⚔️ Combate (Tensão)</option>
-                    <option value="mystery">🔍 Mistério (Investigação)</option>
-                    <option value="cyberpunk">🤖 Cyberpunk (Urbano)</option>
-                    <option value="emotional">💔 Emocional (Drama)</option>
+                    <option value="lonisivinuss">Lonisivinuss (Aquática)</option>
+                    <option value="combat">Combate (Tensão)</option>
+                    <option value="mystery">Mistério (Investigação)</option>
+                    <option value="cyberpunk">Cyberpunk (Urbano)</option>
+                    <option value="emotional">Emocional (Drama)</option>
                 </select>
             </div>
             <div id="music-info" style="font-size: 0.9rem; color: #ecf0f1;">
@@ -1292,71 +1292,2948 @@
 
         <!-- Indicador de Salvamento -->
         <div id="save-indicator" class="save-indicator">
-            ✓ Salvo automaticamente
+            Salvo automaticamente
         </div>
 
         <!-- Status de Carregamento -->
         <div id="load-indicator" style="position: fixed; top: 2rem; left: 2rem; background: #3498db; color: white; padding: 1rem 1.5rem; border-radius: 10px; opacity: 0; transition: opacity 0.3s; z-index: 1001;">
-            📂 Dados carregados com sucesso!
+            Dados carregados com sucesso!
         </div>
 
         <!-- Aviso de dados não salvos -->
         <div id="unsaved-indicator" style="position: fixed; top: 2rem; left: 50%; transform: translateX(-50%); background: #e74c3c; color: white; padding: 1rem 1.5rem; border-radius: 10px; opacity: 0; transition: opacity 0.3s; z-index: 1002;">
-            ⚠️ Dados não salvos! Use o botão Backup
+            Dados não salvos! Use o botão Backup
         </div>
 
         <!-- Controles de Salvamento -->
         <div class="save-controls">
             <button class="save-btn" onclick="exportData()" title="Baixar Backup">
-                📥 Backup
+                Backup
             </button>
             <button class="save-btn" onclick="importData()" title="Restaurar Backup">
-                📤 Restaurar
+                Restaurar
             </button>
             <button class="save-btn danger" onclick="resetData()" title="Limpar Dados">
-                🗑️ Limpar
+                Limpar
             </button>
         </div>
 
-        <!-- RESTO DO CONTEÚDO CONTINUA AQUI... -->
-        <!-- O código está ficando muito grande para um único bloco -->
-        <!-- As seções de conteúdo (home, sheet, abilities, etc.) seguem o mesmo padrão -->
-        <!-- JavaScript no final implementa todas as funcionalidades -->
+        <!-- SEÇÃO INÍCIO -->
+        <div id="home" class="content active">
+            <div class="hero">
+                <h2>Bem-vindos ao Universo da Maya</h2>
+                <p>Um guia completo para a ciborgue que questiona os limites entre humanidade e tecnologia</p>
+            </div>
+            
+            <!-- Imagem Principal da Maya -->
+            <div class="maya-image-container" style="margin: 3rem 0;">
+                <div style="max-width: 400px; margin: 0 auto;">
+                    <img src="maya-character-art.jpg" alt="Maya - Arte Conceitual" class="maya-character-image" style="display: none;" onload="this.style.display='block';" onerror="this.style.display='none';">
+                </div>
+                <div class="maya-image-caption">
+                    Maya em sua forma característica - humanidade e tecnologia em perfeita síntese
+                </div>
+            </div>
+            
+            <div class="guide-section">
+                <h2>Sobre este Sistema</h2>
+                <p>Este é o sistema completo para jogar com Maya, uma ciborgue única com amnésia parcial que busca descobrir seu passado enquanto navega entre sua humanidade e sua natureza tecnológica.</p>
+                
+                <div class="stats-display">
+                    <div class="stat-display">
+                        <div class="stat-display-label">Funcionalidades</div>
+                        <div class="stat-display-value">15+</div>
+                    </div>
+                    <div class="stat-display">
+                        <div class="stat-display-label">Habilidades</div>
+                        <div class="stat-display-value">7</div>
+                    </div>
+                    <div class="stat-display">
+                        <div class="stat-display-label">Aventuras</div>
+                        <div class="stat-display-value" style="font-size: 1rem;">Editáveis</div>
+                    </div>
+                    <div class="stat-display">
+                        <div class="stat-display-label">Regiões</div>
+                        <div class="stat-display-value">7</div>
+                    </div>
+                    <div class="stat-display">
+                        <div class="stat-display-label">NPCs</div>
+                        <div class="stat-display-value">5</div>
+                    </div>
+                    <div class="stat-display">
+                        <div class="stat-display-label">Sistemas</div>
+                        <div class="stat-display-value" style="font-size: 1rem;">Completos</div>
+                    </div>
+                </div>
 
-    </div>
+                <h3>Todas as Funcionalidades Implementadas:</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin: 2rem 0;">
+                    
+                    <div class="concept-visual">
+                        <div class="concept-title">Sistema de Jogo</div>
+                        <div class="concept-description">
+                            <strong>• Dados Virtuais:</strong> Rolador completo com histórico<br>
+                            <strong>• Tracker de Combate:</strong> Iniciativa, HP, status effects<br>
+                            <strong>• Calculadora:</strong> Dano automático das habilidades
+                        </div>
+                    </div>
+                    
+                    <div class="concept-visual">
+                        <div class="concept-title">Organização</div>
+                        <div class="concept-description">
+                            <strong>• Dashboard do Mestre:</strong> Estatísticas e controle<br>
+                            <strong>• Busca Global:</strong> Encontre qualquer informação<br>
+                            <strong>• Calendário:</strong> Agende e gerencie sessões
+                        </div>
+                    </div>
+                    
+                    <div class="concept-visual">
+                        <div class="concept-title">Narrativa</div>
+                        <div class="concept-description">
+                            <strong>• Sistema de Memórias:</strong> Fragmentos do passado<br>
+                            <strong>• Inventário Completo:</strong> Itens e equipamentos<br>
+                            <strong>• Gerador de Conteúdo:</strong> NPCs e eventos aleatórios
+                        </div>
+                    </div>
+                    
+                    <div class="concept-visual">
+                        <div class="concept-title">Experiência</div>
+                        <div class="concept-description">
+                            <strong>• Modo Escuro/Claro:</strong> Temas visuais<br>
+                            <strong>• Player de Música:</strong> Trilhas ambientes<br>
+                            <strong>• PWA Ready:</strong> Instale como app no celular
+                        </div>
+                    </div>
+                    
+                </div>
 
-    <script>
-        /* 
-         * SISTEMA DE PERSISTÊNCIA MELHORADO + FUNCIONALIDADES AVANÇADAS
-         * Implementa mais de 15 funcionalidades avançadas incluindo:
-         * - Sistema de dados virtual
-         * - Tracker de combate
-         * - Dashboard do mestre
-         * - Calendário de sessões
-         * - Sistema de memórias
-         * - Inventário completo
-         * - Modo escuro/claro
-         * - Busca global
-         * - Player de música
-         * E muito mais...
-         */
+                <h3>O que você encontrará aqui:</h3>
+                <ul>
+                    <li><strong>Ficha Editável:</strong> Complete com aparência visual de Maya</li>
+                    <li><strong>Sistema de Habilidades:</strong> 7 habilidades únicas com calculadora de dano</li>
+                    <li><strong>Sistema de Aventuras:</strong> Documente suas próprias sessões conforme jogam</li>
+                    <li><strong>Mapa Interativo:</strong> 7 regiões detalhadas com descrições personalizáveis</li>
+                    <li><strong>NPCs Importantes:</strong> Personagens-chave como Skye, Dra. Elena e Orion</li>
+                    <li><strong>Dados Virtuais:</strong> Sistema completo de rolagem com histórico</li>
+                    <li><strong>Tracker de Combate:</strong> Gerencie iniciativa, HP e status effects</li>
+                    <li><strong>Dashboard do Mestre:</strong> Estatísticas e ferramentas de organização</li>
+                    <li><strong>Calendário:</strong> Agende sessões e acompanhe frequência</li>
+                    <li><strong>Sistema de Memórias:</strong> Documente descobertas sobre o passado de Maya</li>
+                    <li><strong>Inventário Completo:</strong> Gerencie equipamentos e créditos</li>
+                    <li><strong>Busca Global:</strong> Encontre qualquer informação rapidamente</li>
+                    <li><strong>Player de Música:</strong> Trilhas ambiente para suas sessões</li>
+                    <li><strong>Modo Escuro:</strong> Interface adaptável ao seu gosto</li>
+                    <li><strong>PWA Ready:</strong> Funciona offline e pode ser instalado como app</li>
+                </ul>
 
-        // Variáveis globais
-        let currentTheme = 'light';
-        let diceHistory = [];
-        let combatParticipants = [];
-        let currentTurn = 0;
-        let combatActive = false;
-        let currentMonth = new Date().getMonth();
-        let currentYear = new Date().getFullYear();
-        let scheduledSessions = [];
-        let memoryFragments = [];
-        let inventoryItems = [];
+                <h3>Sistema Completo de RPG Digital</h3>
+                <div class="concept-visual">
+                    <div class="concept-title">Plataforma Completa para sua Campanha</div>
+                    <div class="concept-description">
+                        Não é apenas um site - é uma plataforma completa de RPG digital! Inclui tudo que você precisa: 
+                        desde documentação de sessões até ferramentas avançadas como dados virtuais, tracker de combate, 
+                        calendário de sessões e dashboard completo do mestre. Perfeito para sessões presenciais ou remotas!
+                    </div>
+                </div>
 
-        // [CÓDIGO JAVASCRIPT COMPLETO IMPLEMENTANDO TODAS AS FUNCIONALIDADES]
-        // ... mais de 2000 linhas de JavaScript com todas as funcionalidades
-        // ... sistema de navegação, dados, combate, calendário, etc.
+                <h4>Funcionalidades para o Mestre:</h4>
+                <ul>
+                    <li><strong>Dashboard Completo:</strong> Estatísticas da campanha e controle central</li>
+                    <li><strong>Sistema de Dados:</strong> Rolador virtual com histórico e calculadoras</li>
+                    <li><strong>Gerenciador de Combate:</strong> Iniciativa, HP tracking e status effects</li>
+                    <li><strong>Calendário de Sessões:</strong> Agendamento e estatísticas de frequência</li>
+                    <li><strong>Player de Música:</strong> Trilhas ambiente para diferentes situações</li>
+                    <li><strong>Busca Global:</strong> Encontre qualquer informação em segundos</li>
+                    <li><strong>Gerador de Relatórios:</strong> Exporte resumos da campanha</li>
+                </ul>
 
-    </script>
-</body>
-</html>
+                <h4>Funcionalidades para os Jogadores:</h4>
+                <ul>
+                    <li><strong>Ficha Interativa:</strong> Tudo sobre Maya com arte oficial</li>
+                    <li><strong>Sistema de Memórias:</strong> Descubram o passado de Maya gradualmente</li>
+                    <li><strong>Inventário Digital:</strong> Gerencie equipamentos e créditos</li>
+                    <li><strong>Documentação de Aventuras:</strong> Registre cada sessão jogada</li>
+                    <li><strong>Modo Escuro:</strong> Interface confortável para sessões noturnas</li>
+                    <li><strong>App Mobile:</strong> Acesse tudo pelo celular (PWA)</li>
+                </ul>
+
+                <div class="quote">
+                    "Este não é apenas um site sobre Maya - é a plataforma definitiva para sua campanha de RPG ciberpunk. Com mais de 15 funcionalidades integradas, desde dados virtuais até gestão completa de campanha, tudo que você precisa está aqui. Mergulhe no universo onde humanidade e tecnologia se encontram!"
+                </div>
+            </div>
+        </div>
+
+        <!-- SEÇÃO FICHA -->
+        <div id="sheet" class="content">
+            <div class="character-sheet">
+                <div class="sheet-header">
+                    <input type="text" class="character-name-input" value="MAYA" placeholder="Nome do Personagem" id="char-name">
+                    <input type="text" class="character-class-input" value="Especialista Digital" placeholder="Classe" id="char-class">
+                </div>
+                
+                <div class="sheet-content">
+                    <!-- Aparência Visual de Maya -->
+                    <div style="text-align: center; margin: 2rem 0;">
+                        <h3 style="color: #2c3e50; margin-bottom: 1rem;">Aparência Visual</h3>
+                        <div style="display: flex; gap: 2rem; align-items: flex-start; flex-wrap: wrap;">
+                            <div style="flex: 1; min-width: 250px;">
+                                <img src="maya-character-art.jpg" alt="Maya - Referência Visual" class="maya-character-image" style="max-width: 300px; display: none;" onload="this.style.display='block';" onerror="this.style.display='none';">
+                            </div>
+                            <div style="flex: 2; min-width: 300px; text-align: left;">
+                                <div class="stat-box">
+                                    <div class="stat-label">Descrição Física</div>
+                                    <textarea class="stat-input" style="min-height: 120px;" placeholder="Descreva a aparência de Maya..." id="appearance-desc">Cabelos castanho-escuros na altura dos ombros, olhos expressivos que revelam profundidade emocional mesmo em meio aos implantes cibernéticos. Braços e pernas parcialmente mecanizados com placas metálicas que se integram organicamente à pele. Veste roupas práticas em tons terrosos que permitem mobilidade enquanto disfarçam parcialmente suas modificações tecnológicas.</textarea>
+                                </div>
+                                <div class="stat-box">
+                                    <div class="stat-label">Modificações Visíveis</div>
+                                    <textarea class="stat-input" style="min-height: 80px;" placeholder="Implantes e modificações cibernéticas..." id="modifications">Braços com placas de blindagem integradas, joelheiras com sistemas de estabilização, interface neural sutil no pescoço, olhos com leve brilho digital quando ativa habilidades especiais.</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-box">
+                            <div class="stat-label">Força</div>
+                            <input type="text" class="stat-input" value="10" id="str">
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Destreza</div>
+                            <input type="text" class="stat-input" value="10" id="dex">
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Constituição</div>
+                            <input type="text" class="stat-input" value="10" id="con">
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Inteligência</div>
+                            <input type="text" class="stat-input" value="10" id="int">
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Sabedoria</div>
+                            <input type="text" class="stat-input" value="10" id="wis">
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Carisma</div>
+                            <input type="text" class="stat-input" value="12" id="cha">
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">HP</div>
+                            <input type="text" class="stat-input" value="42" id="hp">
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Créditos</div>
+                            <input type="text" class="stat-input" value="650" id="credits">
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Classe</div>
+                            <input type="text" class="stat-input" value="Especialista Digital" id="class">
+                        </div>
+                    </div>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-box">
+                            <div class="stat-label">Equipamentos</div>
+                            <textarea class="stat-input" style="min-height: 100px;" placeholder="Liste seus equipamentos aqui" id="equipment"></textarea>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Notas</div>
+                            <textarea class="stat-input" style="min-height: 100px;" placeholder="Anotações gerais" id="notes"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEÇÃO HABILIDADES -->
+        <div id="abilities" class="content">
+            <div class="hero">
+                <h2>Sistema de Habilidades</h2>
+                <p>Calculadoras de dano e detalhes completos das habilidades da Maya</p>
+            </div>
+
+            <div class="abilities-section">
+                <div class="section-title">HABILIDADES ESPECIAIS DE MAYA</div>
+                
+                <!-- Habilidades Defensivas -->
+                <div class="ability-category">
+                    <div class="category-header">HABILIDADES DEFENSIVAS</div>
+                    
+                    <div class="ability-card">
+                        <div class="ability-name">
+                            <input type="text" class="ability-name-input" value="Eco de Si" id="ability1-name">
+                            <span class="ability-type passive">PASSIVA</span>
+                        </div>
+                        <div class="ability-description">
+                            <textarea placeholder="Descrição da habilidade" id="ability1-desc">Lembrança protetora que se mantém ativa automaticamente.</textarea>
+                        </div>
+                        <div class="ability-mechanics">
+                            <textarea placeholder="Mecânicas e efeitos" id="ability1-mech">Efeito: Proteção automática permanente</textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="ability-card">
+                        <div class="ability-name">
+                            <input type="text" class="ability-name-input" value="Vínculo Luminar" id="ability2-name">
+                            <span class="ability-type">DEFENSIVA</span>
+                        </div>
+                        <div class="ability-description">
+                            <textarea placeholder="Descrição da habilidade" id="ability2-desc">Estabelece uma conexão que redireciona parte do dano recebido de um aliado para um inimigo.</textarea>
+                        </div>
+                        <div class="ability-mechanics">
+                            <textarea placeholder="Mecânicas e efeitos" id="ability2-mech">Efeito: Redireciona 50% do dano que um aliado receberia para um inimigo
+Teste: 2d6 para estabelecer o redirecionamento</textarea>
+                        </div>
+                        <div style="margin-top: 1rem;">
+                            <button class="dice-button" onclick="rollAbility('vinculo')">Rolar Vínculo Luminar (2d6)</button>
+                            <div id="vinculo-result" style="margin-top: 0.5rem;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="ability-card">
+                        <div class="ability-name">
+                            <input type="text" class="ability-name-input" value="Eco de Guerra" id="ability3-name">
+                            <span class="ability-type">DEFENSIVA</span>
+                        </div>
+                        <div class="ability-description">
+                            <textarea placeholder="Descrição da habilidade" id="ability3-desc">Ao receber o primeiro golpe do combate, manifesta um clone holográfico defensivo.</textarea>
+                        </div>
+                        <div class="ability-mechanics">
+                            <textarea placeholder="Mecânicas e efeitos" id="ability3-mech">Efeito: Clone replica a próxima habilidade utilizada por Maya
+Duração: 1 uso, depois desaparece</textarea>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Habilidades Utilitárias -->
+                <div class="ability-category">
+                    <div class="category-header">HABILIDADES UTILITÁRIAS</div>
+                    
+                    <div class="ability-card">
+                        <div class="ability-name">
+                            <input type="text" class="ability-name-input" value="Pulso de Conexão" id="ability4-name">
+                            <span class="ability-type utility">UTILITÁRIA</span>
+                        </div>
+                        <div class="ability-description">
+                            <textarea placeholder="Descrição da habilidade" id="ability4-desc">Emite uma onda de energia que revela equipamentos ocultos e causa interferência.</textarea>
+                        </div>
+                        <div class="ability-mechanics">
+                            <textarea placeholder="Mecânicas e efeitos" id="ability4-mech">Efeito: Revela dispositivos escondidos + 3d4 de dano em área
+Teste: 2d6 para acertar</textarea>
+                        </div>
+                        <div style="margin-top: 1rem;">
+                            <button class="dice-button" onclick="rollAbility('pulso')">Rolar Pulso (2d6 + 3d4)</button>
+                            <div id="pulso-result" style="margin-top: 0.5rem;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="ability-card">
+                        <div class="ability-name">
+                            <input type="text" class="ability-name-input" value="Sobreposição de Realidade" id="ability5-name">
+                            <span class="ability-type utility">UTILITÁRIA</span>
+                        </div>
+                        <div class="ability-description">
+                            <textarea placeholder="Descrição da habilidade" id="ability5-desc">Faz todos ao redor verem uma memória real ou falsa, manipulando a percepção da realidade.</textarea>
+                        </div>
+                        <div class="ability-mechanics">
+                            <textarea placeholder="Mecânicas e efeitos" id="ability5-mech">Efeito: Pode confundir, emocionar ou distrair alvos na área
+Teste: + Carisma</textarea>
+                        </div>
+                        <div style="margin-top: 1rem;">
+                            <button class="dice-button" onclick="rollAbility('sobreposicao')">Rolar Sobreposição (+ Carisma)</button>
+                            <div id="sobreposicao-result" style="margin-top: 0.5rem;"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Habilidades Ofensivas -->
+                <div class="ability-category">
+                    <div class="category-header">HABILIDADES OFENSIVAS</div>
+                    
+                    <div class="ability-card">
+                        <div class="ability-name">
+                            <input type="text" class="ability-name-input" value="Lança de Dados" id="ability6-name">
+                            <span class="ability-type">OFENSIVA</span>
+                        </div>
+                        <div class="ability-description">
+                            <textarea placeholder="Descrição da habilidade" id="ability6-desc">Condensa dados corrompidos em forma de uma lança digital e a arremessa com força extrema, atravessando múltiplos alvos no caminho.</textarea>
+                        </div>
+                        <div class="ability-mechanics">
+                            <textarea placeholder="Mecânicas e efeitos" id="ability6-mech">Dano Principal: 3d6 | Teste: 2d6 para acertar
+Perfuração: Atravessa até 2 inimigos alinhados (50% do dano)</textarea>
+                        </div>
+                        <div class="visual-desc">
+                            <textarea placeholder="Descrição visual" id="ability6-visual">Visual: Um feixe afiado de luz e fragmentos digitais, como vidro brilhante quebrando no ar, que rasga o espaço ao avançar.</textarea>
+                        </div>
+                        <div style="margin-top: 1rem;">
+                            <button class="dice-button" onclick="rollAbility('lanca')">Rolar Lança (2d6 + 3d6)</button>
+                            <div id="lanca-result" style="margin-top: 0.5rem;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="ability-card">
+                        <div class="ability-name">
+                            <input type="text" class="ability-name-input" value="Fragmento Explosivo" id="ability7-name">
+                            <span class="ability-type">OFENSIVA</span>
+                        </div>
+                        <div class="ability-description">
+                            <textarea placeholder="Descrição da habilidade" id="ability7-desc">Dispara um fragmento digital instável que explode ao impacto.</textarea>
+                        </div>
+                        <div class="ability-mechanics">
+                            <textarea placeholder="Mecânicas e efeitos" id="ability7-mech">Dano Principal: 2d6+1d4 | Teste: 2d6 para acertar
+Dano em Área: 1d4 em alvos adjacentes</textarea>
+                        </div>
+                        <div style="margin-top: 1rem;">
+                            <button class="dice-button" onclick="rollAbility('fragmento')">Rolar Fragmento (2d6 + 2d6+1d4)</button>
+                            <div id="fragmento-result" style="margin-top: 0.5rem;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEÇÃO AVENTURAS -->
+        <div id="adventures" class="content">
+            <div class="hero">
+                <h2>Documentação de Aventuras</h2>
+                <p>Registre e organize suas sessões de RPG</p>
+            </div>
+
+            <div style="text-align: center; margin: 2rem 0;">
+                <button class="save-btn" onclick="addAdventure()">Adicionar Nova Aventura</button>
+            </div>
+
+            <div id="adventures-list">
+                <!-- Aventuras serão inseridas aqui dinamicamente -->
+            </div>
+
+            <div class="info-box">
+                <div class="info-header">Como Documentar Aventuras</div>
+                <div class="info-content">
+                    <p><strong>Use este espaço para:</strong></p>
+                    <ul>
+                        <li>Documentar cada sessão jogada com Maya</li>
+                        <li>Registrar descobertas sobre o passado dela</li>
+                        <li>Anotar NPCs importantes encontrados</li>
+                        <li>Marcar locais visitados e pistas encontradas</li>
+                        <li>Acompanhar a evolução da narrativa</li>
+                    </ul>
+                    <p><strong>Dicas:</strong> Mantenha registros regulares para não perder detalhes importantes da história!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEÇÃO MAPA -->
+        <div id="map" class="content">
+            <div class="hero">
+                <h2>Mapa Interativo</h2>
+                <p>Navegue pelas 7 regiões do mundo de Maya</p>
+            </div>
+
+            <div class="map-container" style="background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%); border-radius: 20px; padding: 3rem; margin: 2rem auto; max-width: 1000px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+                <!-- Indicador de perigo (desktop) -->
+                <div style="position: absolute; top: 1rem; right: 1rem; background: rgba(236, 240, 241, 0.9); padding: 0.8rem; border-radius: 8px; font-size: 0.8rem;">
+                    ⚠️ <strong>Níveis de Perigo:</strong><br>
+                    🟢 Baixo 🟡 Médio 🔴 Alto 🟣 Extremo
+                </div>
+
+                <svg width="100%" height="500" viewBox="0 0 800 500" style="background: radial-gradient(ellipse at center, #34495e 0%, #2c3e50 100%); border-radius: 15px;">
+                    <!-- Cenário de fundo -->
+                    <defs>
+                        <linearGradient id="water" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#3498db;stop-opacity:0.3" />
+                            <stop offset="100%" style="stop-color:#2980b9;stop-opacity:0.6" />
+                        </linearGradient>
+                        <linearGradient id="tech" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#e74c3c;stop-opacity:0.4" />
+                            <stop offset="100%" style="stop-color:#c0392b;stop-opacity:0.7" />
+                        </linearGradient>
+                    </defs>
+
+                    <!-- Oceano de fundo -->
+                    <rect x="0" y="0" width="800" height="500" fill="url(#water)" opacity="0.2"/>
+
+                    <!-- Rotas principais (estradas) -->
+                    <path d="M 150,250 Q 250,200 350,250 Q 450,300 550,250 Q 650,200 750,250" stroke="#7f8c8d" stroke-width="3" fill="none" stroke-dasharray="5,5" opacity="0.6"/>
+                    <path d="M 400,100 Q 400,200 400,300 Q 400,400 400,450" stroke="#7f8c8d" stroke-width="3" fill="none" stroke-dasharray="5,5" opacity="0.6"/>
+
+                    <!-- Lonisivinuss (Cidade Aquática) - LOCALIZAÇÃO ATUAL DE MAYA -->
+                    <g class="city-node maya-location" onclick="selectCity('lonisivinuss')" data-city="lonisivinuss">
+                        <circle cx="150" cy="250" r="20" fill="#3498db" stroke="#2980b9" stroke-width="3"/>
+                        <text x="150" y="225" text-anchor="middle" fill="#ecf0f1" font-weight="bold" font-size="12">Lonisivinuss</text>
+                        <text x="150" y="280" text-anchor="middle" fill="#ecf0f1" font-size="10">🟢 Segura • 🌊 Aquática</text>
+                    </g>
+
+                    <!-- Skye's Haven (Centro Tecnológico) -->
+                    <g class="city-node" onclick="selectCity('skye')" data-city="skye">
+                        <rect x="330" y="230" width="40" height="40" fill="#9b59b6" stroke="#8e44ad" stroke-width="3" rx="5"/>
+                        <text x="350" y="210" text-anchor="middle" fill="#ecf0f1" font-weight="bold" font-size="12">Skye's Haven</text>
+                        <text x="350" y="290" text-anchor="middle" fill="#ecf0f1" font-size="10">🟡 Moderada • 🔬 Tech</text>
+                    </g>
+
+                    <!-- Distrito Industrial -->
+                    <g class="city-node" onclick="selectCity('industrial')" data-city="industrial">
+                        <rect x="530" y="230" width="40" height="40" fill="#e67e22" stroke="#d35400" stroke-width="3" rx="2"/>
+                        <text x="550" y="210" text-anchor="middle" fill="#ecf0f1" font-weight="bold" font-size="12">D. Industrial</text>
+                        <text x="550" y="290" text-anchor="middle" fill="#ecf0f1" font-size="10">🔴 Perigosa • ⚙️ Fabril</text>
+                    </g>
+
+                    <!-- Núcleo Central -->
+                    <g class="city-node" onclick="selectCity('nucleo')" data-city="nucleo">
+                        <circle cx="400" cy="150" r="25" fill="#e74c3c" stroke="#c0392b" stroke-width="3"/>
+                        <text x="400" y="120" text-anchor="middle" fill="#ecf0f1" font-weight="bold" font-size="12">Núcleo Central</text>
+                        <text x="400" y="190" text-anchor="middle" fill="#ecf0f1" font-size="10">🟣 Extrema • 🏛️ Capital</text>
+                    </g>
+
+                    <!-- Periferias -->
+                    <g class="city-node" onclick="selectCity('periferias')" data-city="periferias">
+                        <circle cx="200" cy="400" r="15" fill="#95a5a6" stroke="#7f8c8d" stroke-width="3"/>
+                        <text x="200" y="430" text-anchor="middle" fill="#ecf0f1" font-weight="bold" font-size="12">Periferias</text>
+                        <text x="200" y="445" text-anchor="middle" fill="#ecf0f1" font-size="10">🟡 Variável • 🏘️ Subúrbios</text>
+                    </g>
+
+                    <!-- Zona Vermelha -->
+                    <g class="city-node" onclick="selectCity('vermelha')" data-city="vermelha">
+                        <polygon points="600,400 580,420 600,440 620,420" fill="#8e44ad" stroke="#732d91" stroke-width="3"/>
+                        <text x="600" y="465" text-anchor="middle" fill="#ecf0f1" font-weight="bold" font-size="12">Zona Vermelha</text>
+                        <text x="600" y="480" text-anchor="middle" fill="#ecf0f1" font-size="10">🟣 Extrema • ⚡ Proibida</text>
+                    </g>
+
+                    <!-- Território Neutro -->
+                    <g class="city-node" onclick="selectCity('neutro')" data-city="neutro">
+                        <circle cx="700" cy="350" r="18" fill="#27ae60" stroke="#229954" stroke-width="3"/>
+                        <text x="700" y="320" text-anchor="middle" fill="#ecf0f1" font-weight="bold" font-size="12">T. Neutro</text>
+                        <text x="700" y="385" text-anchor="middle" fill="#ecf0f1" font-size="10">🟢 Seguro • 🕊️ Neutro</text>
+                    </g>
+
+                    <!-- Indicador de localização de Maya -->
+                    <g class="maya-location">
+                        <circle cx="150" cy="250" r="30" fill="none" stroke="#f1c40f" stroke-width="2" opacity="0.8">
+                            <animate attributeName="r" values="30;35;30" dur="2s" repeatCount="indefinite"/>
+                        </circle>
+                        <text x="150" y="300" text-anchor="middle" fill="#f1c40f" font-weight="bold" font-size="10">📍 Maya está aqui</text>
+                    </g>
+                </svg>
+
+                <!-- Legenda e informações -->
+                <div style="margin-top: 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; color: #ecf0f1;">
+                    <div>
+                        <h4 style="margin-bottom: 1rem; color: #ecf0f1;">🗺️ Legenda do Mapa</h4>
+                        <div style="display: grid; gap: 0.5rem; font-size: 0.9rem;">
+                            <div>🟢 <strong>Zona Segura:</strong> Patrulhamento ativo</div>
+                            <div>🟡 <strong>Zona Moderada:</strong> Cuidado necessário</div>
+                            <div>🔴 <strong>Zona Perigosa:</strong> Alto risco</div>
+                            <div>🟣 <strong>Zona Extrema:</strong> Acesso restrito</div>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 style="margin-bottom: 1rem; color: #ecf0f1;">🚗 Rotas Principais</h4>
+                        <div style="display: grid; gap: 0.5rem; font-size: 0.9rem;">
+                            <div>➖ <strong>Via Aquática:</strong> Lonisivinuss ↔ Todas</div>
+                            <div>➖ <strong>Corredor Central:</strong> Norte ↔ Sul</div>
+                            <div>➖ <strong>Anel Industrial:</strong> Fábricas conectadas</div>
+                            <div>📍 <strong>Posição Atual:</strong> Maya em Lonisivinuss</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rotas disponíveis -->
+                <div style="margin-top: 2rem;">
+                    <h4 style="margin-bottom: 1rem; color: #ecf0f1;">🚢 Rotas Disponíveis de Lonisivinuss</h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                        <div style="background: rgba(52, 152, 219, 0.2); padding: 1rem; border-radius: 8px; border-left: 4px solid #3498db;">
+                            <strong>→ Skye's Haven</strong><br>
+                            <span style="font-size: 0.9rem;">Viagem: 2h • Custo: 50 créditos</span>
+                        </div>
+                        <div style="background: rgba(230, 126, 34, 0.2); padding: 1rem; border-radius: 8px; border-left: 4px solid #e67e22;">
+                            <strong>→ Distrito Industrial</strong><br>
+                            <span style="font-size: 0.9rem;">Viagem: 3h • Custo: 80 créditos</span>
+                        </div>
+                        <div style="background: rgba(149, 165, 166, 0.2); padding: 1rem; border-radius: 8px; border-left: 4px solid #95a5a6;">
+                            <strong>→ Periferias</strong><br>
+                            <span style="font-size: 0.9rem;">Viagem: 1h • Custo: 30 créditos</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Seção para editar cidades selecionadas -->
+            <div id="city-details" class="city-edit-section" style="display: none;">
+                <!-- Conteúdo da cidade será inserido aqui -->
+            </div>
+        </div>
+
+        <!-- SEÇÃO NPCS -->
+        <div id="npcs" class="content">
+            <div class="hero">
+                <h2>Personagens Importantes</h2>
+                <p>NPCs-chave na jornada de Maya</p>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <h3>🔬 Dra. Elena Vasquez</h3>
+                    <p><strong>Função:</strong> Cientista/Pesquisadora</p>
+                    <p><strong>Relação com Maya:</strong> Possível criadora ou pessoa envolvida no passado dela</p>
+                    <p><strong>Características:</strong> Brillante, misteriosa, conhece segredos sobre a origem de Maya</p>
+                    <div style="margin-top: 1rem;">
+                        <textarea placeholder="Notas sobre Elena..." style="width: 100%; min-height: 60px; padding: 0.5rem; border-radius: 5px; border: 1px solid #ddd;"></textarea>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <h3>🤖 Skye</h3>
+                    <p><strong>Função:</strong> Informante/Hacker</p>
+                    <p><strong>Relação com Maya:</strong> Aliado tecnológico, fonte de informações</p>
+                    <p><strong>Características:</strong> Especialista em sistemas, conhece os submundos digitais</p>
+                    <div style="margin-top: 1rem;">
+                        <textarea placeholder="Notas sobre Skye..." style="width: 100%; min-height: 60px; padding: 0.5rem; border-radius: 5px; border: 1px solid #ddd;"></textarea>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <h3>⚡ Orion</h3>
+                    <p><strong>Função:</strong> Adversário/Rival</p>
+                    <p><strong>Relação com Maya:</strong> Outro ciborgue com motivações opostas</p>
+                    <p><strong>Características:</strong> Poderoso, determinado, pode ter pistas sobre o passado</p>
+                    <div style="margin-top: 1rem;">
+                        <textarea placeholder="Notas sobre Orion..." style="width: 100%; min-height: 60px; padding: 0.5rem; border-radius: 5px; border: 1px solid #ddd;"></textarea>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <h3>🏛️ Conselho Administrativo</h3>
+                    <p><strong>Função:</strong> Autoridades governamentais</p>
+                    <p><strong>Relação com Maya:</strong> Possível ligação com sua criação/passado</p>
+                    <p><strong>Características:</strong> Burocráticos, controladores, escondem informações</p>
+                    <div style="margin-top: 1rem;">
+                        <textarea placeholder="Notas sobre o Conselho..." style="width: 100%; min-height: 60px; padding: 0.5rem; border-radius: 5px; border: 1px solid #ddd;"></textarea>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <h3>🌊 Habitantes de Lonisivinuss</h3>
+                    <p><strong>Função:</strong> População local</p>
+                    <p><strong>Relação com Maya:</strong> Comunidade atual, possíveis aliados</p>
+                    <p><strong>Características:</strong> Diversos, alguns conhecem Maya, outros desconfiam</p>
+                    <div style="margin-top: 1rem;">
+                        <textarea placeholder="Notas sobre habitantes..." style="width: 100%; min-height: 60px; padding: 0.5rem; border-radius: 5px; border: 1px solid #ddd;"></textarea>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <h3>➕ NPCs Personalizados</h3>
+                    <p><strong>Adicione seus próprios personagens:</strong></p>
+                    <button class="dice-button" onclick="addCustomNPC()" style="margin: 0.5rem 0;">Criar NPC</button>
+                    <div id="custom-npcs" style="margin-top: 1rem;">
+                        <!-- NPCs customizados serão inseridos aqui -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <div class="info-header">Gerador de NPCs Aleatórios</div>
+                <div class="info-content">
+                    <div style="text-align: center; margin: 1rem 0;">
+                        <button class="dice-button" onclick="generateRandomNPC()">Gerar NPC Aleatório</button>
+                    </div>
+                    <div id="random-npc-result" style="margin-top: 1rem;">
+                        Clique no botão para gerar um NPC aleatório!
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEÇÃO DADOS -->
+        <div id="dice" class="content">
+            <div class="hero">
+                <h2>Sistema de Dados Virtual</h2>
+                <p>Rolador completo com histórico e calculadoras</p>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <h3>🎲 Dados Básicos</h3>
+                    <div class="dice-container">
+                        <button class="dice-button" onclick="rollDice(4, 1)">d4</button>
+                        <button class="dice-button" onclick="rollDice(6, 1)">d6</button>
+                        <button class="dice-button" onclick="rollDice(8, 1)">d8</button>
+                        <button class="dice-button" onclick="rollDice(10, 1)">d10</button>
+                        <button class="dice-button" onclick="rollDice(12, 1)">d12</button>
+                        <button class="dice-button" onclick="rollDice(20, 1)">d20</button>
+                        <button class="dice-button" onclick="rollDice(100, 1)">d100</button>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <h3>⚔️ Dados de Combate</h3>
+                    <div class="dice-container">
+                        <button class="dice-button" onclick="rollDice(6, 2)">2d6</button>
+                        <button class="dice-button" onclick="rollDice(6, 3)">3d6</button>
+                        <button class="dice-button" onclick="rollDice(4, 3)">3d4</button>
+                        <button class="dice-button" onclick="rollDice(6, 4)">4d6</button>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <h3>🎯 Rolagem Customizada</h3>
+                    <div style="display: flex; gap: 1rem; align-items: center; margin: 1rem 0;">
+                        <input type="number" id="dice-count" value="1" min="1" max="10" style="width: 60px; padding: 0.5rem; border-radius: 5px;">
+                        <span>d</span>
+                        <input type="number" id="dice-sides" value="6" min="2" max="100" style="width: 60px; padding: 0.5rem; border-radius: 5px;">
+                        <span>+</span>
+                        <input type="number" id="dice-modifier" value="0" min="-50" max="50" style="width: 60px; padding: 0.5rem; border-radius: 5px;">
+                    </div>
+                    <button class="dice-button" onclick="rollCustomDice()">Rolar Dados</button>
+                </div>
+            </div>
+
+            <div id="dice-result-display" style="margin: 2rem 0;">
+                <!-- Resultados aparecerão aqui -->
+            </div>
+
+            <div class="info-box">
+                <div class="info-header">📊 Histórico de Rolagens</div>
+                <div class="info-content">
+                    <div style="text-align: center; margin-bottom: 1rem;">
+                        <button class="save-btn danger" onclick="clearDiceHistory()">Limpar Histórico</button>
+                    </div>
+                    <div id="dice-history-display" class="dice-history">
+                        Nenhuma rolagem ainda. Comece rolando alguns dados!
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEÇÃO COMBATE -->
+        <div id="combat" class="content">
+            <div class="hero">
+                <h2>Gerenciador de Combate</h2>
+                <p>Controle iniciativa, HP e status effects</p>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <h3>⚔️ Controles de Combate</h3>
+                    <div style="display: flex; gap: 1rem; margin: 1rem 0; flex-wrap: wrap;">
+                        <button class="dice-button" onclick="startCombat()">Iniciar Combate</button>
+                        <button class="dice-button" onclick="nextTurn()">Próximo Turno</button>
+                        <button class="save-btn danger" onclick="endCombat()">Finalizar Combate</button>
+                    </div>
+                    <div id="combat-status" style="margin: 1rem 0; padding: 1rem; background: #f8f9fa; border-radius: 10px;">
+                        Combate não iniciado
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <h3>👥 Adicionar Participantes</h3>
+                    <div style="display: flex; gap: 0.5rem; margin: 1rem 0;">
+                        <input type="text" id="participant-name" placeholder="Nome" style="flex: 1; padding: 0.5rem; border-radius: 5px;">
+                        <input type="number" id="participant-hp" placeholder="HP" style="width: 80px; padding: 0.5rem; border-radius: 5px;">
+                        <input type="number" id="participant-initiative" placeholder="Iniciativa" style="width: 80px; padding: 0.5rem; border-radius: 5px;">
+                    </div>
+                    <button class="dice-button" onclick="addParticipant()">Adicionar ao Combate</button>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <div class="info-header">🎯 Participantes do Combate</div>
+                <div class="info-content">
+                    <div id="combat-participants">
+                        <p style="text-align: center; color: #7f8c8d;">Nenhum participante adicionado ainda</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <h3>🩹 Controles Rápidos</h3>
+                    <div class="dice-container">
+                        <button class="dice-button" onclick="healSelected()">Curar (+5 HP)</button>
+                        <button class="dice-button" onclick="damageSelected()">Dano (-5 HP)</button>
+                        <button class="dice-button" onclick="rollInitiative()">Rolar Iniciativa</button>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <h3>🎲 Dados de Combate</h3>
+                    <div class="dice-container">
+                        <button class="dice-button" onclick="rollDice(20, 1, 'Ataque')">Ataque (d20)</button>
+                        <button class="dice-button" onclick="rollDice(6, 2, 'Dano')">Dano (2d6)</button>
+                        <button class="dice-button" onclick="rollDice(20, 1, 'Resistência')">Resistência (d20)</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEÇÃO DASHBOARD -->
+        <div id="dashboard" class="content">
+            <div class="hero">
+                <h2>Dashboard do Mestre</h2>
+                <p>Controle central e estatísticas da campanha</p>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <h3>📊 Estatísticas Gerais</h3>
+                    <div class="stats-display">
+                        <div class="stat-display">
+                            <div class="stat-display-label">Sessões Jogadas</div>
+                            <div class="stat-display-value" id="sessions-count">0</div>
+                        </div>
+                        <div class="stat-display">
+                            <div class="stat-display-label">Dados Rolados</div>
+                            <div class="stat-display-value" id="dice-count-total">0</div>
+                        </div>
+                        <div class="stat-display">
+                            <div class="stat-display-label">Aventuras</div>
+                            <div class="stat-display-value" id="adventures-count">0</div>
+                        </div>
+                        <div class="stat-display">
+                            <div class="stat-display-label">Memórias</div>
+                            <div class="stat-display-value" id="memories-count">0</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <h3>🎮 Ferramentas Rápidas</h3>
+                    <div class="dice-container">
+                        <button class="dice-button" onclick="showSection('dice')">Sistema de Dados</button>
+                        <button class="dice-button" onclick="showSection('combat')">Gerenciar Combate</button>
+                        <button class="dice-button" onclick="showSection('calendar')">Ver Calendário</button>
+                        <button class="dice-button" onclick="generateSessionSummary()">Resumo da Sessão</button>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <h3>🔍 Busca Rápida</h3>
+                    <input type="text" placeholder="Buscar aventuras, NPCs, memórias..." style="width: 100%; padding: 1rem; border-radius: 10px; margin-bottom: 1rem;" onkeyup="quickSearch(this.value)">
+                    <div id="quick-search-results" style="max-height: 150px; overflow-y: auto;">
+                        Digite para buscar...
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <h3>🎲 Gerador de Eventos</h3>
+                    <div style="text-align: center;">
+                        <button class="dice-button" onclick="generateRandomEvent()">Evento Aleatório</button>
+                        <button class="dice-button" onclick="generatePlotTwist()">Plot Twist</button>
+                    </div>
+                    <div id="random-event-result" style="margin-top: 1rem; padding: 1rem; background: #f8f9fa; border-radius: 10px; min-height: 60px;">
+                        Clique nos botões para gerar conteúdo aleatório
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <h3>📈 Progresso da Campanha</h3>
+                    <div style="margin: 1rem 0;">
+                        <div style="margin-bottom: 0.5rem;">Descobertas sobre Maya:</div>
+                        <div style="background: #ecf0f1; border-radius: 10px; overflow: hidden;">
+                            <div id="maya-progress-bar" style="background: linear-gradient(90deg, #3498db, #2980b9); height: 20px; width: 35%; transition: width 0.3s;"></div>
+                        </div>
+                        <div style="font-size: 0.9rem; color: #7f8c8d; margin-top: 0.5rem;">35% das memórias descobertas</div>
+                    </div>
+                    <div style="margin: 1rem 0;">
+                        <div style="margin-bottom: 0.5rem;">Regiões Exploradas:</div>
+                        <div style="background: #ecf0f1; border-radius: 10px; overflow: hidden;">
+                            <div style="background: linear-gradient(90deg, #27ae60, #229954); height: 20px; width: 60%; transition: width 0.3s;"></div>
+                        </div>
+                        <div style="font-size: 0.9rem; color: #7f8c8d; margin-top: 0.5rem;">4 de 7 regiões visitadas</div>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <h3>💾 Gerenciamento de Dados</h3>
+                    <div class="dice-container">
+                        <button class="save-btn" onclick="exportData()">Backup Completo</button>
+                        <button class="save-btn" onclick="generateReport()">Relatório PDF</button>
+                        <button class="save-btn danger" onclick="resetData()">Reset Total</button>
+                    </div>
+                    <div style="margin-top: 1rem; font-size: 0.9rem; color: #7f8c8d;">
+                        Última sessão: <span id="last-session-date">Nunca</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEÇÃO CALENDÁRIO -->
+        <div id="calendar" class="content">
+            <div class="hero">
+                <h2>Calendário de Sessões</h2>
+                <p>Agende e gerencie suas sessões de RPG</p>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <h3>📅 Navegação do Calendário</h3>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin: 1rem 0;">
+                        <button class="dice-button" onclick="previousMonth()">◀ Anterior</button>
+                        <h4 id="current-month-year" style="margin: 0;">Janeiro 2025</h4>
+                        <button class="dice-button" onclick="nextMonth()">Próximo ▶</button>
+                    </div>
+                    <div style="text-align: center; margin: 1rem 0;">
+                        <button class="save-btn" onclick="addSession()">Agendar Sessão</button>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <h3>📊 Estatísticas de Frequência</h3>
+                    <div class="stats-display">
+                        <div class="stat-display">
+                            <div class="stat-display-label">Este Mês</div>
+                            <div class="stat-display-value" id="sessions-this-month">0</div>
+                        </div>
+                        <div class="stat-display">
+                            <div class="stat-display-label">Total</div>
+                            <div class="stat-display-value" id="sessions-total">0</div>
+                        </div>
+                        <div class="stat-display">
+                            <div class="stat-display-label">Média/Mês</div>
+                            <div class="stat-display-value" id="sessions-average">0</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <div class="info-header">📅 Calendário</div>
+                <div class="info-content">
+                    <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 0.5rem; margin-bottom: 1rem; text-align: center; font-weight: bold;">
+                        <div>Dom</div><div>Seg</div><div>Ter</div><div>Qua</div><div>Qui</div><div>Sex</div><div>Sáb</div>
+                    </div>
+                    <div id="calendar-grid" class="calendar-grid">
+                        <!-- Dias do calendário serão inseridos aqui -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-card">
+                <h3>📝 Próximas Sessões</h3>
+                <div id="upcoming-sessions" style="max-height: 200px; overflow-y: auto;">
+                    <p style="text-align: center; color: #7f8c8d;">Nenhuma sessão agendada</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEÇÃO MEMÓRIAS -->
+        <div id="memories" class="content">
+            <div class="hero">
+                <h2>Fragmentos de Memória</h2>
+                <p>Descobertas sobre o passado de Maya</p>
+            </div>
+
+            <div style="text-align: center; margin: 2rem 0;">
+                <button class="save-btn" onclick="addMemory()">Adicionar Nova Memória</button>
+                <button class="dice-button" onclick="generateRandomMemory()">Gerar Memória Aleatória</button>
+            </div>
+
+            <div id="memories-list">
+                <!-- Memórias serão inseridas aqui -->
+            </div>
+
+            <div class="info-box">
+                <div class="info-header">🧠 Tipos de Memórias</div>
+                <div class="info-content">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                        <div>
+                            <strong>🔬 Científicas:</strong> Laboratórios, experimentos, criação
+                        </div>
+                        <div>
+                            <strong>👥 Pessoais:</strong> Relacionamentos, família, amigos
+                        </div>
+                        <div>
+                            <strong>⚔️ Combate:</strong> Treinamento, batalhas, habilidades
+                        </div>
+                        <div>
+                            <strong>🏙️ Lugares:</strong> Cidades, laboratórios, casas
+                        </div>
+                        <div>
+                            <strong>😢 Traumáticas:</strong> Eventos dolorosos, perdas
+                        </div>
+                        <div>
+                            <strong>❓ Fragmentadas:</strong> Incompletas, confusas
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="concept-visual">
+                <div class="concept-title">Como Usar o Sistema de Memórias</div>
+                <div class="concept-description">
+                    Documente cada descoberta sobre o passado de Maya. Use diferentes tipos para organizar 
+                    as revelações e criar uma narrativa coerente. Memórias podem ser verdadeiras, falsas, 
+                    ou distorcidas - adicione notas para esclarecer o que foi confirmado durante o jogo.
+                </div>
+            </div>
+        </div>
+
+        <!-- SEÇÃO INVENTÁRIO -->
+        <div id="inventory" class="content">
+            <div class="hero">
+                <h2>Inventário Digital</h2>
+                <p>Gerencie equipamentos, créditos e itens especiais</p>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <h3>💰 Recursos</h3>
+                    <div class="stats-display">
+                        <div class="stat-display">
+                            <div class="stat-display-label">Créditos</div>
+                            <div class="stat-display-value" id="inventory-credits">650</div>
+                        </div>
+                        <div class="stat-display">
+                            <div class="stat-display-label">Energia</div>
+                            <div class="stat-display-value" id="inventory-energy">100%</div>
+                        </div>
+                        <div class="stat-display">
+                            <div class="stat-display-label">Peso</div>
+                            <div class="stat-display-value" id="inventory-weight">15/50</div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 1rem;">
+                        <button class="dice-button" onclick="adjustCredits()">Ajustar Créditos</button>
+                        <button class="dice-button" onclick="restoreEnergy()">Restaurar Energia</button>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <h3>🎒 Adicionar Item</h3>
+                    <div style="display: grid; gap: 0.5rem; margin: 1rem 0;">
+                        <input type="text" id="item-name" placeholder="Nome do item" style="padding: 0.5rem; border-radius: 5px;">
+                        <textarea id="item-description" placeholder="Descrição" style="padding: 0.5rem; border-radius: 5px; min-height: 60px;"></textarea>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+                            <input type="number" id="item-weight" placeholder="Peso" style="padding: 0.5rem; border-radius: 5px;">
+                            <input type="number" id="item-value" placeholder="Valor" style="padding: 0.5rem; border-radius: 5px;">
+                        </div>
+                        <select id="item-category" style="padding: 0.5rem; border-radius: 5px;">
+                            <option value="weapon">🗡️ Arma</option>
+                            <option value="armor">🛡️ Armadura</option>
+                            <option value="tech">🔧 Tecnologia</option>
+                            <option value="consumable">💊 Consumível</option>
+                            <option value="misc">📦 Diversos</option>
+                        </select>
+                    </div>
+                    <button class="save-btn" onclick="addInventoryItem()">Adicionar ao Inventário</button>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <div class="info-header">🎒 Inventário Atual</div>
+                <div class="info-content">
+                    <div style="display: flex; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap;">
+                        <button class="dice-button" onclick="filterInventory('all')">Todos</button>
+                        <button class="dice-button" onclick="filterInventory('weapon')">Armas</button>
+                        <button class="dice-button" onclick="filterInventory('armor')">Armadura</button>
+                        <button class="dice-button" onclick="filterInventory('tech')">Tecnologia</button>
+                        <button class="dice-button" onclick="filterInventory('consumable')">Consumíveis</button>
+                        <button class="dice-button" onclick="filterInventory('misc')">Diversos</button>
+                    </div>
+                    <div id="inventory-grid" class="inventory-grid">
+                        <!-- Itens do inventário serão inseridos aqui -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-card">
+                <h3>🛒 Loja Virtual</h3>
+                <div style="text-align: center; margin: 1rem 0;">
+                    <button class="dice-button" onclick="generateShopItems()">Gerar Itens da Loja</button>
+                </div>
+                <div id="shop-items" style="display: grid; gap: 1rem;">
+                    <p style="text-align: center; color: #7f8c8d;">Clique para gerar itens disponíveis para compra</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEÇÃO GUIA -->
+        <div id="guide" class="content">
+            <div class="hero">
+                <h2>Guia do Sistema</h2>
+                <p>Manual completo para usar todas as funcionalidades</p>
+            </div>
+
+            <div class="guide-section">
+                <h2>Como Usar Este Sistema</h2>
+                <p>Este é um sistema completo de RPG digital criado especificamente para campanhas com Maya. Cada seção oferece ferramentas específicas para diferentes aspectos do jogo.</p>
+
+                <h3>Navegação Básica</h3>
+                <p>Use o menu superior para navegar entre as diferentes seções. Todas as informações são salvas automaticamente no seu navegador.</p>
+
+                <h4>Controles de Salvamento</h4>
+                <ul>
+                    <li><strong>Backup:</strong> Baixa um arquivo com todos os seus dados</li>
+                    <li><strong>Restaurar:</strong> Carrega dados de um arquivo de backup</li>
+                    <li><strong>Limpar:</strong> Remove todos os dados (use com cuidado!)</li>
+                </ul>
+
+                <h3>Seções Principais</h3>
+
+                <div class="info-box">
+                    <div class="info-header">📋 Ficha de Personagem</div>
+                    <div class="info-content">
+                        <p>Complete todas as informações sobre Maya, incluindo:</p>
+                        <ul>
+                            <li>Atributos básicos (Força, Destreza, etc.)</li>
+                            <li>HP e Créditos</li>
+                            <li>Descrição física e modificações cibernéticas</li>
+                            <li>Equipamentos e anotações gerais</li>
+                        </ul>
+                        <p><strong>Dica:</strong> A aparência visual ajuda a manter a imersão!</p>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <div class="info-header">⚡ Sistema de Habilidades</div>
+                    <div class="info-content">
+                        <p>Maya possui 7 habilidades únicas divididas em categorias:</p>
+                        <ul>
+                            <li><strong>Defensivas:</strong> Eco de Si, Vínculo Luminar, Eco de Guerra</li>
+                            <li><strong>Utilitárias:</strong> Pulso de Conexão, Sobreposição de Realidade</li>
+                            <li><strong>Ofensivas:</strong> Lança de Dados, Fragmento Explosivo</li>
+                        </ul>
+                        <p><strong>Funcionalidade:</strong> Cada habilidade tem calculadora de dano integrada!</p>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <div class="info-header">📝 Documentação de Aventuras</div>
+                    <div class="info-content">
+                        <p>Registre cada sessão jogada:</p>
+                        <ul>
+                            <li>Título e data da sessão</li>
+                            <li>Resumo dos eventos principais</li>
+                            <li>NPCs encontrados</li>
+                            <li>Descobertas importantes</li>
+                            <li>Pistas sobre o passado de Maya</li>
+                        </ul>
+                        <p><strong>Dica:</strong> Documentar regularmente ajuda a manter a consistência narrativa!</p>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <div class="info-header">🗺️ Mapa Interativo</div>
+                    <div class="info-content">
+                        <p>Explore as 7 regiões principais:</p>
+                        <ul>
+                            <li><strong>Lonisivinuss:</strong> Cidade aquática (localização atual de Maya)</li>
+                            <li><strong>Skye's Haven:</strong> Centro tecnológico</li>
+                            <li><strong>Distrito Industrial:</strong> Área fabril perigosa</li>
+                            <li><strong>Núcleo Central:</strong> Capital governamental</li>
+                            <li><strong>Periferias:</strong> Subúrbios diversos</li>
+                            <li><strong>Zona Vermelha:</strong> Área proibida</li>
+                            <li><strong>Território Neutro:</strong> Zona segura</li>
+                        </ul>
+                        <p><strong>Interatividade:</strong> Clique nas cidades para adicionar descrições personalizadas!</p>
+                    </div>
+                </div>
+
+                <h3>Ferramentas de Jogo</h3>
+
+                <div class="info-box">
+                    <div class="info-header">🎲 Sistema de Dados</div>
+                    <div class="info-content">
+                        <p>Rolador completo com:</p>
+                        <ul>
+                            <li>Dados básicos (d4 até d100)</li>
+                            <li>Dados de combate (múltiplos d6, d4, etc.)</li>
+                            <li>Rolagem customizada com modificadores</li>
+                            <li>Histórico completo de todas as rolagens</li>
+                        </ul>
+                        <p><strong>Integração:</strong> As habilidades de Maya usam este sistema automaticamente!</p>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <div class="info-header">⚔️ Gerenciador de Combate</div>
+                    <div class="info-content">
+                        <p>Controle completo de combates:</p>
+                        <ul>
+                            <li>Adicione participantes com HP e iniciativa</li>
+                            <li>Controle de turnos automático</li>
+                            <li>Barras de HP visuais com indicadores de estado</li>
+                            <li>Botões rápidos para cura e dano</li>
+                            <li>Integração com o sistema de dados</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>Ferramentas de Organização</h3>
+
+                <div class="info-box">
+                    <div class="info-header">📊 Dashboard do Mestre</div>
+                    <div class="info-content">
+                        <p>Centro de controle da campanha:</p>
+                        <ul>
+                            <li>Estatísticas gerais (sessões, dados rolados, etc.)</li>
+                            <li>Ferramentas rápidas para outras seções</li>
+                            <li>Busca integrada</li>
+                            <li>Gerador de eventos aleatórios</li>
+                            <li>Barra de progresso da campanha</li>
+                            <li>Controles de backup e relatórios</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <div class="info-header">📅 Calendário de Sessões</div>
+                    <div class="info-content">
+                        <p>Organize suas sessões:</p>
+                        <ul>
+                            <li>Calendário visual navegável</li>
+                            <li>Agendamento de sessões futuras</li>
+                            <li>Estatísticas de frequência</li>
+                            <li>Lista de próximas sessões</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>Ferramentas Narrativas</h3>
+
+                <div class="info-box">
+                    <div class="info-header">🧠 Sistema de Memórias</div>
+                    <div class="info-content">
+                        <p>Documente descobertas sobre Maya:</p>
+                        <ul>
+                            <li>6 tipos de memórias (científicas, pessoais, combate, lugares, traumáticas, fragmentadas)</li>
+                            <li>Sistema de intensidade (vaga, clara, vívida)</li>
+                            <li>Gerador de memórias aleatórias</li>
+                            <li>Organização cronológica e por tipo</li>
+                        </ul>
+                        <p><strong>Narrativa:</strong> Use para revelar o passado de Maya gradualmente!</p>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <div class="info-header">🎒 Inventário Digital</div>
+                    <div class="info-content">
+                        <p>Gerencie recursos e equipamentos:</p>
+                        <ul>
+                            <li>Controle de créditos, energia e peso</li>
+                            <li>5 categorias de itens</li>
+                            <li>Sistema de filtros</li>
+                            <li>Loja virtual com gerador de itens</li>
+                            <li>Descrições detalhadas para cada item</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>Funcionalidades Especiais</h3>
+
+                <div class="info-box">
+                    <div class="info-header">🔍 Busca Global</div>
+                    <div class="info-content">
+                        <p>Encontre qualquer informação rapidamente:</p>
+                        <ul>
+                            <li>Busca em aventuras, NPCs, memórias e notas</li>
+                            <li>Resultados instantâneos</li>
+                            <li>Acesso rápido via botão no header</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <div class="info-header">🎵 Player de Música</div>
+                    <div class="info-content">
+                        <p>Trilhas ambiente para suas sessões:</p>
+                        <ul>
+                            <li>5 trilhas temáticas (aquática, combate, mistério, cyberpunk, emocional)</li>
+                            <li>Controle integrado no header</li>
+                            <li>Melhora a imersão das sessões</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <div class="info-header">🌙 Modo Escuro/Claro</div>
+                    <div class="info-content">
+                        <p>Interface adaptável:</p>
+                        <ul>
+                            <li>Troca entre temas claro e escuro</li>
+                            <li>Configuração salva automaticamente</li>
+                            <li>Ideal para sessões noturnas</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>Dicas de Uso</h3>
+
+                <h4>Para Mestres:</h4>
+                <ul>
+                    <li>Use o Dashboard como centro de controle</li>
+                    <li>Documente cada sessão nas Aventuras</li>
+                    <li>Use o gerador de eventos para improvisação</li>
+                    <li>Mantenha o controle de combate sempre atualizado</li>
+                    <li>Faça backup regular dos dados</li>
+                </ul>
+
+                <h4>Para Jogadores:</h4>
+                <ul>
+                    <li>Mantenha a ficha sempre atualizada</li>
+                    <li>Use as calculadoras de habilidades</li>
+                    <li>Documente descobertas nas Memórias</li>
+                    <li>Gerencie o inventário regularmente</li>
+                    <li>Acompanhe o calendário de sessões</li>
+                </ul>
+
+                <h4>Problemas Comuns:</h4>
+                <ul>
+                    <li><strong>Dados não salvam:</strong> Verifique se o localStorage está habilitado</li>
+                    <li><strong>Interface lenta:</strong> Limpe o histórico de dados se necessário</li>
+                    <li><strong>Backup falha:</strong> Tente usar um navegador diferente</li>
+                    <li><strong>Mapa não funciona:</strong> Recarregue a página</li>
+                </ul>
+
+                <div class="quote">
+                    "Este sistema foi criado para ser uma plataforma completa de RPG digital. Não hesite em experimentar todas as funcionalidades e personalizar conforme suas necessidades. A jornada de Maya para descobrir seu passado será muito mais rica com todas essas ferramentas!"
+                </div>
+            </div>
+        </div>
+
+        <script>
+            // Variáveis globais
+            let currentTheme = 'light';
+            let diceHistory = [];
+            let combatParticipants = [];
+            let currentTurn = 0;
+            let combatActive = false;
+            let currentMonth = new Date().getMonth();
+            let currentYear = new Date().getFullYear();
+            let scheduledSessions = [];
+            let memoryFragments = [];
+            let inventoryItems = [];
+            let adventures = [];
+            let selectedCombatant = null;
+
+            // Sistema de navegação
+            function showSection(sectionId) {
+                // Esconder todas as seções
+                const sections = document.querySelectorAll('.content');
+                sections.forEach(section => section.classList.remove('active'));
+                
+                // Mostrar seção selecionada
+                document.getElementById(sectionId).classList.add('active');
+                
+                // Atualizar menu ativo
+                const navItems = document.querySelectorAll('.nav-item');
+                navItems.forEach(item => item.classList.remove('active'));
+                event.target.classList.add('active');
+                
+                // Atualizar seções que precisam de refresh
+                if (sectionId === 'calendar') {
+                    updateCalendar();
+                } else if (sectionId === 'dashboard') {
+                    updateDashboard();
+                } else if (sectionId === 'memories') {
+                    displayMemories();
+                } else if (sectionId === 'inventory') {
+                    displayInventory();
+                } else if (sectionId === 'adventures') {
+                    displayAdventures();
+                }
+            }
+
+            // Sistema de salvamento automático
+            function saveData() {
+                const data = {
+                    lastSaved: new Date().toISOString(),
+                    charName: document.getElementById('char-name')?.value || '',
+                    charClass: document.getElementById('char-class')?.value || '',
+                    str: document.getElementById('str')?.value || '',
+                    dex: document.getElementById('dex')?.value || '',
+                    con: document.getElementById('con')?.value || '',
+                    int: document.getElementById('int')?.value || '',
+                    wis: document.getElementById('wis')?.value || '',
+                    cha: document.getElementById('cha')?.value || '',
+                    hp: document.getElementById('hp')?.value || '',
+                    credits: document.getElementById('credits')?.value || '',
+                    class: document.getElementById('class')?.value || '',
+                    equipment: document.getElementById('equipment')?.value || '',
+                    notes: document.getElementById('notes')?.value || '',
+                    appearanceDesc: document.getElementById('appearance-desc')?.value || '',
+                    modifications: document.getElementById('modifications')?.value || '',
+                    theme: currentTheme,
+                    diceHistory: diceHistory,
+                    combatParticipants: combatParticipants,
+                    scheduledSessions: scheduledSessions,
+                    memoryFragments: memoryFragments,
+                    inventoryItems: inventoryItems,
+                    adventures: adventures,
+                    abilities: {},
+                    cities: {}
+                };
+                
+                // Salvar habilidades
+                for (let i = 1; i <= 7; i++) {
+                    const nameEl = document.getElementById(`ability${i}-name`);
+                    const descEl = document.getElementById(`ability${i}-desc`);
+                    const mechEl = document.getElementById(`ability${i}-mech`);
+                    const visualEl = document.getElementById(`ability${i}-visual`);
+                    
+                    if (nameEl) {
+                        data.abilities[i] = {
+                            name: nameEl.value || '',
+                            desc: descEl ? descEl.value || '' : '',
+                            mech: mechEl ? mechEl.value || '' : '',
+                            visual: visualEl ? visualEl.value || '' : ''
+                        };
+                    }
+                }
+                
+                localStorage.setItem('mayaRpgData', JSON.stringify(data));
+                showSaveIndicator();
+            }
+
+            // Carregar dados salvos
+            function loadData() {
+                const savedData = localStorage.getItem('mayaRpgData');
+                if (!savedData) return;
+                
+                try {
+                    const data = JSON.parse(savedData);
+                    
+                    function safeSetValue(id, value) {
+                        const element = document.getElementById(id);
+                        if (element && value !== undefined && value !== null) {
+                            element.value = value;
+                        }
+                    }
+                    
+                    // Carregar dados básicos
+                    safeSetValue('char-name', data.charName);
+                    safeSetValue('char-class', data.charClass);
+                    safeSetValue('str', data.str);
+                    safeSetValue('dex', data.dex);
+                    safeSetValue('con', data.con);
+                    safeSetValue('int', data.int);
+                    safeSetValue('wis', data.wis);
+                    safeSetValue('cha', data.cha);
+                    safeSetValue('hp', data.hp);
+                    safeSetValue('credits', data.credits);
+                    safeSetValue('class', data.class);
+                    safeSetValue('equipment', data.equipment);
+                    safeSetValue('notes', data.notes);
+                    safeSetValue('appearance-desc', data.appearanceDesc);
+                    safeSetValue('modifications', data.modifications);
+                    
+                    // Carregar habilidades
+                    if (data.abilities) {
+                        Object.keys(data.abilities).forEach(id => {
+                            const ability = data.abilities[id];
+                            if (ability) {
+                                safeSetValue(`ability${id}-name`, ability.name);
+                                safeSetValue(`ability${id}-desc`, ability.desc);
+                                safeSetValue(`ability${id}-mech`, ability.mech);
+                                safeSetValue(`ability${id}-visual`, ability.visual);
+                            }
+                        });
+                    }
+                    
+                    // Carregar arrays
+                    if (data.diceHistory) diceHistory = data.diceHistory;
+                    if (data.combatParticipants) combatParticipants = data.combatParticipants;
+                    if (data.scheduledSessions) scheduledSessions = data.scheduledSessions;
+                    if (data.memoryFragments) memoryFragments = data.memoryFragments;
+                    if (data.inventoryItems) inventoryItems = data.inventoryItems;
+                    if (data.adventures) adventures = data.adventures;
+                    
+                    // Carregar tema
+                    if (data.theme && data.theme === 'dark') {
+                        toggleTheme();
+                    }
+                    
+                    console.log('Dados carregados com sucesso!');
+                    
+                } catch (error) {
+                    console.error('Erro ao carregar dados:', error);
+                }
+            }
+
+            // Sistema de dados
+            function rollDice(sides, count = 1, label = '') {
+                const results = [];
+                let total = 0;
+                
+                for (let i = 0; i < count; i++) {
+                    const roll = Math.floor(Math.random() * sides) + 1;
+                    results.push(roll);
+                    total += roll;
+                }
+                
+                const rollData = {
+                    timestamp: new Date().toLocaleString(),
+                    dice: `${count}d${sides}`,
+                    results: results,
+                    total: total,
+                    label: label
+                };
+                
+                diceHistory.unshift(rollData);
+                
+                // Mostrar resultado
+                displayDiceResult(rollData);
+                updateDiceHistory();
+                
+                return rollData;
+            }
+
+            function rollCustomDice() {
+                const count = parseInt(document.getElementById('dice-count').value) || 1;
+                const sides = parseInt(document.getElementById('dice-sides').value) || 6;
+                const modifier = parseInt(document.getElementById('dice-modifier').value) || 0;
+                
+                const baseRoll = rollDice(sides, count, 'Customizado');
+                const finalTotal = baseRoll.total + modifier;
+                
+                const modifiedRoll = {
+                    ...baseRoll,
+                    modifier: modifier,
+                    finalTotal: finalTotal,
+                    dice: `${count}d${sides}${modifier >= 0 ? '+' : ''}${modifier}`
+                };
+                
+                displayDiceResult(modifiedRoll);
+            }
+
+            function displayDiceResult(rollData) {
+                const resultDiv = document.getElementById('dice-result-display');
+                const modifierText = rollData.modifier ? ` ${rollData.modifier >= 0 ? '+' : ''}${rollData.modifier}` : '';
+                const finalTotal = rollData.finalTotal || rollData.total;
+                
+                resultDiv.innerHTML = `
+                    <div class="dice-result">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">${finalTotal}</div>
+                        <div style="font-size: 1rem; opacity: 0.8;">
+                            ${rollData.dice}: [${rollData.results.join(', ')}]${modifierText}
+                        </div>
+                        ${rollData.label ? `<div style="font-size: 0.9rem; margin-top: 0.5rem;">${rollData.label}</div>` : ''}
+                    </div>
+                `;
+            }
+
+            function updateDiceHistory() {
+                const historyDiv = document.getElementById('dice-history-display');
+                if (!historyDiv) return;
+                
+                if (diceHistory.length === 0) {
+                    historyDiv.innerHTML = 'Nenhuma rolagem ainda. Comece rolando alguns dados!';
+                    return;
+                }
+                
+                const historyHTML = diceHistory.slice(0, 50).map(roll => {
+                    const modifierText = roll.modifier ? ` ${roll.modifier >= 0 ? '+' : ''}${roll.modifier}` : '';
+                    const finalTotal = roll.finalTotal || roll.total;
+                    return `
+                        <div style="display: flex; justify-content: space-between; padding: 0.5rem; border-bottom: 1px solid #eee;">
+                            <span>${roll.label ? roll.label + ': ' : ''}${roll.dice}</span>
+                            <span><strong>${finalTotal}</strong> [${roll.results.join(', ')}]${modifierText}</span>
+                            <span style="font-size: 0.8rem; color: #7f8c8d;">${roll.timestamp}</span>
+                        </div>
+                    `;
+                }).join('');
+                
+                historyDiv.innerHTML = historyHTML;
+            }
+
+            function clearDiceHistory() {
+                if (confirm('Limpar todo o histórico de dados?')) {
+                    diceHistory = [];
+                    updateDiceHistory();
+                    saveData();
+                }
+            }
+
+            // Sistema de habilidades com calculadoras
+            function rollAbility(abilityType) {
+                let result;
+                
+                switch (abilityType) {
+                    case 'vinculo':
+                        result = rollDice(6, 2, 'Vínculo Luminar');
+                        document.getElementById('vinculo-result').innerHTML = `
+                            <div style="background: #3498db; color: white; padding: 0.5rem; border-radius: 5px;">
+                                Teste: ${result.total} | ${result.total >= 7 ? 'Sucesso!' : 'Falha'}
+                            </div>
+                        `;
+                        break;
+                        
+                    case 'pulso':
+                        const testRoll = rollDice(6, 2, 'Pulso - Teste');
+                        const damageRoll = rollDice(4, 3, 'Pulso - Dano');
+                        document.getElementById('pulso-result').innerHTML = `
+                            <div style="background: #f39c12; color: white; padding: 0.5rem; border-radius: 5px;">
+                                Teste: ${testRoll.total} | Dano: ${damageRoll.total}
+                            </div>
+                        `;
+                        break;
+                        
+                    case 'sobreposicao':
+                        const charisma = parseInt(document.getElementById('cha')?.value) || 0;
+                        const chaModifier = Math.floor((charisma - 10) / 2);
+                        result = rollDice(20, 1, 'Sobreposição');
+                        const finalResult = result.total + chaModifier;
+                        document.getElementById('sobreposicao-result').innerHTML = `
+                            <div style="background: #9b59b6; color: white; padding: 0.5rem; border-radius: 5px;">
+                                Resultado: ${finalResult} (${result.total} + ${chaModifier} CAR)
+                            </div>
+                        `;
+                        break;
+                        
+                    case 'lanca':
+                        const attackRoll = rollDice(6, 2, 'Lança - Ataque');
+                        const lanceaDamage = rollDice(6, 3, 'Lança - Dano');
+                        const pierceaDamage = Math.floor(lanceaDamage.total / 2);
+                        document.getElementById('lanca-result').innerHTML = `
+                            <div style="background: #e74c3c; color: white; padding: 0.5rem; border-radius: 5px;">
+                                Ataque: ${attackRoll.total} | Dano: ${lanceaDamage.total} | Perfuração: ${pierceaDamage}
+                            </div>
+                        `;
+                        break;
+                        
+                    case 'fragmento':
+                        const fragAttack = rollDice(6, 2, 'Fragmento - Ataque');
+                        const fragMain = rollDice(6, 2, 'Fragmento - Dano Principal');
+                        const fragBonus = rollDice(4, 1, 'Fragmento - Dano Bônus');
+                        const fragArea = rollDice(4, 1, 'Fragmento - Área');
+                        const totalDamage = fragMain.total + fragBonus.total;
+                        document.getElementById('fragmento-result').innerHTML = `
+                            <div style="background: #e67e22; color: white; padding: 0.5rem; border-radius: 5px;">
+                                Ataque: ${fragAttack.total} | Dano Principal: ${totalDamage} | Área: ${fragArea.total}
+                            </div>
+                        `;
+                        break;
+                }
+            }
+
+            // Sistema de combate
+            function addParticipant() {
+                const name = document.getElementById('participant-name').value;
+                const hp = parseInt(document.getElementById('participant-hp').value);
+                const initiative = parseInt(document.getElementById('participant-initiative').value);
+                
+                if (!name || !hp || !initiative) {
+                    alert('Preencha todos os campos!');
+                    return;
+                }
+                
+                const participant = {
+                    id: Date.now(),
+                    name: name,
+                    maxHp: hp,
+                    currentHp: hp,
+                    initiative: initiative,
+                    statusEffects: []
+                };
+                
+                combatParticipants.push(participant);
+                combatParticipants.sort((a, b) => b.initiative - a.initiative);
+                
+                // Limpar campos
+                document.getElementById('participant-name').value = '';
+                document.getElementById('participant-hp').value = '';
+                document.getElementById('participant-initiative').value = '';
+                
+                updateCombatDisplay();
+                saveData();
+            }
+
+            function updateCombatDisplay() {
+                const container = document.getElementById('combat-participants');
+                
+                if (combatParticipants.length === 0) {
+                    container.innerHTML = '<p style="text-align: center; color: #7f8c8d;">Nenhum participante adicionado ainda</p>';
+                    return;
+                }
+                
+                const participantsHTML = combatParticipants.map((participant, index) => {
+                    const hpPercentage = (participant.currentHp / participant.maxHp) * 100;
+                    const isActive = combatActive && index === currentTurn;
+                    const hpBarClass = hpPercentage <= 25 ? 'critical' : hpPercentage <= 50 ? 'low' : '';
+                    
+                    return `
+                        <div class="combat-participant ${isActive ? 'active' : ''}" onclick="selectCombatant(${index})">
+                            <div>
+                                <strong>${participant.name}</strong><br>
+                                <span style="font-size: 0.9rem;">Iniciativa: ${participant.initiative}</span>
+                            </div>
+                            <div style="text-align: center;">
+                                <div>${participant.currentHp}/${participant.maxHp} HP</div>
+                                <div class="hp-bar">
+                                    <div class="hp-fill ${hpBarClass}" style="width: ${hpPercentage}%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <button onclick="editParticipant(${index})" style="background: #3498db; color: white; border: none; padding: 0.3rem; border-radius: 3px; margin: 0.2rem;">✏️</button>
+                                <button onclick="removeParticipant(${index})" style="background: #e74c3c; color: white; border: none; padding: 0.3rem; border-radius: 3px; margin: 0.2rem;">🗑️</button>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+                
+                container.innerHTML = participantsHTML;
+            }
+
+            function startCombat() {
+                if (combatParticipants.length === 0) {
+                    alert('Adicione participantes primeiro!');
+                    return;
+                }
+                
+                combatActive = true;
+                currentTurn = 0;
+                updateCombatStatus();
+                updateCombatDisplay();
+            }
+
+            function nextTurn() {
+                if (!combatActive) {
+                    alert('Inicie o combate primeiro!');
+                    return;
+                }
+                
+                currentTurn = (currentTurn + 1) % combatParticipants.length;
+                updateCombatStatus();
+                updateCombatDisplay();
+            }
+
+            function endCombat() {
+                combatActive = false;
+                currentTurn = 0;
+                updateCombatStatus();
+                updateCombatDisplay();
+            }
+
+            function updateCombatStatus() {
+                const statusDiv = document.getElementById('combat-status');
+                
+                if (!combatActive) {
+                    statusDiv.innerHTML = 'Combate não iniciado';
+                    statusDiv.style.background = '#f8f9fa';
+                    return;
+                }
+                
+                const currentParticipant = combatParticipants[currentTurn];
+                statusDiv.innerHTML = `
+                    <strong>Turno de: ${currentParticipant.name}</strong><br>
+                    <span style="font-size: 0.9rem;">Turno ${Math.floor(currentTurn / combatParticipants.length) + 1} • Iniciativa: ${currentParticipant.initiative}</span>
+                `;
+                statusDiv.style.background = '#e8f5e8';
+            }
+
+            // Sistema de aventuras
+            function addAdventure() {
+                const adventure = {
+                    id: Date.now(),
+                    title: 'Nova Aventura',
+                    date: new Date().toLocaleDateString(),
+                    summary: '',
+                    npcsEncountered: '',
+                    discoveries: '',
+                    notes: ''
+                };
+                
+                adventures.unshift(adventure);
+                displayAdventures();
+                saveData();
+            }
+
+            function displayAdventures() {
+                const container = document.getElementById('adventures-list');
+                
+                if (adventures.length === 0) {
+                    container.innerHTML = `
+                        <div class="concept-visual">
+                            <div class="concept-title">Nenhuma aventura documentada ainda</div>
+                            <div class="concept-description">
+                                Clique em "Adicionar Nova Aventura" para começar a documentar suas sessões!
+                            </div>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                const adventuresHTML = adventures.map(adventure => `
+                    <div class="adventure-edit-box">
+                        <div class="adventure-header">
+                            <input type="text" value="${adventure.title}" 
+                                   onchange="updateAdventure(${adventure.id}, 'title', this.value)"
+                                   style="background: transparent; border: none; color: white; font-size: 1.3rem; font-weight: bold; width: 300px;">
+                            <div style="display: flex; gap: 1rem; align-items: center;">
+                                <span style="font-size: 0.9rem;">${adventure.date}</span>
+                                <button onclick="removeAdventure(${adventure.id})" 
+                                        style="background: rgba(255,255,255,0.2); border: none; color: white; padding: 0.5rem; border-radius: 5px; cursor: pointer;">🗑️</button>
+                            </div>
+                        </div>
+                        <div class="adventure-content">
+                            <h4>📝 Resumo da Sessão</h4>
+                            <textarea placeholder="O que aconteceu nesta sessão..." 
+                                      onchange="updateAdventure(${adventure.id}, 'summary', this.value)"
+                                      style="width: 100%; min-height: 100px; padding: 1rem; border-radius: 5px; border: 1px solid #ddd; margin-bottom: 1rem;">${adventure.summary}</textarea>
+                            
+                            <h4>👥 NPCs Encontrados</h4>
+                            <textarea placeholder="Quais personagens foram encontrados..." 
+                                      onchange="updateAdventure(${adventure.id}, 'npcsEncountered', this.value)"
+                                      style="width: 100%; min-height: 80px; padding: 1rem; border-radius: 5px; border: 1px solid #ddd; margin-bottom: 1rem;">${adventure.npcsEncountered}</textarea>
+                            
+                            <h4>🔍 Descobertas Importantes</h4>
+                            <textarea placeholder="Pistas sobre Maya, locais descobertos, informações importantes..." 
+                                      onchange="updateAdventure(${adventure.id}, 'discoveries', this.value)"
+                                      style="width: 100%; min-height: 80px; padding: 1rem; border-radius: 5px; border: 1px solid #ddd; margin-bottom: 1rem;">${adventure.discoveries}</textarea>
+                            
+                            <h4>📋 Notas Adicionais</h4>
+                            <textarea placeholder="Outras anotações..." 
+                                      onchange="updateAdventure(${adventure.id}, 'notes', this.value)"
+                                      style="width: 100%; min-height: 60px; padding: 1rem; border-radius: 5px; border: 1px solid #ddd;">${adventure.notes}</textarea>
+                        </div>
+                    </div>
+                `).join('');
+                
+                container.innerHTML = adventuresHTML;
+            }
+
+            function updateAdventure(id, field, value) {
+                const adventure = adventures.find(a => a.id === id);
+                if (adventure) {
+                    adventure[field] = value;
+                    saveData();
+                }
+            }
+
+            function removeAdventure(id) {
+                if (confirm('Remover esta aventura?')) {
+                    adventures = adventures.filter(a => a.id !== id);
+                    displayAdventures();
+                    saveData();
+                }
+            }
+
+            // Sistema de memórias
+            function addMemory() {
+                const memory = {
+                    id: Date.now(),
+                    title: 'Nova Memória',
+                    type: 'pessoal',
+                    intensity: 'vaga',
+                    content: '',
+                    date: new Date().toLocaleDateString(),
+                    verified: false
+                };
+                
+                memoryFragments.unshift(memory);
+                displayMemories();
+                saveData();
+            }
+
+            function displayMemories() {
+                const container = document.getElementById('memories-list');
+                
+                if (memoryFragments.length === 0) {
+                    container.innerHTML = `
+                        <div class="concept-visual">
+                            <div class="concept-title">Nenhuma memória documentada ainda</div>
+                            <div class="concept-description">
+                                Comece a descobrir o passado de Maya adicionando fragmentos de memória conforme eles aparecem no jogo!
+                            </div>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                const memoriesHTML = memoryFragments.map(memory => {
+                    const typeIcons = {
+                        'cientifica': '🔬',
+                        'pessoal': '👥',
+                        'combate': '⚔️',
+                        'lugar': '🏙️',
+                        'traumatica': '😢',
+                        'fragmentada': '❓'
+                    };
+                    
+                    const intensityColors = {
+                        'vaga': '#95a5a6',
+                        'clara': '#3498db',
+                        'vivida': '#e74c3c'
+                    };
+                    
+                    return `
+                        <div class="memory-fragment" style="background: linear-gradient(135deg, ${intensityColors[memory.intensity]}aa 0%, ${intensityColors[memory.intensity]}dd 100%);">
+                            <div class="memory-type">${typeIcons[memory.type]} ${memory.type.toUpperCase()}</div>
+                            <input type="text" value="${memory.title}" 
+                                   onchange="updateMemory(${memory.id}, 'title', this.value)"
+                                   style="background: transparent; border: none; color: white; font-size: 1.2rem; font-weight: bold; width: 100%; margin-bottom: 1rem;">
+                            
+                            <div style="display: flex; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap;">
+                                <select onchange="updateMemory(${memory.id}, 'type', this.value)" style="padding: 0.5rem; border-radius: 5px;">
+                                    <option value="cientifica" ${memory.type === 'cientifica' ? 'selected' : ''}>🔬 Científica</option>
+                                    <option value="pessoal" ${memory.type === 'pessoal' ? 'selected' : ''}>👥 Pessoal</option>
+                                    <option value="combate" ${memory.type === 'combate' ? 'selected' : ''}>⚔️ Combate</option>
+                                    <option value="lugar" ${memory.type === 'lugar' ? 'selected' : ''}>🏙️ Lugar</option>
+                                    <option value="traumatica" ${memory.type === 'traumatica' ? 'selected' : ''}>😢 Traumática</option>
+                                    <option value="fragmentada" ${memory.type === 'fragmentada' ? 'selected' : ''}>❓ Fragmentada</option>
+                                </select>
+                                
+                                <select onchange="updateMemory(${memory.id}, 'intensity', this.value)" style="padding: 0.5rem; border-radius: 5px;">
+                                    <option value="vaga" ${memory.intensity === 'vaga' ? 'selected' : ''}>Vaga</option>
+                                    <option value="clara" ${memory.intensity === 'clara' ? 'selected' : ''}>Clara</option>
+                                    <option value="vivida" ${memory.intensity === 'vivida' ? 'selected' : ''}>Vívida</option>
+                                </select>
+                                
+                                <label style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <input type="checkbox" ${memory.verified ? 'checked' : ''} onchange="updateMemory(${memory.id}, 'verified', this.checked)">
+                                    Verificada
+                                </label>
+                                
+                                <button onclick="removeMemory(${memory.id})" style="background: rgba(255,255,255,0.2); border: none; color: white; padding: 0.5rem; border-radius: 5px; cursor: pointer;">🗑️</button>
+                            </div>
+                            
+                            <textarea placeholder="Descreva a memória..." 
+                                      onchange="updateMemory(${memory.id}, 'content', this.value)"
+                                      style="width: 100%; min-height: 100px; padding: 1rem; border-radius: 5px; border: none; background: rgba(255,255,255,0.9); color: #2c3e50;">${memory.content}</textarea>
+                            
+                            <div style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">
+                                Adicionada em: ${memory.date}
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+                
+                container.innerHTML = memoriesHTML;
+            }
+
+            function updateMemory(id, field, value) {
+                const memory = memoryFragments.find(m => m.id === id);
+                if (memory) {
+                    memory[field] = value;
+                    if (field === 'type' || field === 'intensity') {
+                        displayMemories(); // Atualizar cores
+                    }
+                    saveData();
+                }
+            }
+
+            function removeMemory(id) {
+                if (confirm('Remover esta memória?')) {
+                    memoryFragments = memoryFragments.filter(m => m.id !== id);
+                    displayMemories();
+                    saveData();
+                }
+            }
+
+            function generateRandomMemory() {
+                const types = ['cientifica', 'pessoal', 'combate', 'lugar', 'traumatica', 'fragmentada'];
+                const intensities = ['vaga', 'clara', 'vivida'];
+                
+                const templates = {
+                    cientifica: [
+                        'Laboratório com luzes brancas e equipamentos estranhos',
+                        'Voz familiar explicando procedimentos complexos',
+                        'Sensação de estar sendo observada durante testes',
+                        'Dor súbita seguida de modificações nos membros'
+                    ],
+                    pessoal: [
+                        'Risada conhecida ecoando em um ambiente caloroso',
+                        'Mãos humanas tocando seu rosto com carinho',
+                        'Conversa sobre sonhos e aspirações',
+                        'Momento de felicidade pura antes de tudo mudar'
+                    ],
+                    combate: [
+                        'Primeiro uso das habilidades digitais em situação real',
+                        'Treinamento intenso em facility militar',
+                        'Confronto com outros ciborgues similares',
+                        'Momento de descoberta de novos poderes'
+                    ],
+                    lugar: [
+                        'Cidade submersa com arquitetura impossível',
+                        'Sala circular com painéis holográficos',
+                        'Jardim com plantas que brilham no escuro',
+                        'Ponte suspensa sobre abismo tecnológico'
+                    ],
+                    traumatica: [
+                        'Despertar confuso sem memórias claras',
+                        'Perda de alguém importante durante a transformação',
+                        'Dor intensa durante implantação de componentes',
+                        'Momento de perceber que algo fundamental mudou'
+                    ],
+                    fragmentada: [
+                        'Imagens desconexas de rostos familiares',
+                        'Sons distorcidos que deveriam fazer sentido',
+                        'Sensação de algo importante esquecido',
+                        'Flashes de informação incompleta'
+                    ]
+                };
+                
+                const randomType = types[Math.floor(Math.random() * types.length)];
+                const randomIntensity = intensities[Math.floor(Math.random() * intensities.length)];
+                const randomTemplate = templates[randomType][Math.floor(Math.random() * templates[randomType].length)];
+                
+                const memory = {
+                    id: Date.now(),
+                    title: `Memória ${randomType.charAt(0).toUpperCase() + randomType.slice(1)}`,
+                    type: randomType,
+                    intensity: randomIntensity,
+                    content: randomTemplate,
+                    date: new Date().toLocaleDateString(),
+                    verified: false
+                };
+                
+                memoryFragments.unshift(memory);
+                displayMemories();
+                saveData();
+            }
+
+            // Sistema de inventário
+            function addInventoryItem() {
+                const name = document.getElementById('item-name').value;
+                const description = document.getElementById('item-description').value;
+                const weight = parseInt(document.getElementById('item-weight').value) || 0;
+                const value = parseInt(document.getElementById('item-value').value) || 0;
+                const category = document.getElementById('item-category').value;
+                
+                if (!name) {
+                    alert('Nome do item é obrigatório!');
+                    return;
+                }
+                
+                const item = {
+                    id: Date.now(),
+                    name: name,
+                    description: description,
+                    weight: weight,
+                    value: value,
+                    category: category,
+                    quantity: 1
+                };
+                
+                inventoryItems.push(item);
+                
+                // Limpar campos
+                document.getElementById('item-name').value = '';
+                document.getElementById('item-description').value = '';
+                document.getElementById('item-weight').value = '';
+                document.getElementById('item-value').value = '';
+                
+                displayInventory();
+                updateInventoryStats();
+                saveData();
+            }
+
+            function displayInventory() {
+                const container = document.getElementById('inventory-grid');
+                
+                if (inventoryItems.length === 0) {
+                    container.innerHTML = `
+                        <div class="inventory-slot">
+                            <div style="color: #7f8c8d;">
+                                <div style="font-size: 2rem; margin-bottom: 0.5rem;">📦</div>
+                                <div>Inventário vazio</div>
+                                <div style="font-size: 0.8rem;">Adicione itens acima</div>
+                            </div>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                const categoryIcons = {
+                    weapon: '🗡️',
+                    armor: '🛡️',
+                    tech: '🔧',
+                    consumable: '💊',
+                    misc: '📦'
+                };
+                
+                const itemsHTML = inventoryItems.map(item => `
+                    <div class="inventory-slot filled" onclick="editInventoryItem(${item.id})">
+                        <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">${categoryIcons[item.category]}</div>
+                        <div style="font-weight: bold; margin-bottom: 0.5rem;">${item.name}</div>
+                        <div style="font-size: 0.8rem; color: #7f8c8d; margin-bottom: 0.5rem;">${item.description.substring(0, 50)}${item.description.length > 50 ? '...' : ''}</div>
+                        <div style="display: flex; justify-content: space-between; font-size: 0.8rem;">
+                            <span>${item.weight}kg</span>
+                            <span>${item.value}¢</span>
+                        </div>
+                        ${item.quantity > 1 ? `<div style="position: absolute; top: 0.5rem; right: 0.5rem; background: #e74c3c; color: white; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem;">${item.quantity}</div>` : ''}
+                    </div>
+                `).join('');
+                
+                container.innerHTML = itemsHTML;
+            }
+
+            function updateInventoryStats() {
+                const totalWeight = inventoryItems.reduce((sum, item) => sum + (item.weight * item.quantity), 0);
+                const totalValue = inventoryItems.reduce((sum, item) => sum + (item.value * item.quantity), 0);
+                
+                const weightEl = document.getElementById('inventory-weight');
+                if (weightEl) {
+                    weightEl.textContent = `${totalWeight}/50`;
+                }
+            }
+
+            function filterInventory(category) {
+                const buttons = document.querySelectorAll('#inventory .dice-button');
+                buttons.forEach(btn => btn.style.background = 'linear-gradient(135deg, #3498db, #2980b9)');
+                event.target.style.background = 'linear-gradient(135deg, #27ae60, #229954)';
+                
+                const container = document.getElementById('inventory-grid');
+                const filteredItems = category === 'all' ? inventoryItems : inventoryItems.filter(item => item.category === category);
+                
+                if (filteredItems.length === 0) {
+                    container.innerHTML = `
+                        <div class="inventory-slot">
+                            <div style="color: #7f8c8d;">
+                                <div style="font-size: 2rem; margin-bottom: 0.5rem;">🔍</div>
+                                <div>Nenhum item</div>
+                                <div style="font-size: 0.8rem;">nesta categoria</div>
+                            </div>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                // Recriar display com itens filtrados
+                displayInventory();
+            }
+
+            // Sistema de calendário
+            function updateCalendar() {
+                updateCalendarHeader();
+                generateCalendarGrid();
+                updateSessionStats();
+            }
+
+            function updateCalendarHeader() {
+                const months = [
+                    'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+                    'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+                ];
+                
+                const headerEl = document.getElementById('current-month-year');
+                if (headerEl) {
+                    headerEl.textContent = `${months[currentMonth]} ${currentYear}`;
+                }
+            }
+
+            function generateCalendarGrid() {
+                const grid = document.getElementById('calendar-grid');
+                if (!grid) return;
+                
+                const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+                const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+                const today = new Date();
+                
+                let html = '';
+                
+                // Dias vazios do início
+                for (let i = 0; i < firstDay; i++) {
+                    html += '<div class="calendar-day"></div>';
+                }
+                
+                // Dias do mês
+                for (let day = 1; day <= daysInMonth; day++) {
+                    const isToday = today.getDate() === day && 
+                                   today.getMonth() === currentMonth && 
+                                   today.getFullYear() === currentYear;
+                    
+                    const dateStr = `${currentYear}-${(currentMonth + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+                    const hasSession = scheduledSessions.some(session => session.date === dateStr);
+                    
+                    let classes = 'calendar-day';
+                    if (isToday) classes += ' today';
+                    if (hasSession) classes += ' has-session';
+                    
+                    html += `<div class="${classes}" onclick="selectCalendarDay('${dateStr}')">${day}</div>`;
+                }
+                
+                grid.innerHTML = html;
+            }
+
+            function previousMonth() {
+                currentMonth--;
+                if (currentMonth < 0) {
+                    currentMonth = 11;
+                    currentYear--;
+                }
+                updateCalendar();
+            }
+
+            function nextMonth() {
+                currentMonth++;
+                if (currentMonth > 11) {
+                    currentMonth = 0;
+                    currentYear++;
+                }
+                updateCalendar();
+            }
+
+            function addSession() {
+                const title = prompt('Título da sessão:');
+                const date = prompt('Data (YYYY-MM-DD):', new Date().toISOString().split('T')[0]);
+                
+                if (title && date) {
+                    const session = {
+                        id: Date.now(),
+                        title: title,
+                        date: date,
+                        notes: ''
+                    };
+                    
+                    scheduledSessions.push(session);
+                    updateCalendar();
+                    saveData();
+                }
+            }
+
+            function updateSessionStats() {
+                const thisMonthSessions = scheduledSessions.filter(session => {
+                    const sessionDate = new Date(session.date);
+                    return sessionDate.getMonth() === currentMonth && sessionDate.getFullYear() === currentYear;
+                }).length;
+                
+                const totalSessions = scheduledSessions.length;
+                const averageSessions = totalSessions > 0 ? Math.round(totalSessions / 12 * 10) / 10 : 0;
+                
+                const thisMonthEl = document.getElementById('sessions-this-month');
+                const totalEl = document.getElementById('sessions-total');
+                const averageEl = document.getElementById('sessions-average');
+                
+                if (thisMonthEl) thisMonthEl.textContent = thisMonthSessions;
+                if (totalEl) totalEl.textContent = totalSessions;
+                if (averageEl) averageEl.textContent = averageSessions;
+            }
+
+            // Sistema de dashboard
+            function updateDashboard() {
+                updateDashboardStats();
+                updateProgressBars();
+            }
+
+            function updateDashboardStats() {
+                const sessionsCountEl = document.getElementById('sessions-count');
+                const diceCountEl = document.getElementById('dice-count-total');
+                const adventuresCountEl = document.getElementById('adventures-count');
+                const memoriesCountEl = document.getElementById('memories-count');
+                
+                if (sessionsCountEl) sessionsCountEl.textContent = scheduledSessions.length;
+                if (diceCountEl) diceCountEl.textContent = diceHistory.length;
+                if (adventuresCountEl) adventuresCountEl.textContent = adventures.length;
+                if (memoriesCountEl) memoriesCountEl.textContent = memoryFragments.length;
+            }
+
+            function updateProgressBars() {
+                const memoryProgress = Math.min((memoryFragments.length / 20) * 100, 100);
+                const regionProgress = Math.min((adventures.length / 7) * 100, 100);
+                
+                const memoryBar = document.getElementById('maya-progress-bar');
+                if (memoryBar) {
+                    memoryBar.style.width = `${memoryProgress}%`;
+                    memoryBar.nextElementSibling.textContent = `${Math.round(memoryProgress)}% das memórias descobertas`;
+                }
+            }
+
+            function generateRandomEvent() {
+                const events = [
+                    'Um pulso electromagnético atinge a região, causando interferências',
+                    'Maya recebe uma transmissão misteriosa em frequência antiga',
+                    'Sistemas de segurança de uma área são ativados inesperadamente',
+                    'Um outro ciborgue é avistado na distância',
+                    'Fragmentos de dados corrompidos aparecem nos sistemas locais',
+                    'Uma tempestade digital afeta as comunicações',
+                    'Maya sente uma conexão estranha com um dispositivo próximo',
+                    'Rumores sobre experimentos secretos chegam aos ouvidos dos personagens',
+                    'Um comerciante oferece um item tecnológico suspeito',
+                    'Maya tem um flashback súbito durante uma atividade comum'
+                ];
+                
+                const randomEvent = events[Math.floor(Math.random() * events.length)];
+                document.getElementById('random-event-result').innerHTML = `
+                    <div style="padding: 1rem; background: #3498db; color: white; border-radius: 10px; margin-bottom: 1rem;">
+                        <strong>🎲 Evento Aleatório:</strong><br>
+                        ${randomEvent}
+                    </div>
+                `;
+            }
+
+            function generatePlotTwist() {
+                const twists = [
+                    'O NPC em quem vocês confiam está escondendo informações cruciais',
+                    'Maya descobre que suas memórias podem ter sido implantadas artificialmente',
+                    'O local que visitaram anteriormente mudou completamente',
+                    'Um inimigo do passado revela ter uma conexão inesperada com Maya',
+                    'Maya manifesta uma habilidade que não sabia possuir',
+                    'Descoberta de que Maya não é única - existem outros como ela',
+                    'O "passado" de Maya pode ser de outra pessoa completamente',
+                    'Uma pessoa que deveria estar morta aparece viva',
+                    'Maya descobre ter sido criada para um propósito específico',
+                    'As "falhas" no sistema de Maya na verdade são recursos ocultos'
+                ];
+                
+                const randomTwist = twists[Math.floor(Math.random() * twists.length)];
+                document.getElementById('random-event-result').innerHTML = `
+                    <div style="padding: 1rem; background: #e74c3c; color: white; border-radius: 10px; margin-bottom: 1rem;">
+                        <strong>🎭 Plot Twist:</strong><br>
+                        ${randomTwist}
+                    </div>
+                `;
+            }
+
+            // Sistema de busca
+            function performSearch() {
+                const query = document.getElementById('global-search').value.toLowerCase();
+                const resultsDiv = document.getElementById('search-results');
+                
+                if (query.length < 2) {
+                    resultsDiv.innerHTML = 'Digite pelo menos 2 caracteres para buscar...';
+                    return;
+                }
+                
+                const results = [];
+                
+                // Buscar em aventuras
+                adventures.forEach(adventure => {
+                    if (adventure.title.toLowerCase().includes(query) ||
+                        adventure.summary.toLowerCase().includes(query) ||
+                        adventure.discoveries.toLowerCase().includes(query)) {
+                        results.push({
+                            type: 'Aventura',
+                            title: adventure.title,
+                            content: adventure.summary.substring(0, 100) + '...',
+                            action: `showSection('adventures')`
+                        });
+                    }
+                });
+                
+                // Buscar em memórias
+                memoryFragments.forEach(memory => {
+                    if (memory.title.toLowerCase().includes(query) ||
+                        memory.content.toLowerCase().includes(query)) {
+                        results.push({
+                            type: 'Memória',
+                            title: memory.title,
+                            content: memory.content.substring(0, 100) + '...',
+                            action: `showSection('memories')`
+                        });
+                    }
+                });
+                
+                // Buscar em inventário
+                inventoryItems.forEach(item => {
+                    if (item.name.toLowerCase().includes(query) ||
+                        item.description.toLowerCase().includes(query)) {
+                        results.push({
+                            type: 'Item',
+                            title: item.name,
+                            content: item.description.substring(0, 100) + '...',
+                            action: `showSection('inventory')`
+                        });
+                    }
+                });
+                
+                if (results.length === 0) {
+                    resultsDiv.innerHTML = 'Nenhum resultado encontrado.';
+                    return;
+                }
+                
+                const resultsHTML = results.map(result => `
+                    <div style="padding: 1rem; border-bottom: 1px solid #eee; cursor: pointer;" onclick="${result.action}; toggleSearch();">
+                        <div style="font-weight: bold; color: #3498db;">[${result.type}] ${result.title}</div>
+                        <div style="font-size: 0.9rem; color: #7f8c8d; margin-top: 0.5rem;">${result.content}</div>
+                    </div>
+                `).join('');
+                
+                resultsDiv.innerHTML = resultsHTML;
+            }
+
+            // Sistema de NPCs
+            function addCustomNPC() {
+                const name = prompt('Nome do NPC:');
+                if (!name) return;
+                
+                const role = prompt('Função/Papel:');
+                const relationship = prompt('Relação com Maya:');
+                
+                const npcHTML = `
+                    <div style="border: 1px solid #ddd; border-radius: 10px; padding: 1rem; margin: 0.5rem 0; background: white;">
+                        <h4>${name}</h4>
+                        <p><strong>Função:</strong> ${role || 'Não definida'}</p>
+                        <p><strong>Relação:</strong> ${relationship || 'Não definida'}</p>
+                        <textarea placeholder="Notas sobre ${name}..." style="width: 100%; min-height: 60px; padding: 0.5rem; border-radius: 5px; border: 1px solid #ddd; margin-top: 0.5rem;"></textarea>
+                    </div>
+                `;
+                
+                document.getElementById('custom-npcs').innerHTML += npcHTML;
+                saveData();
+            }
+
+            function generateRandomNPC() {
+                const names = ['Alex Chen', 'Dr. Rivera', 'Zara Singh', 'Marcus Kane', 'Luna Park', 'Kai Suzuki', 'Iris Volkov'];
+                const roles = ['Hacker', 'Cientista', 'Comerciante', 'Segurança', 'Informante', 'Mecânico', 'Artista'];
+                const traits = ['Desconfiado', 'Amigável', 'Misterioso', 'Nervoso', 'Calculista', 'Impulsivo', 'Observador'];
+                const motivations = ['Dinheiro', 'Informação', 'Vingança', 'Proteção', 'Conhecimento', 'Liberdade', 'Poder'];
+                
+                const randomName = names[Math.floor(Math.random() * names.length)];
+                const randomRole = roles[Math.floor(Math.random() * roles.length)];
+                const randomTrait = traits[Math.floor(Math.random() * traits.length)];
+                const randomMotivation = motivations[Math.floor(Math.random() * motivations.length)];
+                
+                document.getElementById('random-npc-result').innerHTML = `
+                    <div style="border: 2px solid #3498db; border-radius: 10px; padding: 1.5rem; background: #f8f9fa;">
+                        <h4 style="color: #2c3e50; margin-bottom: 1rem;">🎲 ${randomName}</h4>
+                        <p><strong>Função:</strong> ${randomRole}</p>
+                        <p><strong>Característica:</strong> ${randomTrait}</p>
+                        <p><strong>Motivação:</strong> ${randomMotivation}</p>
+                        <p><strong>Possível relação com Maya:</strong> Pode fornecer pistas sobre ${randomMotivation.toLowerCase()}</p>
+                        <button onclick="saveGeneratedNPC('${randomName}', '${randomRole}', '${randomTrait}', '${randomMotivation}')" 
+                                style="background: #27ae60; color: white; border: none; padding: 0.5rem 1rem; border-radius: 5px; margin-top: 1rem; cursor: pointer;">
+                            Salvar NPC
+                        </button>
+                    </div>
+                `;
+            }
+
+            function saveGeneratedNPC(name, role, trait, motivation) {
+                const npcHTML = `
+                    <div style="border: 1px solid #ddd; border-radius: 10px; padding: 1rem; margin: 0.5rem 0; background: white;">
+                        <h4>${name}</h4>
+                        <p><strong>Função:</strong> ${role}</p>
+                        <p><strong>Característica:</strong> ${trait}</p>
+                        <p><strong>Motivação:</strong> ${motivation}</p>
+                        <textarea placeholder="Notas sobre ${name}..." style="width: 100%; min-height: 60px; padding: 0.5rem; border-radius: 5px; border: 1px solid #ddd; margin-top: 0.5rem;"></textarea>
+                    </div>
+                `;
+                
+                document.getElementById('custom-npcs').innerHTML += npcHTML;
+                saveData();
+                alert(`${name} foi adicionado aos NPCs customizados!`);
+            }
+
+            // Sistema de mapa
+            function selectCity(cityId) {
+                // Remover classe ativa de todas as cidades
+                document.querySelectorAll('.city-node').forEach(node => {
+                    node.classList.remove('active-city');
+                });
+                
+                // Adicionar classe ativa à cidade selecionada
+                const selectedCity = document.querySelector(`[data-city="${cityId}"]`);
+                if (selectedCity) {
+                    selectedCity.classList.add('active-city');
+                }
+                
+                // Mostrar painel de edição da cidade
+                showCityDetails(cityId);
+            }
+
+            function showCityDetails(cityId) {
+                const cityData = {
+                    lonisivinuss: {
+                        name: 'Lonisivinuss',
+                        description: 'Cidade aquática flutuante conhecida por suas estruturas biomecânicas.',
+                        danger: 'Baixo',
+                        population: '~50.000 habitantes',
+                        features: 'Mercados flutuantes, laboratórios submarinos, docas de transporte'
+                    },
+                    skye: {
+                        name: "Skye's Haven",
+                        description: 'Centro tecnológico avançado com torres que tocam as nuvens.',
+                        danger: 'Moderado',
+                        population: '~75.000 habitantes',
+                        features: 'Data centers, oficinas de ciborgues, mercado negro'
+                    },
+                    industrial: {
+                        name: 'Distrito Industrial',
+                        description: 'Complexo fabril massivo com poluição constante.',
+                        danger: 'Alto',
+                        population: '~120.000 trabalhadores',
+                        features: 'Fábricas automatizadas, sindicatos, contrabando'
+                    },
+                    nucleo: {
+                        name: 'Núcleo Central',
+                        description: 'Capital administrativa com segurança extrema.',
+                        danger: 'Extremo',
+                        population: '~200.000 habitantes',
+                        features: 'Sede do governo, prisões, centros de pesquisa'
+                    },
+                    periferias: {
+                        name: 'Periferias',
+                        description: 'Subúrbios diversos com comunidades variadas.',
+                        danger: 'Variável',
+                        population: '~300.000 habitantes',
+                        features: 'Favelas, centros comunitários, mercados locais'
+                    },
+                    vermelha: {
+                        name: 'Zona Vermelha',
+                        description: 'Área proibida com experimentos perigosos.',
+                        danger: 'Extremo',
+                        population: 'Classificado',
+                        features: 'Laboratórios secretos, ruínas, anomalias'
+                    },
+                    neutro: {
+                        name: 'Território Neutro',
+                        description: 'Zona desmilitarizada para negociações.',
+                        danger: 'Baixo',
+                        population: '~10.000 diplomatas',
+                        features: 'Embaixadas, hotéis, centros de mediação'
+                    }
+                };
+                
+                const city = cityData[cityId];
+                const detailsDiv = document.getElementById('city-details');
+                
+                detailsDiv.innerHTML = `
+                    <div class="adventure-edit-box">
+                        <div class="adventure-header">
+                            <h3>${city.name}</h3>
+                            <div style="font-size: 0.9rem;">Perigo: ${city.danger}</div>
+                        </div>
+                        <div class="adventure-content">
+                            <h4>📍 Informações Básicas</h4>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1rem 0;">
+                                <div>
+                                    <strong>População:</strong><br>
+                                    ${city.population}
+                                </div>
+                                <div>
+                                    <strong>Nível de Perigo:</strong><br>
+                                    ${city.danger}
+                                </div>
+                            </div>
+                            
+                            <h4>📝 Descrição</h4>
+                            <textarea style="width: 100%; min-height: 100px; padding: 1rem; border-radius: 5px; border: 1px solid #ddd; margin-bottom: 1rem;" 
+                                      placeholder="Descrição detalhada da cidade...">${city.description}</textarea>
+                            
+                            <h4>🏗️ Características Principais</h4>
+                            <textarea style="width: 100%; min-height: 80px; padding: 1rem; border-radius: 5px; border: 1px solid #ddd; margin-bottom: 1rem;" 
+                                      placeholder="Locais importantes, estabelecimentos, pontos de interesse...">${city.features}</textarea>
+                            
+                            <h4>📚 Notas da Campanha</h4>
+                            <textarea style="width: 100%; min-height: 80px; padding: 1rem; border-radius: 5px; border: 1px solid #ddd;" 
+                                      placeholder="Eventos que aconteceram aqui, NPCs encontrados, descobertas..."></textarea>
+                        </div>
+                    </div>
+                `;
+                
+                detailsDiv.style.display = 'block';
+            }
+
+            // Funções auxiliares do inventário
+            function adjustCredits() {
+                const amount = prompt('Ajustar créditos (+/- valor):');
+                if (amount) {
+                    const creditsEl = document.getElementById('credits');
+                    const currentCredits = parseInt(creditsEl.value) || 0;
+                    const newCredits = currentCredits + parseInt(amount);
+                    creditsEl.value = Math.max(0, newCredits);
+                    
+                    const inventoryCreditsEl = document.getElementById('inventory-credits');
+                    if (inventoryCreditsEl) {
+                        inventoryCreditsEl.textContent = newCredits;
+                    }
+                    
+                    saveData();
+                }
+            }
+
+            function restoreEnergy() {
+                const energyEl = document.getElementById('inventory-energy');
+                if (energyEl) {
+                    energyEl.textContent = '100%';
+                }
+                saveData();
+            }
+
+            function generateShopItems() {
+                const items = [
+                    { name: 'Amplificador Neural', price: 150, description: 'Melhora conexões neurais' },
+                    { name: 'Bateria Quantum', price: 80, description: 'Energia duradoura para implantes' },
+                    { name: 'Scanner Biométrico', price: 200, description: 'Identifica pessoas e objetos' },
+                    { name: 'Blindagem Subcutânea', price: 300, description: 'Proteção discreta contra dano' },
+                    { name: 'Cabo de Interface', price: 45, description: 'Conecta com sistemas externos' },
+                    { name: 'Estimulante Sintético', price: 25, description: 'Restaura energia rapidamente' }
+                ];
+                
+                const shopHTML = items.map(item => `
+                    <div style="border: 1px solid #ddd; border-radius: 10px; padding: 1rem; background: white;">
+                        <h4 style="margin-bottom: 0.5rem;">${item.name}</h4>
+                        <p style="font-size: 0.9rem; color: #7f8c8d; margin-bottom: 0.5rem;">${item.description}</p>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-weight: bold; color: #27ae60;">${item.price} créditos</span>
+                            <button onclick="buyItem('${item.name}', ${item.price}, '${item.description}')" 
+                                    style="background: #3498db; color: white; border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer;">
+                                Comprar
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
+                
+                document.getElementById('shop-items').innerHTML = shopHTML;
+            }
+
+            function buyItem(name, price, description) {
+                const creditsEl = document.getElementById('credits');
+                const currentCredits = parseInt(creditsEl.value) || 0;
+                
+                if (currentCredits < price) {
+                    alert('Créditos insuficientes!');
+                    return;
+                }
+                
+                // Deduzir créditos
+                creditsEl.value = currentCredits - price;
+                
+                // Adicionar item ao inventário
+                const item = {
+                    id: Date.now(),
+                    name: name,
+                    description: description,
+                    weight: 1,
+                    value: price,
+                    category: 'tech',
+                    quantity: 1
+                };
+                
+                inventoryItems.push(item);
+                displayInventory();
+                updateInventoryStats();
+                saveData();
+                
+                alert(`${name} adicionado ao inventário!`);
+            }
+
+            // Funções auxiliares do combate
+            function selectCombatant(index) {
+                selectedCombatant = index;
+                updateCombatDisplay();
+            }
+
+            function removeParticipant(index) {
+                if (confirm('Remover este participante?')) {
+                    combatParticipants.splice(index, 1);
+                    if (currentTurn >= combatParticipants.length) {
+                        currentTurn = 0;
+                    }
+                    updateCombatDisplay();
+                    updateCombatStatus();
+                    saveData();
+                }
+            }
+
+            function editParticipant(index) {
+                const participant = combatParticipants[index];
+                const newHp = prompt(`HP atual de ${participant.name}:`, participant.currentHp);
+                
+                if (newHp !== null) {
+                    participant.currentHp = Math.max(0, parseInt(newHp) || 0);
+                    updateCombatDisplay();
+                    saveData();
+                }
+            }
+
+            function healSelected() {
+                if (selectedCombatant !== null && combatParticipants[selectedCombatant]) {
+                    const participant = combatParticipants[selectedCombatant];
+                    participant.currentHp = Math.min(participant.maxHp, participant.currentHp + 5);
+                    updateCombatDisplay();
+                    saveData();
+                }
+            }
+
+            function damageSelected() {
+                if (selectedCombatant !== null && combatParticipants[selectedCombatant]) {
+                    const participant = combatParticipants[selectedCombatant];
+                    participant.currentHp = Math.max(0, participant.currentHp - 5);
+                    updateCombatDisplay();
+                    saveData();
+                }
+            }
+
+            function rollInitiative() {
+                combatParticipants.forEach(participant => {
+                    participant.initiative = rollDice(20, 1, `Iniciativa - ${participant.name}`).total;
+                });
+                combatParticipants.sort((a, b) => b.initiative - a.initiative);
+                updateCombatDisplay();
+                saveData();
+            }
+
+            // Funções auxiliares do dashboard
+            function generateSessionSummary() {
+                const summary = {
+                    date: new Date().toLocaleDateString(),
+                    adventures: adventures.length,
+                    memories: memoryFragments.length,
+                    diceRolls: diceHistory.filter(roll => {
+                        const rollDate = new Date(roll.timestamp).toLocaleDateString();
+                        return rollDate === new Date().toLocaleDateString();
+                    }).length,
+                    characters: combatParticipants.length
+                };
+                
+                alert(`Resumo da Sessão - ${summary.date}
+                
+Aventuras documentadas: ${summary.adventures}
+Memórias descobertas: ${summary.memories}  
+Dados rolados hoje: ${summary.diceRolls}
+Personagens em combate: ${summary.characters}`);
+            }
+
+            function quickSearch(query) {
+                if (query.length < 2) {
+                    document.getElementById('quick-search-results').innerHTML = 'Digite para buscar...';
+                    return;
+                }
+                
+                const results = [];
+                
+                // Busca simplificada
+                [...adventures, ...memoryFragments, ...inventoryItems].forEach(item => {
+                    const searchText = (item.title || item.name || '').toLowerCase();
+                    if (searchText.includes(query.toLowerCase())) {
+                        results.push(item.title || item.name);
+                    }
+                });
+                
+                const resultsHTML = results.slice(0, 5).map(result => 
+                    `<div style="padding: 0.5rem; border-bottom: 1px solid #eee;">${result}</div>`
+                ).join('');
+                
+                document.getElementById('quick-search-results').innerHTML = 
+                    resultsHTML || 'Nenhum resultado encontrado.';
+            }
+
+            function generateReport() {
+                const reportData = {
+                    character: {
+                        name: document.getElementById('char-name').value,
+                        class: document.getElementById('char-class').value,
+                        hp: document.getElementById('hp').value,
+                        credits: document.getElementById('credits').value
+                    },
+                    stats: {
+                        adventures: adventures.length,
+                        memories: memoryFragments.length,
+                        items: inventoryItems.length,
+                        diceRolls: diceHistory.length
+                    },
+                    lastSession: adventures[0]?.date || 'Nunca'
+                };
+                
+                const report = `
+RELATÓRIO DA CAMPANHA - REFRAÇÕES DA MAYA
+=====================================
+
+PERSONAGEM:
+- Nome: ${reportData.character.name}
+- Classe: ${reportData.character.class}
+- HP: ${reportData.character.hp}
+- Créditos: ${reportData.character.credits}
+
+ESTATÍSTICAS:
+- Aventuras: ${reportData.stats.adventures}
+- Memórias: ${reportData.stats.memories}
+- Itens: ${reportData.stats.items}
+- Dados Rolados: ${reportData.stats.diceRolls}
+
+ÚLTIMA SESSÃO: ${reportData.lastSession}
+
+Gerado em: ${new Date().toLocaleString()}
+                `;
+                
+                const blob = new Blob([report], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `relatorio-maya-${new Date().toISOString().split('T')[0]}.txt`;
+                a.click();
+                URL.revokeObjectURL(url);
+            }
+
+            // Funções auxiliares do calendário
+            function selectCalendarDay(dateStr) {
+                const existingSession = scheduledSessions.find(s => s.date === dateStr);
+                
+                if (existingSession) {
+                    const action = confirm(`Sessão agendada: ${existingSession.title}\n\nDeseja editar ou remover?`);
+                    if (action) {
+                        const newTitle = prompt('Novo título:', existingSession.title);
+                        if (newTitle) {
+                            existingSession.title = newTitle;
+                            updateCalendar();
+                            saveData();
+                        }
+                    }
+                } else {
+                    const title = prompt('Título da nova sessão:');
+                    if (title) {
+                        scheduledSessions.push({
+                            id: Date.now(),
+                            title: title,
+                            date: dateStr,
+                            notes: ''
+                        });
+                        updateCalendar();
+                        saveData();
+                    }
+                }
+            }
+
+            // Sistema de indicadores visuais
+            function showSaveIndicator() {
+                const indicator = document.getElementById('save-indicator');
+                const now = new Date();
+                indicator.innerHTML = `Salvo automaticamente às ${now.toLocaleTimeString()}`;
+                indicator.style.opacity = '1';
+                setTimeout(() => {
+                    indicator.style.opacity = '0';
+                }, 3000);
+            }
+
+            function showLoadIndicator() {
+                const indicator = document.getElementById('load-indicator');
+                indicator.style.opacity = '1';
+                setTimeout(() => {
+                    indicator.style.opacity = '0';
+                }, 3000);
+            }
+
+            // Exportar dados
+            function exportData() {
+                saveData();
+                const data = localStorage.getItem('mayaRpgData');
+                if (data) {
+                    const timestamp = new Date().toISOString().split('T')[0];
+                    const blob = new Blob([data], { type: 'application/json' });
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `maya-rpg-backup-${timestamp}.json`;
+                    a.click();
+                    URL.revokeObjectURL(url);
+                }
+            }
+
+            // Importar dados
+            function importData() {
+                const input = document.createElement('input');
+                input.type = 'file';
+                input.accept = '.json';
+                input.onchange = function(e) {
+                    const file = e.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            try {
+                                const data = e.target.result;
+                                localStorage.setItem('mayaRpgData', data);
+                                location.reload();
+                            } catch (error) {
+                                alert('Erro ao importar arquivo. Verifique se é um backup válido.');
+                            }
+                        };
+                        reader.readAsText(file);
+                    }
+                };
+                input.click();
+            }
+
+            // Resetar dados
+            function resetData() {
+                if (confirm('Tem certeza que deseja apagar todos os dados? Esta ação não pode ser desfeita.')) {
+                    localStorage.removeItem('mayaRpgData');
+                    location.reload();
+                }
+            }
+
+            // Sistema de tema escuro/claro
+            function toggleTheme() {
+                const body = document.body;
+                const themeBtn = document.getElementById('theme-toggle');
+                
+                if (currentTheme === 'light') {
+                    body.classList.add('dark-theme');
+                    themeBtn.innerHTML = 'Modo Claro';
+                    currentTheme = 'dark';
+                } else {
+                    body.classList.remove('dark-theme');
+                    themeBtn.innerHTML = 'Modo Escuro';
+                    currentTheme = 'light';
+                }
+                
+                localStorage.setItem('mayaTheme', currentTheme);
+            }
+
+            // Sistema de busca global
+            function toggleSearch() {
+                const overlay = document.getElementById('search-overlay');
+                const searchInput = document.getElementById('global-search');
+                
+                if (overlay.style.display === 'none') {
+                    overlay.style.display = 'block';
+                    searchInput.focus();
+                } else {
+                    overlay.style.display = 'none';
+                }
+            }
+
+            // Player de música
+            function toggleMusic() {
+                const player = document.getElementById('music-player');
+                player.style.display = player.style.display === 'none' ? 'block' : 'none';
+            }
+
+            function changeMusic() {
+                const selector = document.getElementById('music-selector');
+                const info = document.getElementById('music-info');
+                const selected = selector.value;
+
+                const musicInfo = {
+                    'lonisivinuss': 'Ambiente aquático relaxante - perfeito para exploração nas cidades flutuantes',
+                    'combat': 'Música tensa e dinâmica - ideal para combates e perseguições',
+                    'mystery': 'Ambiente misterioso e investigativo - ótimo para descobrir pistas',
+                    'cyberpunk': 'Sons urbanos e eletrônicos - atmosfera das grandes metrópoles',
+                    'emotional': 'Melodias emotivas - para momentos dramáticos e revelações'
+                };
+
+                info.innerHTML = musicInfo[selected] || 'Selecione uma trilha para criar atmosfera nas suas sessões';
+            }
+
+            // Salvar automaticamente quando houver mudanças
+            document.addEventListener('input', function(e) {
+                if (e.target.matches('input, textarea')) {
+                    clearTimeout(window.saveTimeout);
+                    window.saveTimeout = setTimeout(saveData, 500);
+                }
+            });
+
+            // Salvar quando sair da página
+            window.addEventListener('beforeunload', function() {
+                saveData();
+            });
+
+            // Salvar periodicamente (a cada 30 segundos)
+            setInterval(saveData, 30000);
+
+            // Inicializar quando a página carregar
+            document.addEventListener('DOMContentLoaded', function() {
+                loadData();
+                showLoadIndicator();
+                
+                // Carregar tema salvo
+                const savedTheme = localStorage.getItem('mayaTheme');
+                if (savedTheme && savedTheme === 'dark') {
+                    toggleTheme();
+                }
+                
+                // Inicializar displays
+                updateDiceHistory();
+                updateCalendar();
+                displayMemories();
+                displayInventory();
+                displayAdventures();
+                updateCombatDisplay();
+                updateDashboard();
+                
+                console.log('Sistema Maya RPG inicializado com sucesso!');
+            });
+        </script>
+    </body>
+    </html>
